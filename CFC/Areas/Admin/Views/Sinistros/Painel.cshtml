@@ -1,0 +1,196 @@
+﻿@using CFC.Models
+@using Microsoft.Ajax.Utilities
+
+@{
+
+    //DateTime? datasinistro0 = DateTime.Today.AddDays(1);
+    //DateTime? datasinistro1 = DateTime.Today.AddDays(-1);
+    DateTime? dataDoSinistro = DateTime.Today;
+
+    Decimal valorSinistro = Convert.ToDecimal(ViewBag.valorSinistro);
+
+    int codigoCliente = Convert.ToInt32(ViewBag.Cliente);
+    int codigoDoSinistro = Convert.ToInt32(ViewBag.CodigoDoSinistro);
+
+    if (ViewBag.Data != "" && ViewBag.Data != null)
+    {
+        dataDoSinistro = Convert.ToDateTime(ViewBag.Data);
+        //datasinistro0 = dataDoSinistro.Value.AddDays(1);
+        //datasinistro1 = dataDoSinistro.Value.AddDays(-1);
+    }
+
+    cfcadminEntities db = new cfcadminEntities();
+
+    var itens = db.Itens.Where(x => x.DataDaAtivacao  < dataDoSinistro && (x.DataDaDesativacao == null || x.DataDaDesativacao > dataDoSinistro));
+    var itensSinistro = db.Itens;
+    var dadosSinsitro = db.DadosDoSinistro.Where(x => x.CodigoDoSinistro == codigoDoSinistro);
+    var sinistro = db.Sinistros.Find(codigoDoSinistro);
+
+    var particularOuAutoescola = (from x in itensSinistro
+                                  join i in dadosSinsitro on x.CodigoDoItem equals i.CodigoDoItem
+                                  select new
+                                  {
+                                      i.CodigoDoCliente,
+                                      x.Particular
+                                  });
+
+    if (codigoCliente != 0)
+    {
+        itens = itens.Where(x => x.CodigoDocliente == codigoCliente);
+        dadosSinsitro = dadosSinsitro.Where(x => x.CodigoDoCliente == codigoCliente);
+        particularOuAutoescola = particularOuAutoescola.Where(x => x.CodigoDoCliente == codigoCliente);
+    }
+
+}
+
+<div class="col-md-4">
+    <!-- col-md-4 start here -->
+    <div class="reminder mb25">
+        <!-- .reminder -->
+        <h4>
+            Cotas @Html.Raw(codigoDoSinistro != 0 ? sinistro.DataDoSinistro.Value.ToShortDateString(): dataDoSinistro.Value.ToShortDateString())
+            <a href="#" class="icon tip pull-right mr15" title="Configure"></a>
+        </h4>
+        <ul>
+            <li class="clearfix">
+                <div class="icon">
+                    <span class="s32  icomoon-icon-happy color-green-dark"></span>
+                </div>
+                <span class="number">@Html.Raw(codigoDoSinistro == 0 ? (itens.Where(x => x.DataDaDesativacao == null).Sum(x => x.Valor) ?? 0)/10000 : dadosSinsitro.Any(x => x.ItemInativo == null) ? dadosSinsitro.Where(x => x.ItemInativo == null).Sum(x => x.ValorDoItem)/10000 : 0)</span>
+                <span class="txt">Ativas</span>
+
+            </li>
+            <li class="clearfix">
+                <div class="icon">
+                    <span class="s32  icomoon-icon-sad-2 color-gray"></span>
+                </div>
+                <span class="number">@Html.Raw(codigoDoSinistro == 0 ? (itens.Where(x => x.DataDaDesativacao != null).Sum(x => x.Valor) ?? 0) / 10000 : dadosSinsitro.Any(x => x.ItemInativo != null) ? dadosSinsitro.Where(x => x.ItemInativo != null).Sum(x => x.ValorDoItem) / 10000 : 0)</span>
+                <span class="txt">Inativas </span>
+
+            </li>
+            <li class="clearfix">
+                <div class="icon">
+                    <span class="s32 icomoon-icon-info color-blue-dark"></span>
+                </div>
+                <span class="number">@Html.Raw(codigoDoSinistro == 0 ? itens.Sum(x => x.Valor) / 10000 : dadosSinsitro.Any() ? dadosSinsitro.Sum(x => x.ValorDoItem)/10000 : 0)</span>
+                <span class="txt">Total </span>
+
+            </li>
+            <li class="clearfix">
+                <div class="icon">
+                    <span class="s32  icomoon-icon-coin color-green-light"></span>
+                </div>
+                <span class="number color-blue-dark">R$ @Html.Raw($"{(codigoDoSinistro == 0 ? valorSinistro : sinistro.ValorDeReferencia):N2}")</span>
+                <span class="txt">Valor do sinistro</span>
+
+            </li>            
+        </ul>
+    </div>
+    <!-- End .reminder -->
+</div>
+<div class="col-md-4">
+    <!-- col-md-4 start here -->
+    <div class="reminder mb25">
+        <!-- .reminder -->
+        <h4>
+            Clientes
+            <a href="#" class="icon tip pull-right mr15" title="Configure"></a>
+        </h4>
+        <ul>
+            <li class="clearfix">
+                <div class="icon">
+                    <span class="s32  icomoon-icon-user-plus-2 color-green-dark"></span>
+                </div>
+                <span class="number">@Html.Raw(codigoDoSinistro == 0 ? itens.Where(x => x.Clientes.ClienteAtivo).DistinctBy(x => x.CodigoDocliente).Count() : dadosSinsitro.Where(x => x.ClienteInativo).DistinctBy(x => x.CodigoDoCliente).Count())</span>
+                <span class="txt">Ativos</span>
+
+            </li>
+            <li class="clearfix">
+                <div class="icon">
+                    <span class="s32 icomoon-icon-user-minus-2 color-gray"></span>
+                </div>
+                <span class="number">@Html.Raw(codigoDoSinistro == 0 ? itens.Where(x => !x.Clientes.ClienteAtivo).DistinctBy(x => x.CodigoDocliente).Count() : dadosSinsitro.Where(x => !x.ClienteInativo).DistinctBy(x => x.CodigoDoCliente).Count())</span>
+                <span class="txt">Inativos </span>
+
+            </li>
+            <li class="clearfix">
+                <div class="icon">
+                    <span class="s32 icomoon-icon-info color-blue-dark"></span>
+                </div>
+                <span class="number">@Html.Raw(codigoDoSinistro == 0 ? itens.DistinctBy(x => x.CodigoDocliente).Count() : dadosSinsitro.DistinctBy(x => x.CodigoDoCliente).Count())</span>
+                <span class="txt">Total </span>
+
+            </li>  
+
+                <li class="clearfix">
+                    <div class="icon">
+                        <span class="s32 icomoon-icon-pie-2 color-green-light"></span>
+                    </div>
+                    <span class="number color-blue-dark">@Html.Raw(codigoDoSinistro == 0 ? itens.Sum(x => x.Valor)/10000 : sinistro.CotasNaData)</span>
+                    <span class="txt">Cotas na data </span>
+
+                </li>
+        </ul>
+    </div>
+    <!-- End .reminder -->
+</div>
+<div class="col-md-4">
+    <!-- col-md-4 start here -->
+    <div class="reminder mb25">
+        <!-- .reminder -->
+        <h4>
+            Itens
+            <a href="#" class="icon tip pull-right mr15" title="Configure"></a>
+        </h4>
+        <ul>
+            <li class="clearfix">
+                <div class="left" style="float:left">
+                    <div class="icon">
+                        <span class="s32  icomoon-icon-car color-green-dark"></span>
+                    </div>
+                    <span class="number">@Html.Raw(codigoDoSinistro == 0 ? itens.Count(x => x.DataDaDesativacao == null) : dadosSinsitro.Count(x => x.ItemInativo == null))</span>
+                    <span class="txt">Ativos</span>
+                </div>
+                <div style="float:right" class="right">
+                    <div class="icon">
+                        <span class="s32 icomoon-icon-sad color-gray"></span>
+                    </div>
+                    <span class="number">@Html.Raw(codigoDoSinistro == 0 ? itens.Count(x => x.DataDaDesativacao != null) : dadosSinsitro.Count(x => x.ItemInativo != null))</span>
+                    <span class="txt">Inativos </span>
+                </div>
+            </li>    
+            <li class="clearfix">
+                <div class="left" style="float:left">
+                    <div class="icon">
+                        <span class="s32 icomoon-icon-briefcase color-blue-dark"></span>
+                    </div>
+                    <span class="number">@Html.Raw(codigoDoSinistro == 0 ? itens.Count(x => !x.Particular) : particularOuAutoescola.Count(x => !x.Particular))</span>
+                    <span class="txt">CFC</span>                            
+                </div>
+                <div style="float:right" class="right">
+                    <div class="icon">
+                        <span class="s32 icomoon-icon-accessibility color-blue-dark"></span>
+                    </div>
+                    <span class="number">@Html.Raw(codigoDoSinistro == 0 ? itens.Count(x => x.Particular) : particularOuAutoescola.Count(x => x.Particular))</span>
+                    <span class="txt">Particular</span>
+                </div>
+            </li>
+            <li class="clearfix">
+                <div class="icon">
+                    <span class="s32 icomoon-icon-info color-blue-dark"></span>
+                </div>
+                <span class="number">@Html.Raw(codigoDoSinistro == 0 ? itens.Count() : particularOuAutoescola.Count())</span>
+                <span class="txt">Total </span>
+            </li>                                                           
+                <li class="clearfix">
+                    <div class="icon">
+                        <span class="s32  icomoon-icon-coin color-green-light"></span>
+                    </div>
+                    <span class="number color-blue-dark">R$ @Html.Raw($"{(codigoDoSinistro == 0 ? valorSinistro/(itens.Sum(x => x.Valor)/10000) : sinistro.ValorDeReferencia/sinistro.CotasNaData):N3}")</span>
+                    <span class="txt">Média p/cota </span>
+
+                </li>
+        </ul>
+    </div>
+    <!-- End .reminder -->
+</div>

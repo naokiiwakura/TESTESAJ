@@ -1,0 +1,69 @@
+﻿@model CFC.Models.Historicos
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>Históricos</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                        <i class="s16 icomoon-icon-screen-2"></i>
+                    </a>
+                    <span class="divider">
+                        <i class="s16 icomoon-icon-arrow-right-3"></i>
+                    </span>
+                </li>
+                <li class="active">Novo Estado</li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            <div class="panel panel-default toggle panelMove panelClose panelRefresh">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">Novo Histórico</h4>
+                </div>
+                <div class="panel-body">
+                    @using ((Html.BeginForm("Create", "Historicos", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" })))
+                    {
+                        @Html.AntiForgeryToken()                          
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.LabelFor(model => model.DescricaoDoHistorico, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DescricaoDoHistorico, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DescricaoDoHistorico, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.HistoricoAtivo, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.HistoricoAtivo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.HistoricoAtivo, "", new { @class = "text-danger" })
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <button onclick="javascript: history.back();" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</button>
+                                    <button type="submit" class="btn btn-success" ><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
+                                </div>
+                            </div>                       
+                    }
+                    </div>
+                </div>                                                
+            </div>
+                <!-- End .row -->
+    </div>
+    <!-- End contentwrapper -->
+</div>
+
+
+

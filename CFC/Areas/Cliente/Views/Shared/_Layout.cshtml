@@ -1,0 +1,312 @@
+﻿@using CFC.Uteis
+<!doctype html>
+<!--[if lt IE 8]><html class="no-js lt-ie8"> <![endif]-->
+<html class="no-js" lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>CFC | Super Cliente</title>
+    <!-- Mobile specific metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Force IE9 to render in normal mode -->
+    <!--[if IE]><meta http-equiv="x-ua-compatible" content="IE=9" /><![endif]-->
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="application-name" content="" />
+    <!-- Import google fonts - Heading first/ text second -->
+    @*<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet" type="text/css">*@
+    <!-- Css files -->
+    <!-- Icons -->
+    <link href="/Supr/css/icons.css" rel="stylesheet" />
+    <!-- Bootstrap stylesheets (included template modifications) -->
+    <link href="/Supr/css/bootstrap.css" rel="stylesheet" />    
+    <!-- Plugins stylesheets (all plugin custom css) -->
+    <link href="/Supr/css/plugins.css" rel="stylesheet" />
+    <!-- Main stylesheets (template main css file) -->
+    <link href="/Supr/css/main.css" rel="stylesheet" />
+    <!-- Custom stylesheets ( Put your own changes here ) -->
+    <link href="/Supr/css/custom.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/buttons.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/dataTables.tableTools.css" rel="stylesheet" />
+    <!-- Javascripts -->
+    <!-- Load pace first -->
+    <script src="/Supr/plugins/core/pace/pace.min.js"></script>
+    <!-- Important javascript libs(put in all pages) -->
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Scripts/jquery-ui-1.12.1.min.js"></script>     
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/Supr/js/libs/excanvas.min.js"></script>
+      <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script type="text/javascript" src="/Supr/js/libs/respond.min.js"></script>
+    <![endif]-->
+    <!-- Bootstrap plugins -->
+    <script src="/Supr/js/bootstrap/bootstrap.js"></script>
+    <!-- Core plugins ( not remove ) -->
+    <script src="/Supr/js/libs/modernizr.custom.js"></script>
+    <!-- Handle responsive view functions -->
+    <script src="/Supr/js/jRespond.min.js"></script>
+    <!-- Custom scroll for sidebars,tables and etc. -->
+    <script src="/Supr/plugins/core/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/Supr/plugins/core/slimscroll/jquery.slimscroll.horizontal.min.js"></script>
+    <!-- Remove click delay in touch -->
+    <script src="/Supr/plugins/core/fastclick/fastclick.js"></script>
+    <!-- Increase jquery animation speed -->
+    <script src="/Supr/plugins/core/velocity/jquery.velocity.min.js"></script>
+    <!-- Quick search plugin (fast search for many widgets) -->
+    <script src="/Supr/plugins/core/quicksearch/jquery.quicksearch.js"></script>
+    <!-- Bootbox fast bootstrap modals -->
+    <script src="/Supr/plugins/ui/bootbox/bootbox.js"></script>
+    <!-- Other plugins ( load only nessesary plugins for every page) -->          
+    <script src="/Supr/plugins/charts/sparklines/jquery.sparkline.js"></script>  
+    <script src="/Supr/plugins/forms/select2/select2.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Supr/plugins/tables/datatables/dataTables.tableTools.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
+    <script src="/Supr/plugins/ui/lightbox/ekko-lightbox.js"></script>
+    <script src="/Supr/plugins/ui/notify/jquery.gritter.js"></script>
+    <script src="/Supr/plugins/forms/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="/Supr/plugins/forms/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.js"></script>    
+    <script src="/Supr/plugins/forms/maskedinput/jquery.maskedinput.js"></script>
+    <script src="/Supr/plugins/forms/price/jquery.price_format.1.8.min.js"></script>
+    <script src="/Scripts/jquery.validate.min.js"></script>
+  
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/methods_pt.js"></script>       
+    <script src="/Supr/js/jquery.supr.js"></script>
+    <script src="/Supr/js/main.js"></script>
+    <script src="/Scripts/app.js"></script>
+    <!--Customizado-->
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({ placeholder: 'Selecione' });
+        });
+        </script>
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/Supr/img/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/Supr/img/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/Supr/img/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/Supr/img/apple-touch-icon-57-precomposed.png">
+    <link rel="icon" href="/Supr/img/ico/favicon.ico" type="image/png">
+    <!-- Windows8 touch icon ( http://www.buildmypinnedsite.com/ )-->
+    <meta name="msapplication-TileColor" content="#3399cc" />
+    </head>
+    <body>
+        <!--[if lt IE 9]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- .#header -->
+        <div id="header">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/Cliente/Home/Painel">
+                        CFC.<span class="slogan">Cliente</span>
+                    </a>
+                </div>   
+
+                <div id="navbar-no-collapse" class="navbar-no-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <!--Sidebar collapse button-->
+                            <a href="#" class="collapseBtn leftbar"><i class="s16 minia-icon-list-3"></i></a>
+                        </li>
+                        @*<li>
+                            <a href="#" class="tipB reset-layout" title="Reset panel postions"><i class="s16 icomoon-icon-history"></i></a>
+                        </li>*@
+                        @*<li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="s16 icomoon-icon-cog-2"></i><span class="txt"> Layout</span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu left dropdown-form template-settings">
+                                <li class="menu">
+                                    <ul role="menu">
+                                        <li>
+                                            <strong>Configurações de Layout</strong>
+                                        </li>
+                                        <li>
+                                            <div class="toggle-custom">
+                                                <label class="toggle" data-on="ON" data-off="OFF">
+                                                    <input type="checkbox" id="fixed-header-toggle" name="fixed-header-toggle" checked>
+                                                    <span class="button-checkbox"></span>
+                                                </label>
+                                                <label for="fixed-header-toggle">Cabeçalho Fixo</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="toggle-custom">
+                                                <label class="toggle" data-on="ON" data-off="OFF">
+                                                    <input type="checkbox" id="fixed-left-sidebar" name="fixed-left-sidebar" checked>
+                                                    <span class="button-checkbox"></span>
+                                                </label>
+                                                <label for="fixed-left-sidebar">Painel Esqu. Fixo</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="toggle-custom">
+                                                <label class="toggle" data-on="ON" data-off="OFF">
+                                                    <input type="checkbox" id="fixed-right-sidebar" name="fixed-right-sidebar" checked>
+                                                    <span class="button-checkbox"></span>
+                                                </label>
+                                                <label for="fixed-right-sidebar">Painel Dir. Fixo</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>*@
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="s16 minia-icon-envelope"></i><span class="txt">Mensagens</span><span class="notification">0</span>
+                            </a>
+                            <ul class="dropdown-menu left">
+                                <li class="menu">
+                                    <ul class="messages">
+                                        <li class="header"><strong>Mensagens</strong> (0) PM</li>
+                                        <li>
+                                            <span class="icon"><i class="s16 icomoon-icon-user-plus"></i></span>
+                                            <span class="name"><a data-toggle="modal" href="#myModal1"><strong>Administrador</strong></a><span class="time">35 min atrás</span></span>
+                                            <span class="msg">Teste de função futura ...</span>
+                                        </li>                                        
+                                        <li class="view-all">
+                                            <a href="#">Ver todas <i class="s16 fa fa-angle-double-right"></i></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-right usernav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
+                                <img src="/Supr/img/user.png" alt="" class="image" />
+                                <span class="txt">cliente@clubecfc.com.br</span>
+                                <b class="caret"></b>
+                            </a>
+                            @*<ul class="dropdown-menu right">
+                                <li class="menu">
+                                    <ul>
+                                        <li>
+                                            <a href="#"><i class="s16 icomoon-icon-user-plus"></i>Edit profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="s16 icomoon-icon-bubble-2"></i>Comments</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="s16 icomoon-icon-plus"></i>Add user</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>*@
+                        </li>
+                        <li>
+                            <a href="/Cliente/Home/LogOff"><i class="s16 icomoon-icon-exit"></i><span class="txt"> Sair</span></a>
+                        </li>
+                        <li>
+                            <a id="toggle-right-sidebar" href="#"><i class="s16 icomoon-icon-indent-increase"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.nav-collapse -->                
+            </nav>
+            <!-- /navbar -->
+    </div>
+    <!-- / #header -->
+    <div id="wrapper">
+        <!-- #wrapper -->
+        <!--Sidebar background-->
+        <div id="sidebarbg" class="hidden-lg hidden-md hidden-sm hidden-xs"></div>
+        <!--Sidebar content-->
+        <div id="sidebar" class="page-sidebar hidden-lg hidden-md hidden-sm hidden-xs">
+
+            <div class="shortcuts">
+                <ul>                    
+                    <li>
+                        <a href="#" title="Statisticas" class="tip"><i class="s24 icomoon-icon-pie-2"></i></a>
+                    </li>                    
+                </ul>
+            </div>
+           
+            <!-- Start .sidebar-inner -->
+            <div class="sidebar-inner">
+                <!-- Start .sidebar-scrollarea -->
+                <div class="sidebar-scrollarea">
+                    <div class="sidenav">
+                        <div class="sidebar-widget mb0">
+                            <h6 class="title mb0">Navegação</h6>
+                        </div>
+                        <!-- End .sidenav-widget -->
+                        <div class="mainnav">
+                            <ul>
+                                <li>
+                                    <a href="/Cliente/Home/Painel"><i class="s16 icomoon-icon-screen-2"></i><span class="txt">Home</span></a>
+                                </li>                                                                
+                                <li>
+                                    <a href="/Cliente/Home/Cliente"><i class="s16 icomoon-icon-people"></i><span class="txt">Cliente</span></a>
+                                </li>
+                                <li>
+                                    <a href="/Cliente/Home/Veiculos"><i class="s16 icomoon-icon-car"></i><span class="txt">Veiculos</span></a>
+                                </li>
+                                <li>
+                                    <a href="/Cliente/Home/Financeiro"><i class="s16 icomoon-icon-tag-5"></i><span class="txt">Financeiro</span></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="s16 icomoon-icon-fire"></i><span class="txt">Sinistros</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End .sidebar-scrollarea -->
+            </div>
+            <!-- End .sidebar-inner -->
+        </div>
+        <!-- End #sidebar -->        
+        <!--Sidebar background-->
+        <div id="right-sidebarbg" class="hidden-lg hidden-md hidden-sm hidden-xs"></div>
+        <!-- Start #right-sidebar -->
+        <aside id="right-sidebar" class="right-sidebar hidden-lg hidden-md hidden-sm hidden-xs">
+            <!-- Start .sidebar-inner -->
+            <div class="sidebar-inner">
+                <!-- Start .sidebar-scrollarea -->
+                <div class="sidebar-scrollarea">
+                    <div class="pl10 pt10 pr5">
+                        <ul class="timeline timeline-icons">
+                            <li>
+                                <p>
+                                    <a href="#">Versão</a> @DadosSeguros.Versao <a href="#"></a>
+                                </p>
+                            </li>
+                            @Html.Raw(DadosSeguros.InfoCli)
+                        </ul>                        
+                    </div>
+                </div>
+                <!-- End .sidebar-scrollarea -->
+            </div>
+            <!-- End .sidebar-inner -->
+        </aside>
+        <!-- End #right-sidebar -->          
+            <!--Body content-->
+            @RenderBody()
+            <!-- End #content -->
+            <div id="footer" class="clearfix sidebar-page right-sidebar-page">
+                <!-- Start #footer  -->
+                <p class="pull-left">
+                    Copyrights &copy; 2016 <a href="http://inuva.com.br/" class="color-blue strong" target="_blank">CFC.Cliente</a>. Sistema Privado
+                </p>
+                <p class="pull-right">
+                    <a href="#" class="mr5">Suporte</a>
+                </p>
+            </div>
+            <!-- End #footer  -->
+</div>
+    <!-- / #wrapper -->
+    <!-- Back to top -->
+    <div id="back-to-top">
+        <a href="#">Voltar para o TOPO</a>
+    </div>
+</body>
+</html>

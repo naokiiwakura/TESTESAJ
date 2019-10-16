@@ -1,0 +1,142 @@
+﻿@model IEnumerable<CFC.Models.Titulos>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DescricaoDoTitulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoDoCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoDoTitulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorDoTitulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataDoTitulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataDoVencimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataDoRecebimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NossoNumero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoDaBaixa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GeradoBoleto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GeradoRemessa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Observacao1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Observacao2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Observacao3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cancelado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoDaConta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailEnviado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroParcela)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalParcelas)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescricaoDoTitulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoDoCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoDoTitulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorDoTitulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataDoTitulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataDoVencimento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataDoRecebimento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NossoNumero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoDaBaixa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GeradoBoleto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GeradoRemessa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Observacao1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Observacao2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Observacao3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cancelado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoDaConta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailEnviado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroParcela)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalParcelas)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CodigoDoTitulo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CodigoDoTitulo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CodigoDoTitulo })
+        </td>
+    </tr>
+}
+
+</table>

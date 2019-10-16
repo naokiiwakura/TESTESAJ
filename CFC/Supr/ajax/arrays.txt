@@ -1,0 +1,9 @@
+{
+    "data": [
+        [
+            "1",
+            "System Architect",
+            "<div class='btn-group btn-group-sm'><button type='button' class='btn btn-primary' data-toggle='modal' data-target='#editMemberModal' onclick='editMember()'> <span class='glyphicon glyphicon-edit'></span> Editar</button><button class='btn btn-danger' type='button' data-toggle='modal' data-target='#removeMemberModal' onclick='removeMember()'> <span class='glyphicon glyphicon-trash'></span> Remover</button></div>"
+        ]
+    ]
+}

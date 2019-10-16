@@ -1,0 +1,352 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    //string codigoDoSinsitro = ViewBag.CodigoDoSinistro;
+}
+@*<script>
+    $(document).ready(function() {
+            
+    });
+</script>*@
+<style>
+    .center{ text-align: center; }
+</style>
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>Clientes no Sinistro</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                        <i class="s16 icomoon-icon-screen-2"></i>
+                    </a>
+                    <span class="divider">
+                        <i class="s16 icomoon-icon-arrow-right-3"></i>
+                    </span>
+                </li>
+                <li class="active">Blank Page</li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div id="painel" class="row">
+
+        </div>
+        <div class="row">
+            <div class="panel panel-default toggle">
+                <!-- Start .panel -->                
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.Label("Cliente", htmlAttributes: new {@class = "control-label"})
+                                @Html.DropDownList("Cliente", null, "Todos", htmlAttributes: new {@class = "form-control select2" })
+                            </div>                            
+                            @*<div id="itens" class="col-md-6">
+                                <label class="control-label">Itens</label>
+                                <select id="CodigoDoItem" name="CodigoDoItem" class="form-control select2">
+                                    <option>-- Selecione o Cliente --</option>
+                                </select>
+                            </div>*@
+                            <div class="col-md-3">                           
+                                @Html.Label("Data do Sinsitro", htmlAttributes: new {@class = "control-label"})
+                                @Html.Editor("dataSimulacao", new {htmlAttributes = new {@class = "form-control", PlaceHolder = "Data"}})                                         
+                            </div>    
+                            <div class="col-md-3">                           
+                                @Html.Label("Valor", htmlAttributes: new {@class = "control-label"})
+                                @Html.Editor("valorSinistro", new {htmlAttributes = new {@class = "form-control"}})                                         
+                            </div>    
+                            <div class="col-md-12" style="margin-top:10px">                                
+                                <button id="busca" class="btn btn-info"><span class="icon icomoon-icon-search-3"></span> Buscar</button>
+                                <button onclick="limpar()" class="btn btn-default"><span class="icon icomoon-icon-remove-5"></span> Limpar</button>                                
+                                @*<button style="float:right" onclick="inserir()" class="btn btn-warning"><span class="icon icomoon-icon-plus"></span> Adicionar Item</button>*@
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="removeMessages"></div>
+            <div class="col-lg-12">
+                <!-- col-lg-12 start here -->
+                <div class="reminder mb25">
+                    <!-- Start .panel -->
+                    @*<div class="panel-heading">
+                        <h4 class="panel-title">Visão Geral</h4>
+                    </div>*@
+                    <div class="panel-body">
+                        <table class="table table-striped table-bordered" cellspacing="0" width="100%" id="tabela">
+                            <thead>
+                            <tr>
+                                @*<th>Cod</th>*@
+                                @*<th width="30" align="center">C.Cli</th>*@
+                                <th></th>
+                                <th>CFC</th>
+                                <th>Item</th>
+                                <th  width="65">Data</th>
+                                <th width="70">Valor</th>
+                                <th>Cotas</th>                               
+                                <th>Rateio</th> 
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr></tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End .row -->
+    </div>
+    <!-- End contentwrapper -->
+    <!-- remove modal -->
+    @*<div class="modal fade" tabindex="-1" role="dialog" id="removerModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-trash"></span> Remover</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Você tem certeza disso?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-danger" id="removerBtn">Sim Remover</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->*@
+    <!-- /remove modal -->
+</div>
+
+<script>
+    function seleciona(tipo) {
+        itens = tipo;
+        console.log(tipo);
+        $('#tabela').DataTable().ajax.reload();
+    }
+
+    function limpar() {
+        $('#Cliente').val("");
+        $('#dataSimulacao').val("");
+        $('#tabela').dataTable().fnDraw();
+    }
+
+    var itens;
+    var $dt;
+
+    $(document).ready(function () {
+        $("#dataSimulacao").mask("99/99/9999");
+        $("#adicionarBtn").appendTo($(".panel-title"));
+        CampoDecimal("#valorSinistro");    
+
+
+        $dt = $('#tabela').dataTable({
+            "bServerSide": true,
+            "sAjaxSource": "/Admin/Sinistros/ListaSimulacao/",
+            "fnServerParams": function (aoData) {
+
+                aoData.push(
+                    @*{ "name": "id", "value": @codigoDoSinsitro },*@
+                    { "name": "valorSinistro", "value": $("#valorSinistro").val() },
+                    { "name": "Cliente", "value": $("#Cliente").val() },
+                    { "name": "dataSimulacao", "value": $("#dataSimulacao").val() }
+                );
+            },
+            "bProcessing": true,
+            "aoColumns": [
+                //{ "sName": "CodigoDadosDoSinistro" },
+                {
+                    "sName": "CodigoDoItem",
+                    "bSearchable": false,
+                    "sClass": "center"
+                },
+                { "sName": "CFC" },
+                { "sName": "Item" },
+                { "sName": "Data" },
+                { "sName": "Valor" },
+                { "sName": "Cotas" },
+                { "sName": "Rateio" },
+                { "sName": "Acao", "sClass": "center" }
+            ],
+            "displayLength": 50,
+            "lengthMenu": [[10, 25, 50, 100, 200, 500, -1], [10, 25, 50, 100, 200, 500, "Tudo"]],
+            "oLanguage": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "CFC/CNPJ/Cidade/Estado",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            },
+            "sDom":
+                "T<'row'<'col-md-5 col-xs-12 'l><'col-md-5 col-xs-12'f>r>t<'row'<'col-md-4 col-xs-12'i><'col-md-8 col-xs-12'p>>",
+            tableTools: {
+                "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf",
+                "aButtons": [
+                    {
+                        "sExtends": "print",
+                        "sButtonText": "<span><i class='s16  icomoon-icon-print'></i> Imprimir </span>"
+                    }
+                    //"copy",
+                    //"csv",
+                    //"xls",
+                    //"print",
+                    //"select_all",
+                    //"select_none"
+                ]
+            },
+            bFilter: false,
+            "columnDefs": [
+                { "visible": false, "targets": 1 },
+                //{ "visible": false, "targets": 0 },
+                {
+                    "targets": -1,
+                    "data": null,
+                    "render": function (data, type, row) {
+                        return ""; //"<button class='btn btn-xs btn-danger' type='button' data-toggle='modal' data-target='#removerModal' onclick= 'remover(" + row[0] + ")' > <span class='glyphicon glyphicon-trash'></span></button></div>";
+                    }
+                    //"defaultContent":
+                }
+            ],
+            "drawCallback": function (settings) {
+                //var dataSimulacao = $("#dataSimulacao").val();
+                var codigoCliente = $("#Cliente").val();
+                var valorSinistro = $("#valorSinistro").val();
+                var dataSimulacao = $("#dataSimulacao").val();
+                
+
+                $.get('@Url.Action("Painel", "Sinistros")',
+                    { dataSimulacao: dataSimulacao, cliente: codigoCliente, valorSinistro: valorSinistro }, function (data) {
+                        $("#painel").html(data);
+                    });
+
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+
+                api.column(1, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="7">'+group+'</td></tr>'
+                        );
+
+                        last = group;
+                    }
+                } );
+            }
+        });
+
+        $('#busca').on('click',
+            function (e) {
+                e.preventDefault();
+                $dt.dataTable().fnDraw();
+            }
+        );
+
+        @*$("#Cliente").change(function () {
+            var item = $(this).val();
+            $.get('@Url.Action("Itens", "Itens")',
+                { CodigoDoCliente: item }, function (data) {
+                    $("#itens").html(data);
+                });
+        });*@
+    });
+
+    @*function remover(id) {
+        if (id) {
+            // click on remove button
+            $("#removerBtn").unbind('click').bind('click', function () {
+                $.ajax({
+                    url: '/Admin/Sinistros/RemoverClienteDoSinistro',
+                    type: 'post',
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success == true) {
+                            $(".removeMessages").html('<div class="alert alert-success fade in">'
+                                + '<button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;</button >'
+                                + '<i class="fa fa-check alert-icon"></i><strong>Tudo certo! </strong>' + response.messages + '</div >');
+
+                            // refresh the table
+                            $('#tabela').DataTable().ajax.reload();
+
+                            // close the modal
+                            $("#removerModal").modal('hide');
+
+                        } else {
+                            $(".removeMessages").html('<div class="alert alert-danger fade in">'
+                                + '<button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;</button >'
+                                + '<i class="glyphicon glyphicon-ban-circle alert-icon "></i><strong>Ops! </strong>' + response.messages + '</div >');
+
+                            $("#removerModal").modal('hide');
+                        }
+                    }
+                });
+            }); // click remove btn
+        } else {
+            alert('Error: Algo de errado aconteceu, tente atualizar a página!');
+        }
+    }
+
+    function inserir() {
+        var id = $("#CodigoDoItem").val();
+        var codigoDoSinistro = "@codigoDoSinsitro";       
+        if (id != "") {
+            // click on remove button
+            $.ajax({
+                url: '/Admin/Sinistros/InserirClienteDoSinistro',
+                type: 'post',
+                data: { id: id, codigoDoSinistro: codigoDoSinistro },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success == true) {
+                        $(".removeMessages").html('<div class="alert alert-success fade in">'
+                            + '<button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;</button >'
+                            + '<i class="fa fa-check alert-icon"></i><strong>Tudo certo! </strong>' + response.messages + '</div >');
+
+                        // refresh the table
+                        limpar();
+
+                        // close the modal
+                        $("#removerModal").modal('hide');
+
+                    } else {
+                        $(".removeMessages").html('<div class="alert alert-danger fade in">'
+                            + '<button type="button" class="close" data-dismiss="alert" aria-hidden="true" >&times;</button >'
+                            + '<i class="glyphicon glyphicon-ban-circle alert-icon "></i><strong>Ops! </strong>' + response.messages + '</div >');
+
+                        $("#removerModal").modal('hide');
+                    }
+                }
+            });            
+        } else {
+            alert('Error: Selecione um item!');
+        }
+    }*@
+
+</script>
+

@@ -1,0 +1,91 @@
+﻿@model CFC.Models.Usuarios
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Usuarios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeDoUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeDoUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Senha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Senha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioAtivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioAtivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FotoDoUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FotoDoUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDoCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDoCadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Admin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Admin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Site)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Site)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Operador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Operador)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoDoUsuario }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,400 @@
+﻿@model CFC.Models.Sinistros
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var controller = "Sinistros";
+    var tipo = "Create";
+    var opt = "Adicionar <span class='glyphicon glyphicon-plus'></span>";
+    //var opt = "Editar <span class='glyphicon glyphicon-edit'></span>";
+    var erro = TempData["erro"];
+}
+<script>
+    jQuery(function() {
+        $("#CodigoDoCliente").change(function () {
+            //$("#log").ajaxError(function (event, jqxhr, settings, exception) {
+            //    alert(exception);
+            //});
+
+            var item = $(this).val();
+            $.get('@Url.Action("Itens", "Itens")',
+                { CodigoDoCliente: item }, function (data) {
+                    $("#itens").html(data);
+                });
+        });
+    });
+</script>
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>@Html.Raw(controller)</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                        <i class="s16 icomoon-icon-screen-2"></i>
+                    </a>
+                    <span class="divider">
+                        <i class="s16 icomoon-icon-arrow-right-3"></i>
+                    </span>
+                </li>
+                <li class="active"></li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            @if (erro != null)
+            {
+                <div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><i class="glyphicon glyphicon-ban-circle alert-icon "></i><strong>Ops! </strong>@Html.Raw(erro)</div>
+            }
+            <div class="panel panel-default">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">@Html.Raw(opt)</h4>
+                </div>
+                <div class="panel-body">
+                    @using ((Html.BeginForm(tipo, controller, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" })))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })                        
+                        <div class="form-group">                                                                                    
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.CodigoDoCliente, "Cliente", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("CodigoDoCliente", null, "", htmlAttributes: new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.CodigoDoCliente, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6" id="itens">
+                                @Html.LabelFor(model => model.CodigoDoItem, "Itens", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("CodigoDoItem", null, "-- Selecione um Cliente --", htmlAttributes: new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.CodigoDoItem, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.ValorDoSinistro, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.ValorDoSinistro, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Value = "0,00" } })
+                                @Html.ValidationMessageFor(model => model.ValorDoSinistro, "", new { @class = "text-danger" })
+                            </div>                            
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.ValorDeReferencia, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.ValorDeReferencia, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ValorDeReferencia, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.DataDoSinistro, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DataDoSinistro, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Today.ToShortDateString()} })
+                                @Html.ValidationMessageFor(model => model.DataDoSinistro, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.DataDeConclusaoDoSinistro, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DataDeConclusaoDoSinistro, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.DataDeConclusaoDoSinistro, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.DataDoFaturamento, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DataDoFaturamento, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.DataDoFaturamento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.ObservacaoDoSinistro, htmlAttributes: new { @class = "control-label" })
+                                @Html.TextAreaFor(model => model.ObservacaoDoSinistro, new { @class = "form-control limitTextarea", @maxlength = "8000", @rows = "6" })
+                                @Html.ValidationMessageFor(model => model.ObservacaoDoSinistro, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="email-read-attachment">
+                            <p class="mb15">
+                               Sinistrado 4 Fotos <a href="#"><i class="fa fa-cloud-download s16"></i></a>
+                            </p>
+                            <div class="row">
+                                <div class="col-md-3">                                    
+                                    @*@Html.EditorFor(model => model.Foto1, new { htmlAttributes = new { @class = "form-control" } })*@   
+                                    <input type="file" name="f1" id="f1" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto2, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f2" id="f2" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto3, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f3" id="f3" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto4, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f4" id="f4" style="display: none;" />
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto1" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto1" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>                                   
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f1').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(1)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto2" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto2" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f2').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(2)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto3" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto3" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f3').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(3)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto4" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto4" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f4').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(4)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                        <div class="email-read-attachment">
+                            <p class="mb15">
+                                Concluído 4 Fotos <a href="#"><i class="fa fa-cloud-download s16"></i></a>
+                            </p>
+                            <div class="row">
+                                <div class="col-md-3">                                    
+                                    @*@Html.EditorFor(model => model.Foto1, new { htmlAttributes = new { @class = "form-control" } })*@   
+                                    <input type="file" name="f5" id="f5" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto2, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f6" id="f6" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto3, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f7" id="f7" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto4, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f8" id="f8" style="display: none;" />
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto5" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto5" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>                                   
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f5').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(1)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto6" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto6" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f6').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(2)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto7" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto7" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f7').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(3)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto8" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto8" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f8').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(4)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>           
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button onclick="javascript: history.back();" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</button>
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- End .row -->
+    </div>
+    <!-- End contentwrapper -->
+</div>
+
+<script>
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });     
+
+    $("#f1").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto1').attr('src', e.target.result);
+                $('#ufoto1').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f2").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto2').attr('src', e.target.result);
+                $('#ufoto2').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f3").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto3').attr('src', e.target.result);
+                $('#ufoto3').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f4").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto4').attr('src', e.target.result);
+                $('#ufoto4').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f5").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto5').attr('src', e.target.result);
+                $('#ufoto5').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f6").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto6').attr('src', e.target.result);
+                $('#ufoto6').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f7").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto7').attr('src', e.target.result);
+                $('#ufoto7').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f8").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto8').attr('src', e.target.result);
+                $('#ufoto8').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    function note() {
+        $.extend($.gritter.options, {
+            position: 'bottom-left',
+        });
+        $.gritter.add({
+            // (string | mandatory) the heading of the notification
+            title: 'Atenção !!!',
+            // (string | mandatory) the text inside the notification
+            text: 'Não esqueça de salvar o Item após selecionar as fotos',
+            // (int | optional) the time you want it to be alive for before fading out
+            time: '',
+            // (string) specify font-face icon  class for close message
+            close_icon: 'entypo-icon-cancel s12',
+            // (string) specify font-face icon class for big icon in left. if are specify image this will not show up.
+            icon: 'icomoon-icon-user',
+            // (string | optional) the class name you want to apply to that specific message
+            class_name: 'warning-notice'
+        });
+    }
+
+    function remover(e) {
+        $.ajax({
+            url: '/Admin/Sinistros/DeletarFoto/' + e,
+            type: 'POST',
+            success: function (result) {
+                $('#ifoto' + e + '').attr('src', '/Supr/img/semimagem.png');
+                $('#ufoto' + e + '').attr('href', '/Supr/img/semimagem.png');
+
+                $.extend($.gritter.options, {
+                    position: 'bottom-left',
+                });
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Feito !!!',
+                    // (string | mandatory) the text inside the notification
+                    text: 'A foto foi Removida com Sucesso',
+                    // (int | optional) the time you want it to be alive for before fading out
+                    time: '',
+                    // (string) specify font-face icon  class for close message
+                    close_icon: 'entypo-icon-cancel s12',
+                    // (string) specify font-face icon class for big icon in left. if are specify image this will not show up.
+                    icon: 'eco-trashcan',
+                    // (string | optional) the class name you want to apply to that specific message
+                    class_name: 'success-notice'
+                });  
+            }
+        });
+    }; 
+
+    $(document).ready(function () {        
+        $("#DataDoSinistro").mask("99/99/9999");
+        $("#DataDeConclusaoDoSinistro").mask("99/99/9999");
+        $("#DataDoFaturamento").mask("99/99/9999");        
+        CampoDecimal("#ValorDoSinistro");               
+        CampoDecimal("#ValorDeReferencia");   
+        
+    });
+</script>    
+
+        

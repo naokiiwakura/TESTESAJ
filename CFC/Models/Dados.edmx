@@ -1,0 +1,1240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cfcadminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cidades">
+          <Key>
+            <PropertyRef Name="CodigoDaCidade" />
+          </Key>
+          <Property Name="CodigoDaCidade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeDaCidade" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CodigoDoEstado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="CodigoDoCliente" />
+          </Key>
+          <Property Name="CodigoDoCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeCFC" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="NomeCompletoDoCliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TipoDePessoaDoCliente" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="CPFCNPJDoCliente" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="EnderecoDoCliente" Type="varchar" MaxLength="100" />
+          <Property Name="NumeroDoCliente" Type="varchar" MaxLength="20" />
+          <Property Name="ComplementoDoCliente" Type="varchar" MaxLength="50" />
+          <Property Name="BairroDoCliente" Type="varchar" MaxLength="100" />
+          <Property Name="CodigoDaCidade" Type="int" Nullable="false" />
+          <Property Name="CodigoDoEstado" Type="int" Nullable="false" />
+          <Property Name="CEPDoCliente" Type="varchar" MaxLength="9" />
+          <Property Name="EmailDoCliente" Type="varchar" MaxLength="100" />
+          <Property Name="SenhaDoCliente" Type="varchar" MaxLength="20" />
+          <Property Name="TelefoneResidencialDoCliente" Type="varchar" MaxLength="15" />
+          <Property Name="TelefoneCelularDoCliente" Type="varchar" MaxLength="15" />
+          <Property Name="ClienteAtivo" Type="bit" Nullable="false" />
+          <Property Name="ObservacoesDoCliente" Type="varchar" MaxLength="8000" />
+          <Property Name="DataDoCadastro" Type="datetime" />
+          <Property Name="Foto1" Type="varchar" MaxLength="100" />
+          <Property Name="Foto2" Type="varchar" MaxLength="100" />
+          <Property Name="Foto3" Type="varchar" MaxLength="100" />
+          <Property Name="Foto4" Type="varchar" MaxLength="100" />
+          <Property Name="SepararVeiculos" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Configuracoes">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="CnpjDaEmpresa" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="RazaoSocialDaEmpresa" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="NumeroDaAgenciaBancaria" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DigitoDaAgenciaBancaria" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="NumeroDaContaBancaria" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DigitoDaContaBancaria" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="UltimaRemessa" Type="int" Nullable="false" />
+          <Property Name="ValorDaMensalidade" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TaxaDoBoleto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TextoMulta" Type="varchar" MaxLength="150" />
+          <Property Name="TextoMora" Type="varchar" MaxLength="150" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="Senha" Type="varchar" MaxLength="50" />
+          <Property Name="SMTP" Type="varchar" MaxLength="50" />
+          <Property Name="DisparaEmail" Type="bit" Nullable="false" />
+          <Property Name="TextoGestao" Type="varchar" MaxLength="150" />
+          <Property Name="TextoTerceiro" Type="varchar" MaxLength="150" />
+          <Property Name="ValorTerceiro" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DadosDoSinistro">
+          <Key>
+            <PropertyRef Name="CodigoDadosDoSinistro" />
+          </Key>
+          <Property Name="CodigoDadosDoSinistro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoDoSinistro" Type="int" Nullable="false" />
+          <Property Name="CodigoDoCliente" Type="int" Nullable="false" />
+          <Property Name="CodigoDoItem" Type="int" Nullable="false" />
+          <Property Name="ValorDoItem" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ClienteCadastrado" Type="datetime" Nullable="false" />
+          <Property Name="ClienteInativo" Type="bit" Nullable="false" />
+          <Property Name="ItemCadastrado" Type="datetime" Nullable="false" />
+          <Property Name="ItemInativo" Type="datetime" />
+          <Property Name="DataDoSinistro" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Demonstrativo">
+          <Key>
+            <PropertyRef Name="CodigoDoDemonstrativo" />
+          </Key>
+          <Property Name="CodigoDoDemonstrativo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoDaMovimentacao" Type="int" Nullable="false" />
+          <Property Name="TituloDoGrupo" Type="varchar" MaxLength="100" />
+          <Property Name="ItemReferencia" Type="varchar" MaxLength="100" />
+          <Property Name="ItemDescricao" Type="varchar" MaxLength="100" />
+          <Property Name="ItemValor" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="CodigoDoEstado" />
+          </Key>
+          <Property Name="CodigoDoEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeDoEstado" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fornecedores">
+          <Key>
+            <PropertyRef Name="CodigoDoFornecedor" />
+          </Key>
+          <Property Name="CodigoDoFornecedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeDoFornecedor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RazaoSocial" Type="varchar" MaxLength="50" />
+          <Property Name="CPFCNPJ" Type="varchar" MaxLength="50" />
+          <Property Name="Endereco" Type="varchar" MaxLength="50" />
+          <Property Name="Cidade" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="varchar" MaxLength="2" />
+          <Property Name="Telefone" Type="varchar" MaxLength="50" />
+          <Property Name="TipoDoFornecedor" Type="varchar" MaxLength="50" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Historicos">
+          <Key>
+            <PropertyRef Name="CodigoDoHistorico" />
+          </Key>
+          <Property Name="CodigoDoHistorico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescricaoDoHistorico" Type="varchar" MaxLength="100" />
+          <Property Name="HistoricoAtivo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Itens">
+          <Key>
+            <PropertyRef Name="CodigoDoItem" />
+          </Key>
+          <Property Name="CodigoDoItem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoDocliente" Type="int" Nullable="false" />
+          <Property Name="DescricaoDoModelo" Type="varchar" MaxLength="200" />
+          <Property Name="Placa1DoVeiculo" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Placa2DoVeiculo" Type="varchar" MaxLength="9" />
+          <Property Name="Renavam" Type="varchar" MaxLength="40" />
+          <Property Name="NumeroDoChassi" Type="varchar" MaxLength="40" />
+          <Property Name="AnoDeFabricacao" Type="varchar" MaxLength="4" />
+          <Property Name="AnoDoModelo" Type="varchar" MaxLength="4" />
+          <Property Name="CorPredominante" Type="varchar" MaxLength="50" />
+          <Property Name="Particular" Type="bit" Nullable="false" />
+          <Property Name="ObservacaoDoItem" Type="varchar" MaxLength="8000" />
+          <Property Name="DataDoCadastro" Type="datetime" />
+          <Property Name="DataDaDesativacao" Type="datetime" />
+          <Property Name="CodigoFipe" Type="varchar" MaxLength="50" />
+          <Property Name="CodigoDoTipo" Type="int" Nullable="false" />
+          <Property Name="Foto1" Type="varchar" MaxLength="100" />
+          <Property Name="Foto2" Type="varchar" MaxLength="100" />
+          <Property Name="Foto3" Type="varchar" MaxLength="100" />
+          <Property Name="Foto4" Type="varchar" MaxLength="100" />
+          <Property Name="DataDaAtivacao" Type="datetime" />
+          <Property Name="Valor" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DescricaoDaMarca" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Movimentacao">
+          <Key>
+            <PropertyRef Name="CodigoDoTitulo" />
+          </Key>
+          <Property Name="CodigoDoTitulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescricaoDoTitulo" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="CodigoDoCliente" Type="int" />
+          <Property Name="TipoDoTitulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ValorDoTitulo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DataDoTitulo" Type="datetime" Nullable="false" />
+          <Property Name="DataDoVencimento" Type="datetime" Nullable="false" />
+          <Property Name="DataDoRecebimento" Type="datetime" />
+          <Property Name="NossoNumero" Type="varchar" MaxLength="30" />
+          <Property Name="TipoDaBaixa" Type="varchar" MaxLength="50" />
+          <Property Name="GeradoBoleto" Type="bit" Nullable="false" />
+          <Property Name="GeradoRemessa" Type="bit" Nullable="false" />
+          <Property Name="Observacao1" Type="varchar" MaxLength="150" />
+          <Property Name="Observacao2" Type="varchar" MaxLength="150" />
+          <Property Name="Observacao3" Type="varchar" MaxLength="150" />
+          <Property Name="Cancelado" Type="bit" Nullable="false" />
+          <Property Name="NumeroParcela" Type="int" />
+          <Property Name="TotalParcelas" Type="int" />
+          <Property Name="BoletoAdmin" Type="bit" Nullable="false" />
+          <Property Name="Credito" Type="bit" Nullable="false" />
+          <Property Name="Debito" Type="bit" Nullable="false" />
+          <Property Name="CodigoDoSinistro" Type="int" />
+          <Property Name="CodigoDoFornecedor" Type="int" />
+          <Property Name="Boleto" Type="bit" Nullable="false" />
+          <Property Name="Caixa" Type="bit" Nullable="false" />
+          <Property Name="Detalhes" Type="varchar(max)" />
+          <Property Name="CodigoDoHistorico" Type="int" Nullable="false" />
+          <Property Name="Foto1" Type="varchar" MaxLength="100" />
+          <Property Name="Foto2" Type="varchar" MaxLength="100" />
+          <Property Name="Foto3" Type="varchar" MaxLength="100" />
+          <Property Name="Foto4" Type="varchar" MaxLength="100" />
+          <Property Name="Rateio" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrdemDeServico">
+          <Key>
+            <PropertyRef Name="CodigoDaOS" />
+          </Key>
+          <Property Name="CodigoDaOS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoDoTitulo" Type="int" Nullable="false" />
+          <Property Name="Mensagem" Type="varchar" MaxLength="300" />
+          <Property Name="Valor" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NovoTitulo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sinistros">
+          <Key>
+            <PropertyRef Name="CodigoDoSinistro" />
+          </Key>
+          <Property Name="CodigoDoSinistro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoDoItem" Type="int" Nullable="false" />
+          <Property Name="CodigoDoCliente" Type="int" Nullable="false" />
+          <Property Name="ValorDoSinistro" Type="numeric" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="DataDoSinistro" Type="datetime" />
+          <Property Name="DataDeConclusaoDoSinistro" Type="datetime" />
+          <Property Name="ObservacaoDoSinistro" Type="varchar" MaxLength="8000" />
+          <Property Name="CotasNaData" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="ValorPorCota" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ClientesNoRateio" Type="int" />
+          <Property Name="ValorDeReferencia" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DataDoFaturamento" Type="date" />
+          <Property Name="Foto1" Type="varchar" MaxLength="100" />
+          <Property Name="Foto2" Type="varchar" MaxLength="100" />
+          <Property Name="Foto3" Type="varchar" MaxLength="100" />
+          <Property Name="Foto4" Type="varchar" MaxLength="100" />
+          <Property Name="Foto5" Type="varchar" MaxLength="100" />
+          <Property Name="Foto6" Type="varchar" MaxLength="100" />
+          <Property Name="Foto7" Type="varchar" MaxLength="100" />
+          <Property Name="Foto8" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="CodigoDoSite" />
+          </Key>
+          <Property Name="AtivaSite" Type="bit" Nullable="false" />
+          <Property Name="AtivaBanner" Type="bit" Nullable="false" />
+          <Property Name="AtivaCobertura" Type="bit" Nullable="false" />
+          <Property Name="AtivaServicos" Type="bit" Nullable="false" />
+          <Property Name="AtivaVeiculos" Type="bit" Nullable="false" />
+          <Property Name="AtivaLogin" Type="bit" Nullable="false" />
+          <Property Name="AtivaSobre" Type="bit" Nullable="false" />
+          <Property Name="AtivaContato" Type="bit" Nullable="false" />
+          <Property Name="SobreTitulo" Type="varchar" MaxLength="150" />
+          <Property Name="SobreResumo" Type="varchar" MaxLength="250" />
+          <Property Name="VeiculosTexto" Type="varchar(max)" />
+          <Property Name="CoberturaTexto" Type="varchar(max)" />
+          <Property Name="PrecoTexto" Type="varchar(max)" />
+          <Property Name="ServicosTexto" Type="varchar(max)" />
+          <Property Name="Area1Titulo" Type="varchar" MaxLength="50" />
+          <Property Name="Area1Texto" Type="varchar" MaxLength="250" />
+          <Property Name="Area2Titulo" Type="varchar" MaxLength="50" />
+          <Property Name="Area2Texto" Type="varchar" MaxLength="250" />
+          <Property Name="Depoimento1Cliente" Type="varchar" MaxLength="50" />
+          <Property Name="Depoimento1Texto" Type="varchar" MaxLength="250" />
+          <Property Name="Depoimento2Cliente" Type="varchar" MaxLength="50" />
+          <Property Name="Depoimento2Texto" Type="varchar" MaxLength="250" />
+          <Property Name="Depoimento3Cliente" Type="varchar" MaxLength="50" />
+          <Property Name="Depoimento3Texto" Type="varchar" MaxLength="250" />
+          <Property Name="Depoimento4Cliente" Type="varchar" MaxLength="50" />
+          <Property Name="Depoimento4Texto" Type="varchar" MaxLength="250" />
+          <Property Name="AtivaDepoimento" Type="bit" Nullable="false" />
+          <Property Name="Contador1Titulo" Type="varchar" MaxLength="20" />
+          <Property Name="Contador1Numero" Type="int" />
+          <Property Name="Contador2Titulo" Type="varchar" MaxLength="20" />
+          <Property Name="Contador2Numero" Type="int" />
+          <Property Name="Contador3Titulo" Type="varchar" MaxLength="20" />
+          <Property Name="Contador3Numero" Type="int" />
+          <Property Name="Contador4Titulo" Type="varchar" MaxLength="20" />
+          <Property Name="Contador4Numero" Type="int" />
+          <Property Name="AtivaParceiros" Type="bit" Nullable="false" />
+          <Property Name="Telefone" Type="varchar" MaxLength="50" />
+          <Property Name="Endereco" Type="varchar" MaxLength="150" />
+          <Property Name="Facebook" Type="varchar" MaxLength="500" />
+          <Property Name="Youtube" Type="varchar" MaxLength="500" />
+          <Property Name="Twitter" Type="varchar" MaxLength="500" />
+          <Property Name="Instagram" Type="varchar" MaxLength="500" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Banner1Texto1" Type="varchar" MaxLength="150" />
+          <Property Name="Banner1Texto2" Type="varchar" MaxLength="150" />
+          <Property Name="Banner1Imagem" Type="varchar" MaxLength="150" />
+          <Property Name="AtivaBanner1Padrao" Type="bit" Nullable="false" />
+          <Property Name="AtivaBanner2Padrao" Type="bit" Nullable="false" />
+          <Property Name="Banner2Texto1" Type="varchar" MaxLength="150" />
+          <Property Name="Banner2Texto2" Type="varchar" MaxLength="250" />
+          <Property Name="Banner2Texto3" Type="varchar" MaxLength="150" />
+          <Property Name="Banner2Imagem" Type="varchar" MaxLength="150" />
+          <Property Name="CodigoDoSite" Type="int" Nullable="false" />
+          <Property Name="SobreTexto" Type="varchar(max)" />
+          <Property Name="SobreImagem" Type="varchar" MaxLength="150" />
+          <Property Name="AtivaPreco" Type="bit" Nullable="false" />
+          <Property Name="AtivaContador" Type="bit" Nullable="false" />
+          <Property Name="SobreImagemEquipe" Type="varchar" MaxLength="150" />
+          <Property Name="AtivaArea" Type="bit" Nullable="false" />
+          <Property Name="AtivaLinks" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipos">
+          <Key>
+            <PropertyRef Name="CodigoDoTipo" />
+          </Key>
+          <Property Name="CodigoDoTipo" Type="int" Nullable="false" />
+          <Property Name="NomeDoTipo" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="CodigoDoUsuario" />
+          </Key>
+          <Property Name="CodigoDoUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeDoUsuario" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Senha" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="UsuarioAtivo" Type="bit" Nullable="false" />
+          <Property Name="FotoDoUsuario" Type="varchar" MaxLength="100" />
+          <Property Name="DataDoCadastro" Type="datetime" Nullable="false" />
+          <Property Name="Admin" Type="bit" Nullable="false" />
+          <Property Name="Site" Type="bit" Nullable="false" />
+          <Property Name="Operador" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cidades_Estados">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Cidades" Type="Self.Cidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoDoEstado" />
+            </Principal>
+            <Dependent Role="Cidades">
+              <PropertyRef Name="CodigoDoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clientes_Cidades">
+          <End Role="Cidades" Type="Self.Cidades" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidades">
+              <PropertyRef Name="CodigoDaCidade" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="CodigoDaCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clientes_Estados">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoDoEstado" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="CodigoDoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Itens_Clientes">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Itens" Type="Self.Itens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="CodigoDoCliente" />
+            </Principal>
+            <Dependent Role="Itens">
+              <PropertyRef Name="CodigoDocliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Itens_Tipos">
+          <End Role="Tipos" Type="Self.Tipos" Multiplicity="1" />
+          <End Role="Itens" Type="Self.Itens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipos">
+              <PropertyRef Name="CodigoDoTipo" />
+            </Principal>
+            <Dependent Role="Itens">
+              <PropertyRef Name="CodigoDoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimentacao_Historicos">
+          <End Role="Historicos" Type="Self.Historicos" Multiplicity="1" />
+          <End Role="Movimentacao" Type="Self.Movimentacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Historicos">
+              <PropertyRef Name="CodigoDoHistorico" />
+            </Principal>
+            <Dependent Role="Movimentacao">
+              <PropertyRef Name="CodigoDoHistorico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sinistros_Itens">
+          <End Role="Itens" Type="Self.Itens" Multiplicity="1" />
+          <End Role="Sinistros" Type="Self.Sinistros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Itens">
+              <PropertyRef Name="CodigoDoItem" />
+            </Principal>
+            <Dependent Role="Sinistros">
+              <PropertyRef Name="CodigoDoItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cfcadminModelStoreContainer">
+          <EntitySet Name="Cidades" EntityType="Self.Cidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Configuracoes" EntityType="Self.Configuracoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DadosDoSinistro" EntityType="Self.DadosDoSinistro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Demonstrativo" EntityType="Self.Demonstrativo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fornecedores" EntityType="Self.Fornecedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Historicos" EntityType="Self.Historicos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Itens" EntityType="Self.Itens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimentacao" EntityType="Self.Movimentacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdemDeServico" EntityType="Self.OrdemDeServico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sinistros" EntityType="Self.Sinistros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipos" EntityType="Self.Tipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cidades_Estados" Association="Self.FK_Cidades_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Cidades" EntitySet="Cidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clientes_Cidades" Association="Self.FK_Clientes_Cidades">
+            <End Role="Cidades" EntitySet="Cidades" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clientes_Estados" Association="Self.FK_Clientes_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Itens_Clientes" Association="Self.FK_Itens_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Itens" EntitySet="Itens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Itens_Tipos" Association="Self.FK_Itens_Tipos">
+            <End Role="Tipos" EntitySet="Tipos" />
+            <End Role="Itens" EntitySet="Itens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimentacao_Historicos" Association="Self.FK_Movimentacao_Historicos">
+            <End Role="Historicos" EntitySet="Historicos" />
+            <End Role="Movimentacao" EntitySet="Movimentacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sinistros_Itens" Association="Self.FK_Sinistros_Itens">
+            <End Role="Itens" EntitySet="Itens" />
+            <End Role="Sinistros" EntitySet="Sinistros" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cfcadminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="cfcadminEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cidades" EntityType="cfcadminModel.Cidades" />
+          <EntitySet Name="Configuracoes" EntityType="cfcadminModel.Configuracoes" />
+          <EntitySet Name="Estados" EntityType="cfcadminModel.Estados" />
+          <EntitySet Name="Fornecedores" EntityType="cfcadminModel.Fornecedores" />
+          <EntitySet Name="Historicos" EntityType="cfcadminModel.Historicos" />
+          <EntitySet Name="Itens" EntityType="cfcadminModel.Itens" />
+          <EntitySet Name="OrdemDeServico" EntityType="cfcadminModel.OrdemDeServico" />
+          <EntitySet Name="Site" EntityType="cfcadminModel.Site" />
+          <EntitySet Name="Tipos" EntityType="cfcadminModel.Tipos" />
+          <EntitySet Name="Usuarios" EntityType="cfcadminModel.Usuarios" />
+          <AssociationSet Name="FK_Cidades_Estados" Association="cfcadminModel.FK_Cidades_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Cidades" EntitySet="Cidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Itens_Tipos" Association="cfcadminModel.FK_Itens_Tipos">
+            <End Role="Tipos" EntitySet="Tipos" />
+            <End Role="Itens" EntitySet="Itens" />
+          </AssociationSet>
+          <EntitySet Name="DadosDoSinistro" EntityType="cfcadminModel.DadosDoSinistro" />
+          <EntitySet Name="Sinistros" EntityType="cfcadminModel.Sinistros" />
+          <AssociationSet Name="FK_Sinistros_Itens" Association="cfcadminModel.FK_Sinistros_Itens">
+            <End Role="Itens" EntitySet="Itens" />
+            <End Role="Sinistros" EntitySet="Sinistros" />
+          </AssociationSet>
+          <EntitySet Name="Movimentacao" EntityType="cfcadminModel.Movimentacao" />
+          <AssociationSet Name="FK_Movimentacao_Historicos" Association="cfcadminModel.FK_Movimentacao_Historicos">
+            <End Role="Historicos" EntitySet="Historicos" />
+            <End Role="Movimentacao" EntitySet="Movimentacao" />
+          </AssociationSet>
+          <EntitySet Name="Demonstrativo" EntityType="cfcadminModel.Demonstrativo" />
+          <EntitySet Name="Clientes" EntityType="cfcadminModel.Clientes" />
+          <AssociationSet Name="FK_Clientes_Cidades" Association="cfcadminModel.FK_Clientes_Cidades">
+            <End Role="Cidades" EntitySet="Cidades" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clientes_Estados" Association="cfcadminModel.FK_Clientes_Estados">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Itens_Clientes" Association="cfcadminModel.FK_Itens_Clientes">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Itens" EntitySet="Itens" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cidades">
+          <Key>
+            <PropertyRef Name="CodigoDaCidade" />
+          </Key>
+          <Property Name="CodigoDaCidade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeDaCidade" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoDoEstado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estados" Relationship="cfcadminModel.FK_Cidades_Estados" FromRole="Cidades" ToRole="Estados" />
+          <NavigationProperty Name="Clientes" Relationship="cfcadminModel.FK_Clientes_Cidades" FromRole="Cidades" ToRole="Clientes" />
+        </EntityType>
+        <EntityType Name="Configuracoes">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" />
+          <Property Name="CnpjDaEmpresa" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RazaoSocialDaEmpresa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDaAgenciaBancaria" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DigitoDaAgenciaBancaria" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDaContaBancaria" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DigitoDaContaBancaria" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="UltimaRemessa" Type="Int32" Nullable="false" />
+          <Property Name="ValorDaMensalidade" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TaxaDoBoleto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TextoMulta" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TextoMora" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DisparaEmail" Type="Boolean" Nullable="false" />
+          <Property Name="TextoGestao" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TextoTerceiro" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ValorTerceiro" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="CodigoDoEstado" />
+          </Key>
+          <Property Name="CodigoDoEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeDoEstado" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cidades" Relationship="cfcadminModel.FK_Cidades_Estados" FromRole="Estados" ToRole="Cidades" />
+          <NavigationProperty Name="Clientes" Relationship="cfcadminModel.FK_Clientes_Estados" FromRole="Estados" ToRole="Clientes" />
+        </EntityType>
+        <EntityType Name="Fornecedores">
+          <Key>
+            <PropertyRef Name="CodigoDoFornecedor" />
+          </Key>
+          <Property Name="CodigoDoFornecedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeDoFornecedor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RazaoSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CPFCNPJ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Endereco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDoFornecedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Historicos">
+          <Key>
+            <PropertyRef Name="CodigoDoHistorico" />
+          </Key>
+          <Property Name="CodigoDoHistorico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescricaoDoHistorico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HistoricoAtivo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Movimentacao" Relationship="cfcadminModel.FK_Movimentacao_Historicos" FromRole="Historicos" ToRole="Movimentacao" />
+        </EntityType>
+        <EntityType Name="Itens">
+          <Key>
+            <PropertyRef Name="CodigoDoItem" />
+          </Key>
+          <Property Name="CodigoDoItem" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoDocliente" Type="Int32" Nullable="false" />
+          <Property Name="DescricaoDoModelo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Placa1DoVeiculo" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Placa2DoVeiculo" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Renavam" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDoChassi" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="AnoDeFabricacao" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="AnoDoModelo" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="CorPredominante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Particular" Type="Boolean" Nullable="false" />
+          <Property Name="ObservacaoDoItem" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="DataDoCadastro" Type="DateTime" Precision="3" />
+          <Property Name="DataDaDesativacao" Type="DateTime" Precision="3" />
+          <Property Name="CodigoFipe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoDoTipo" Type="Int32" Nullable="false" />
+          <Property Name="Foto1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DataDaAtivacao" Type="DateTime" Precision="3" />
+          <Property Name="Valor" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DescricaoDaMarca" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tipos" Relationship="cfcadminModel.FK_Itens_Tipos" FromRole="Itens" ToRole="Tipos" />
+          <NavigationProperty Name="Sinistros" Relationship="cfcadminModel.FK_Sinistros_Itens" FromRole="Itens" ToRole="Sinistros" />
+          <NavigationProperty Name="Clientes" Relationship="cfcadminModel.FK_Itens_Clientes" FromRole="Itens" ToRole="Clientes" />
+        </EntityType>
+        <EntityType Name="OrdemDeServico">
+          <Key>
+            <PropertyRef Name="CodigoDaOS" />
+          </Key>
+          <Property Name="CodigoDaOS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoDoTitulo" Type="Int32" Nullable="false" />
+          <Property Name="Mensagem" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NovoTitulo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="CodigoDoSite" />
+          </Key>
+          <Property Name="AtivaSite" Type="Boolean" Nullable="false" />
+          <Property Name="AtivaBanner" Type="Boolean" Nullable="false" />
+          <Property Name="AtivaCobertura" Type="Boolean" Nullable="false" />
+          <Property Name="AtivaServicos" Type="Boolean" Nullable="false" />
+          <Property Name="AtivaVeiculos" Type="Boolean" Nullable="false" />
+          <Property Name="AtivaLogin" Type="Boolean" Nullable="false" />
+          <Property Name="AtivaSobre" Type="Boolean" Nullable="false" />
+          <Property Name="AtivaContato" Type="Boolean" Nullable="false" />
+          <Property Name="SobreTitulo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="SobreResumo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="VeiculosTexto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CoberturaTexto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PrecoTexto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ServicosTexto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Area1Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Area1Texto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Area2Titulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Area2Texto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Depoimento1Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Depoimento1Texto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Depoimento2Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Depoimento2Texto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Depoimento3Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Depoimento3Texto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Depoimento4Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Depoimento4Texto" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AtivaDepoimento" Type="Boolean" Nullable="false" />
+          <Property Name="Contador1Titulo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Contador1Numero" Type="Int32" />
+          <Property Name="Contador2Titulo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Contador2Numero" Type="Int32" />
+          <Property Name="Contador3Titulo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Contador3Numero" Type="Int32" />
+          <Property Name="Contador4Titulo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Contador4Numero" Type="Int32" />
+          <Property Name="AtivaParceiros" Type="Boolean" Nullable="false" />
+          <Property Name="Telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Endereco" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Facebook" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Youtube" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Twitter" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Instagram" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Banner1Texto1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Banner1Texto2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Banner1Imagem" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AtivaBanner1Padrao" Type="Boolean" Nullable="false" />
+          <Property Name="AtivaBanner2Padrao" Type="Boolean" Nullable="false" />
+          <Property Name="Banner2Texto1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Banner2Texto2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Banner2Texto3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Banner2Imagem" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoDoSite" Type="Int32" Nullable="false" />
+          <Property Name="SobreTexto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SobreImagem" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AtivaPreco" Type="Boolean" Nullable="false" />
+          <Property Name="AtivaContador" Type="Boolean" Nullable="false" />
+          <Property Name="SobreImagemEquipe" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AtivaArea" Type="Boolean" Nullable="false" />
+          <Property Name="AtivaLinks" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipos">
+          <Key>
+            <PropertyRef Name="CodigoDoTipo" />
+          </Key>
+          <Property Name="CodigoDoTipo" Type="Int32" Nullable="false" />
+          <Property Name="NomeDoTipo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Itens" Relationship="cfcadminModel.FK_Itens_Tipos" FromRole="Tipos" ToRole="Itens" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="CodigoDoUsuario" />
+          </Key>
+          <Property Name="CodigoDoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeDoUsuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Senha" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioAtivo" Type="Boolean" Nullable="false" />
+          <Property Name="FotoDoUsuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DataDoCadastro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Admin" Type="Boolean" Nullable="false" />
+          <Property Name="Site" Type="Boolean" Nullable="false" />
+          <Property Name="Operador" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cidades_Estados">
+          <End Type="cfcadminModel.Estados" Role="Estados" Multiplicity="1" />
+          <End Type="cfcadminModel.Cidades" Role="Cidades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoDoEstado" />
+            </Principal>
+            <Dependent Role="Cidades">
+              <PropertyRef Name="CodigoDoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Itens_Tipos">
+          <End Type="cfcadminModel.Tipos" Role="Tipos" Multiplicity="1" />
+          <End Type="cfcadminModel.Itens" Role="Itens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipos">
+              <PropertyRef Name="CodigoDoTipo" />
+            </Principal>
+            <Dependent Role="Itens">
+              <PropertyRef Name="CodigoDoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DadosDoSinistro">
+          <Key>
+            <PropertyRef Name="CodigoDadosDoSinistro" />
+          </Key>
+          <Property Name="CodigoDadosDoSinistro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoDoSinistro" Type="Int32" Nullable="false" />
+          <Property Name="CodigoDoCliente" Type="Int32" Nullable="false" />
+          <Property Name="CodigoDoItem" Type="Int32" Nullable="false" />
+          <Property Name="ValorDoItem" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ClienteCadastrado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClienteInativo" Type="Boolean" Nullable="false" />
+          <Property Name="ItemCadastrado" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ItemInativo" Type="DateTime" Precision="3" />
+          <Property Name="DataDoSinistro" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Sinistros">
+          <Key>
+            <PropertyRef Name="CodigoDoSinistro" />
+          </Key>
+          <Property Name="CodigoDoSinistro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoDoItem" Type="Int32" Nullable="false" />
+          <Property Name="CodigoDoCliente" Type="Int32" Nullable="false" />
+          <Property Name="ValorDoSinistro" Type="Decimal" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="DataDoSinistro" Type="DateTime" Precision="3" />
+          <Property Name="DataDeConclusaoDoSinistro" Type="DateTime" Precision="3" />
+          <Property Name="ObservacaoDoSinistro" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="CotasNaData" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="ValorPorCota" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ClientesNoRateio" Type="Int32" />
+          <Property Name="ValorDeReferencia" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DataDoFaturamento" Type="DateTime" Precision="0" />
+          <Property Name="Foto1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto5" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto6" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto7" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto8" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Itens" Relationship="cfcadminModel.FK_Sinistros_Itens" FromRole="Sinistros" ToRole="Itens" />
+        </EntityType>
+        <Association Name="FK_Sinistros_Itens">
+          <End Type="cfcadminModel.Itens" Role="Itens" Multiplicity="1" />
+          <End Type="cfcadminModel.Sinistros" Role="Sinistros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Itens">
+              <PropertyRef Name="CodigoDoItem" />
+            </Principal>
+            <Dependent Role="Sinistros">
+              <PropertyRef Name="CodigoDoItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Movimentacao">
+          <Key>
+            <PropertyRef Name="CodigoDoTitulo" />
+          </Key>
+          <Property Name="CodigoDoTitulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescricaoDoTitulo" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoDoCliente" Type="Int32" />
+          <Property Name="TipoDoTitulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ValorDoTitulo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DataDoTitulo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataDoVencimento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataDoRecebimento" Type="DateTime" Precision="3" />
+          <Property Name="NossoNumero" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDaBaixa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GeradoBoleto" Type="Boolean" Nullable="false" />
+          <Property Name="GeradoRemessa" Type="Boolean" Nullable="false" />
+          <Property Name="Observacao1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Observacao2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Observacao3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Cancelado" Type="Boolean" Nullable="false" />
+          <Property Name="NumeroParcela" Type="Int32" />
+          <Property Name="TotalParcelas" Type="Int32" />
+          <Property Name="BoletoAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Credito" Type="Boolean" Nullable="false" />
+          <Property Name="Debito" Type="Boolean" Nullable="false" />
+          <Property Name="CodigoDoSinistro" Type="Int32" />
+          <Property Name="CodigoDoFornecedor" Type="Int32" />
+          <Property Name="Boleto" Type="Boolean" Nullable="false" />
+          <Property Name="Caixa" Type="Boolean" Nullable="false" />
+          <Property Name="Detalhes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoDoHistorico" Type="Int32" Nullable="false" />
+          <Property Name="Foto1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Rateio" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Historicos" Relationship="cfcadminModel.FK_Movimentacao_Historicos" FromRole="Movimentacao" ToRole="Historicos" />
+        </EntityType>
+        <Association Name="FK_Movimentacao_Historicos">
+          <End Type="cfcadminModel.Historicos" Role="Historicos" Multiplicity="1" />
+          <End Type="cfcadminModel.Movimentacao" Role="Movimentacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Historicos">
+              <PropertyRef Name="CodigoDoHistorico" />
+            </Principal>
+            <Dependent Role="Movimentacao">
+              <PropertyRef Name="CodigoDoHistorico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Demonstrativo">
+          <Key>
+            <PropertyRef Name="CodigoDoDemonstrativo" />
+          </Key>
+          <Property Name="CodigoDoDemonstrativo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodigoDaMovimentacao" Type="Int32" Nullable="false" />
+          <Property Name="TituloDoGrupo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ItemReferencia" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ItemDescricao" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="ItemValor" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="CodigoDoCliente" />
+          </Key>
+          <Property Name="CodigoDoCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeCFC" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NomeCompletoDoCliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDePessoaDoCliente" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="CPFCNPJDoCliente" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="EnderecoDoCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDoCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ComplementoDoCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BairroDoCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoDaCidade" Type="Int32" Nullable="false" />
+          <Property Name="CodigoDoEstado" Type="Int32" Nullable="false" />
+          <Property Name="CEPDoCliente" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="EmailDoCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SenhaDoCliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TelefoneResidencialDoCliente" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TelefoneCelularDoCliente" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ClienteAtivo" Type="Boolean" Nullable="false" />
+          <Property Name="ObservacoesDoCliente" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="DataDoCadastro" Type="DateTime" Precision="3" />
+          <Property Name="Foto1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Foto4" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SepararVeiculos" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cidades" Relationship="cfcadminModel.FK_Clientes_Cidades" FromRole="Clientes" ToRole="Cidades" />
+          <NavigationProperty Name="Estados" Relationship="cfcadminModel.FK_Clientes_Estados" FromRole="Clientes" ToRole="Estados" />
+          <NavigationProperty Name="Itens" Relationship="cfcadminModel.FK_Itens_Clientes" FromRole="Clientes" ToRole="Itens" />
+        </EntityType>
+        <Association Name="FK_Clientes_Cidades">
+          <End Type="cfcadminModel.Cidades" Role="Cidades" Multiplicity="1" />
+          <End Type="cfcadminModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidades">
+              <PropertyRef Name="CodigoDaCidade" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="CodigoDaCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clientes_Estados">
+          <End Type="cfcadminModel.Estados" Role="Estados" Multiplicity="1" />
+          <End Type="cfcadminModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="CodigoDoEstado" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="CodigoDoEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Itens_Clientes">
+          <End Type="cfcadminModel.Clientes" Role="Clientes" Multiplicity="1" />
+          <End Type="cfcadminModel.Itens" Role="Itens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="CodigoDoCliente" />
+            </Principal>
+            <Dependent Role="Itens">
+              <PropertyRef Name="CodigoDocliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cfcadminModelStoreContainer" CdmEntityContainer="cfcadminEntities">
+          <EntitySetMapping Name="Cidades">
+            <EntityTypeMapping TypeName="cfcadminModel.Cidades">
+              <MappingFragment StoreEntitySet="Cidades">
+                <ScalarProperty Name="CodigoDoEstado" ColumnName="CodigoDoEstado" />
+                <ScalarProperty Name="NomeDaCidade" ColumnName="NomeDaCidade" />
+                <ScalarProperty Name="CodigoDaCidade" ColumnName="CodigoDaCidade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configuracoes">
+            <EntityTypeMapping TypeName="cfcadminModel.Configuracoes">
+              <MappingFragment StoreEntitySet="Configuracoes">
+                <ScalarProperty Name="ValorTerceiro" ColumnName="ValorTerceiro" />
+                <ScalarProperty Name="TextoTerceiro" ColumnName="TextoTerceiro" />
+                <ScalarProperty Name="TextoGestao" ColumnName="TextoGestao" />
+                <ScalarProperty Name="DisparaEmail" ColumnName="DisparaEmail" />
+                <ScalarProperty Name="SMTP" ColumnName="SMTP" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TextoMora" ColumnName="TextoMora" />
+                <ScalarProperty Name="TextoMulta" ColumnName="TextoMulta" />
+                <ScalarProperty Name="TaxaDoBoleto" ColumnName="TaxaDoBoleto" />
+                <ScalarProperty Name="ValorDaMensalidade" ColumnName="ValorDaMensalidade" />
+                <ScalarProperty Name="UltimaRemessa" ColumnName="UltimaRemessa" />
+                <ScalarProperty Name="DigitoDaContaBancaria" ColumnName="DigitoDaContaBancaria" />
+                <ScalarProperty Name="NumeroDaContaBancaria" ColumnName="NumeroDaContaBancaria" />
+                <ScalarProperty Name="DigitoDaAgenciaBancaria" ColumnName="DigitoDaAgenciaBancaria" />
+                <ScalarProperty Name="NumeroDaAgenciaBancaria" ColumnName="NumeroDaAgenciaBancaria" />
+                <ScalarProperty Name="RazaoSocialDaEmpresa" ColumnName="RazaoSocialDaEmpresa" />
+                <ScalarProperty Name="CnpjDaEmpresa" ColumnName="CnpjDaEmpresa" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estados">
+            <EntityTypeMapping TypeName="cfcadminModel.Estados">
+              <MappingFragment StoreEntitySet="Estados">
+                <ScalarProperty Name="NomeDoEstado" ColumnName="NomeDoEstado" />
+                <ScalarProperty Name="CodigoDoEstado" ColumnName="CodigoDoEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fornecedores">
+            <EntityTypeMapping TypeName="cfcadminModel.Fornecedores">
+              <MappingFragment StoreEntitySet="Fornecedores">
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="TipoDoFornecedor" ColumnName="TipoDoFornecedor" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="CPFCNPJ" ColumnName="CPFCNPJ" />
+                <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+                <ScalarProperty Name="NomeDoFornecedor" ColumnName="NomeDoFornecedor" />
+                <ScalarProperty Name="CodigoDoFornecedor" ColumnName="CodigoDoFornecedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Historicos">
+            <EntityTypeMapping TypeName="cfcadminModel.Historicos">
+              <MappingFragment StoreEntitySet="Historicos">
+                <ScalarProperty Name="HistoricoAtivo" ColumnName="HistoricoAtivo" />
+                <ScalarProperty Name="DescricaoDoHistorico" ColumnName="DescricaoDoHistorico" />
+                <ScalarProperty Name="CodigoDoHistorico" ColumnName="CodigoDoHistorico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Itens">
+            <EntityTypeMapping TypeName="cfcadminModel.Itens">
+              <MappingFragment StoreEntitySet="Itens">
+                <ScalarProperty Name="DescricaoDaMarca" ColumnName="DescricaoDaMarca" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="DataDaAtivacao" ColumnName="DataDaAtivacao" />
+                <ScalarProperty Name="Foto4" ColumnName="Foto4" />
+                <ScalarProperty Name="Foto3" ColumnName="Foto3" />
+                <ScalarProperty Name="Foto2" ColumnName="Foto2" />
+                <ScalarProperty Name="Foto1" ColumnName="Foto1" />
+                <ScalarProperty Name="CodigoDoTipo" ColumnName="CodigoDoTipo" />
+                <ScalarProperty Name="CodigoFipe" ColumnName="CodigoFipe" />
+                <ScalarProperty Name="DataDaDesativacao" ColumnName="DataDaDesativacao" />
+                <ScalarProperty Name="DataDoCadastro" ColumnName="DataDoCadastro" />
+                <ScalarProperty Name="ObservacaoDoItem" ColumnName="ObservacaoDoItem" />
+                <ScalarProperty Name="Particular" ColumnName="Particular" />
+                <ScalarProperty Name="CorPredominante" ColumnName="CorPredominante" />
+                <ScalarProperty Name="AnoDoModelo" ColumnName="AnoDoModelo" />
+                <ScalarProperty Name="AnoDeFabricacao" ColumnName="AnoDeFabricacao" />
+                <ScalarProperty Name="NumeroDoChassi" ColumnName="NumeroDoChassi" />
+                <ScalarProperty Name="Renavam" ColumnName="Renavam" />
+                <ScalarProperty Name="Placa2DoVeiculo" ColumnName="Placa2DoVeiculo" />
+                <ScalarProperty Name="Placa1DoVeiculo" ColumnName="Placa1DoVeiculo" />
+                <ScalarProperty Name="DescricaoDoModelo" ColumnName="DescricaoDoModelo" />
+                <ScalarProperty Name="CodigoDocliente" ColumnName="CodigoDocliente" />
+                <ScalarProperty Name="CodigoDoItem" ColumnName="CodigoDoItem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdemDeServico">
+            <EntityTypeMapping TypeName="cfcadminModel.OrdemDeServico">
+              <MappingFragment StoreEntitySet="OrdemDeServico">
+                <ScalarProperty Name="NovoTitulo" ColumnName="NovoTitulo" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Mensagem" ColumnName="Mensagem" />
+                <ScalarProperty Name="CodigoDoTitulo" ColumnName="CodigoDoTitulo" />
+                <ScalarProperty Name="CodigoDaOS" ColumnName="CodigoDaOS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Site">
+            <EntityTypeMapping TypeName="cfcadminModel.Site">
+              <MappingFragment StoreEntitySet="Site">
+                <ScalarProperty Name="AtivaLinks" ColumnName="AtivaLinks" />
+                <ScalarProperty Name="AtivaArea" ColumnName="AtivaArea" />
+                <ScalarProperty Name="SobreImagemEquipe" ColumnName="SobreImagemEquipe" />
+                <ScalarProperty Name="AtivaContador" ColumnName="AtivaContador" />
+                <ScalarProperty Name="AtivaPreco" ColumnName="AtivaPreco" />
+                <ScalarProperty Name="SobreImagem" ColumnName="SobreImagem" />
+                <ScalarProperty Name="SobreTexto" ColumnName="SobreTexto" />
+                <ScalarProperty Name="CodigoDoSite" ColumnName="CodigoDoSite" />
+                <ScalarProperty Name="Banner2Imagem" ColumnName="Banner2Imagem" />
+                <ScalarProperty Name="Banner2Texto3" ColumnName="Banner2Texto3" />
+                <ScalarProperty Name="Banner2Texto2" ColumnName="Banner2Texto2" />
+                <ScalarProperty Name="Banner2Texto1" ColumnName="Banner2Texto1" />
+                <ScalarProperty Name="AtivaBanner2Padrao" ColumnName="AtivaBanner2Padrao" />
+                <ScalarProperty Name="AtivaBanner1Padrao" ColumnName="AtivaBanner1Padrao" />
+                <ScalarProperty Name="Banner1Imagem" ColumnName="Banner1Imagem" />
+                <ScalarProperty Name="Banner1Texto2" ColumnName="Banner1Texto2" />
+                <ScalarProperty Name="Banner1Texto1" ColumnName="Banner1Texto1" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Youtube" ColumnName="Youtube" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="AtivaParceiros" ColumnName="AtivaParceiros" />
+                <ScalarProperty Name="Contador4Numero" ColumnName="Contador4Numero" />
+                <ScalarProperty Name="Contador4Titulo" ColumnName="Contador4Titulo" />
+                <ScalarProperty Name="Contador3Numero" ColumnName="Contador3Numero" />
+                <ScalarProperty Name="Contador3Titulo" ColumnName="Contador3Titulo" />
+                <ScalarProperty Name="Contador2Numero" ColumnName="Contador2Numero" />
+                <ScalarProperty Name="Contador2Titulo" ColumnName="Contador2Titulo" />
+                <ScalarProperty Name="Contador1Numero" ColumnName="Contador1Numero" />
+                <ScalarProperty Name="Contador1Titulo" ColumnName="Contador1Titulo" />
+                <ScalarProperty Name="AtivaDepoimento" ColumnName="AtivaDepoimento" />
+                <ScalarProperty Name="Depoimento4Texto" ColumnName="Depoimento4Texto" />
+                <ScalarProperty Name="Depoimento4Cliente" ColumnName="Depoimento4Cliente" />
+                <ScalarProperty Name="Depoimento3Texto" ColumnName="Depoimento3Texto" />
+                <ScalarProperty Name="Depoimento3Cliente" ColumnName="Depoimento3Cliente" />
+                <ScalarProperty Name="Depoimento2Texto" ColumnName="Depoimento2Texto" />
+                <ScalarProperty Name="Depoimento2Cliente" ColumnName="Depoimento2Cliente" />
+                <ScalarProperty Name="Depoimento1Texto" ColumnName="Depoimento1Texto" />
+                <ScalarProperty Name="Depoimento1Cliente" ColumnName="Depoimento1Cliente" />
+                <ScalarProperty Name="Area2Texto" ColumnName="Area2Texto" />
+                <ScalarProperty Name="Area2Titulo" ColumnName="Area2Titulo" />
+                <ScalarProperty Name="Area1Texto" ColumnName="Area1Texto" />
+                <ScalarProperty Name="Area1Titulo" ColumnName="Area1Titulo" />
+                <ScalarProperty Name="ServicosTexto" ColumnName="ServicosTexto" />
+                <ScalarProperty Name="PrecoTexto" ColumnName="PrecoTexto" />
+                <ScalarProperty Name="CoberturaTexto" ColumnName="CoberturaTexto" />
+                <ScalarProperty Name="VeiculosTexto" ColumnName="VeiculosTexto" />
+                <ScalarProperty Name="SobreResumo" ColumnName="SobreResumo" />
+                <ScalarProperty Name="SobreTitulo" ColumnName="SobreTitulo" />
+                <ScalarProperty Name="AtivaContato" ColumnName="AtivaContato" />
+                <ScalarProperty Name="AtivaSobre" ColumnName="AtivaSobre" />
+                <ScalarProperty Name="AtivaLogin" ColumnName="AtivaLogin" />
+                <ScalarProperty Name="AtivaVeiculos" ColumnName="AtivaVeiculos" />
+                <ScalarProperty Name="AtivaServicos" ColumnName="AtivaServicos" />
+                <ScalarProperty Name="AtivaCobertura" ColumnName="AtivaCobertura" />
+                <ScalarProperty Name="AtivaBanner" ColumnName="AtivaBanner" />
+                <ScalarProperty Name="AtivaSite" ColumnName="AtivaSite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipos">
+            <EntityTypeMapping TypeName="cfcadminModel.Tipos">
+              <MappingFragment StoreEntitySet="Tipos">
+                <ScalarProperty Name="NomeDoTipo" ColumnName="NomeDoTipo" />
+                <ScalarProperty Name="CodigoDoTipo" ColumnName="CodigoDoTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="cfcadminModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Operador" ColumnName="Operador" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="DataDoCadastro" ColumnName="DataDoCadastro" />
+                <ScalarProperty Name="FotoDoUsuario" ColumnName="FotoDoUsuario" />
+                <ScalarProperty Name="UsuarioAtivo" ColumnName="UsuarioAtivo" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NomeDoUsuario" ColumnName="NomeDoUsuario" />
+                <ScalarProperty Name="CodigoDoUsuario" ColumnName="CodigoDoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DadosDoSinistro">
+            <EntityTypeMapping TypeName="cfcadminModel.DadosDoSinistro">
+              <MappingFragment StoreEntitySet="DadosDoSinistro">
+                <ScalarProperty Name="DataDoSinistro" ColumnName="DataDoSinistro" />
+                <ScalarProperty Name="ItemInativo" ColumnName="ItemInativo" />
+                <ScalarProperty Name="ItemCadastrado" ColumnName="ItemCadastrado" />
+                <ScalarProperty Name="ClienteInativo" ColumnName="ClienteInativo" />
+                <ScalarProperty Name="ClienteCadastrado" ColumnName="ClienteCadastrado" />
+                <ScalarProperty Name="ValorDoItem" ColumnName="ValorDoItem" />
+                <ScalarProperty Name="CodigoDoItem" ColumnName="CodigoDoItem" />
+                <ScalarProperty Name="CodigoDoCliente" ColumnName="CodigoDoCliente" />
+                <ScalarProperty Name="CodigoDoSinistro" ColumnName="CodigoDoSinistro" />
+                <ScalarProperty Name="CodigoDadosDoSinistro" ColumnName="CodigoDadosDoSinistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sinistros">
+            <EntityTypeMapping TypeName="cfcadminModel.Sinistros">
+              <MappingFragment StoreEntitySet="Sinistros">
+                <ScalarProperty Name="Foto8" ColumnName="Foto8" />
+                <ScalarProperty Name="Foto7" ColumnName="Foto7" />
+                <ScalarProperty Name="Foto6" ColumnName="Foto6" />
+                <ScalarProperty Name="Foto5" ColumnName="Foto5" />
+                <ScalarProperty Name="Foto4" ColumnName="Foto4" />
+                <ScalarProperty Name="Foto3" ColumnName="Foto3" />
+                <ScalarProperty Name="Foto2" ColumnName="Foto2" />
+                <ScalarProperty Name="Foto1" ColumnName="Foto1" />
+                <ScalarProperty Name="DataDoFaturamento" ColumnName="DataDoFaturamento" />
+                <ScalarProperty Name="ValorDeReferencia" ColumnName="ValorDeReferencia" />
+                <ScalarProperty Name="ClientesNoRateio" ColumnName="ClientesNoRateio" />
+                <ScalarProperty Name="ValorPorCota" ColumnName="ValorPorCota" />
+                <ScalarProperty Name="CotasNaData" ColumnName="CotasNaData" />
+                <ScalarProperty Name="ObservacaoDoSinistro" ColumnName="ObservacaoDoSinistro" />
+                <ScalarProperty Name="DataDeConclusaoDoSinistro" ColumnName="DataDeConclusaoDoSinistro" />
+                <ScalarProperty Name="DataDoSinistro" ColumnName="DataDoSinistro" />
+                <ScalarProperty Name="ValorDoSinistro" ColumnName="ValorDoSinistro" />
+                <ScalarProperty Name="CodigoDoCliente" ColumnName="CodigoDoCliente" />
+                <ScalarProperty Name="CodigoDoItem" ColumnName="CodigoDoItem" />
+                <ScalarProperty Name="CodigoDoSinistro" ColumnName="CodigoDoSinistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimentacao">
+            <EntityTypeMapping TypeName="cfcadminModel.Movimentacao">
+              <MappingFragment StoreEntitySet="Movimentacao">
+                <ScalarProperty Name="Rateio" ColumnName="Rateio" />
+                <ScalarProperty Name="Foto4" ColumnName="Foto4" />
+                <ScalarProperty Name="Foto3" ColumnName="Foto3" />
+                <ScalarProperty Name="Foto2" ColumnName="Foto2" />
+                <ScalarProperty Name="Foto1" ColumnName="Foto1" />
+                <ScalarProperty Name="CodigoDoHistorico" ColumnName="CodigoDoHistorico" />
+                <ScalarProperty Name="Detalhes" ColumnName="Detalhes" />
+                <ScalarProperty Name="Caixa" ColumnName="Caixa" />
+                <ScalarProperty Name="Boleto" ColumnName="Boleto" />
+                <ScalarProperty Name="CodigoDoFornecedor" ColumnName="CodigoDoFornecedor" />
+                <ScalarProperty Name="CodigoDoSinistro" ColumnName="CodigoDoSinistro" />
+                <ScalarProperty Name="Debito" ColumnName="Debito" />
+                <ScalarProperty Name="Credito" ColumnName="Credito" />
+                <ScalarProperty Name="BoletoAdmin" ColumnName="BoletoAdmin" />
+                <ScalarProperty Name="TotalParcelas" ColumnName="TotalParcelas" />
+                <ScalarProperty Name="NumeroParcela" ColumnName="NumeroParcela" />
+                <ScalarProperty Name="Cancelado" ColumnName="Cancelado" />
+                <ScalarProperty Name="Observacao3" ColumnName="Observacao3" />
+                <ScalarProperty Name="Observacao2" ColumnName="Observacao2" />
+                <ScalarProperty Name="Observacao1" ColumnName="Observacao1" />
+                <ScalarProperty Name="GeradoRemessa" ColumnName="GeradoRemessa" />
+                <ScalarProperty Name="GeradoBoleto" ColumnName="GeradoBoleto" />
+                <ScalarProperty Name="TipoDaBaixa" ColumnName="TipoDaBaixa" />
+                <ScalarProperty Name="NossoNumero" ColumnName="NossoNumero" />
+                <ScalarProperty Name="DataDoRecebimento" ColumnName="DataDoRecebimento" />
+                <ScalarProperty Name="DataDoVencimento" ColumnName="DataDoVencimento" />
+                <ScalarProperty Name="DataDoTitulo" ColumnName="DataDoTitulo" />
+                <ScalarProperty Name="ValorDoTitulo" ColumnName="ValorDoTitulo" />
+                <ScalarProperty Name="TipoDoTitulo" ColumnName="TipoDoTitulo" />
+                <ScalarProperty Name="CodigoDoCliente" ColumnName="CodigoDoCliente" />
+                <ScalarProperty Name="DescricaoDoTitulo" ColumnName="DescricaoDoTitulo" />
+                <ScalarProperty Name="CodigoDoTitulo" ColumnName="CodigoDoTitulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Demonstrativo">
+            <EntityTypeMapping TypeName="cfcadminModel.Demonstrativo">
+              <MappingFragment StoreEntitySet="Demonstrativo">
+                <ScalarProperty Name="ItemValor" ColumnName="ItemValor" />
+                <ScalarProperty Name="ItemDescricao" ColumnName="ItemDescricao" />
+                <ScalarProperty Name="ItemReferencia" ColumnName="ItemReferencia" />
+                <ScalarProperty Name="TituloDoGrupo" ColumnName="TituloDoGrupo" />
+                <ScalarProperty Name="CodigoDaMovimentacao" ColumnName="CodigoDaMovimentacao" />
+                <ScalarProperty Name="CodigoDoDemonstrativo" ColumnName="CodigoDoDemonstrativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="cfcadminModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="SepararVeiculos" ColumnName="SepararVeiculos" />
+                <ScalarProperty Name="Foto4" ColumnName="Foto4" />
+                <ScalarProperty Name="Foto3" ColumnName="Foto3" />
+                <ScalarProperty Name="Foto2" ColumnName="Foto2" />
+                <ScalarProperty Name="Foto1" ColumnName="Foto1" />
+                <ScalarProperty Name="DataDoCadastro" ColumnName="DataDoCadastro" />
+                <ScalarProperty Name="ObservacoesDoCliente" ColumnName="ObservacoesDoCliente" />
+                <ScalarProperty Name="ClienteAtivo" ColumnName="ClienteAtivo" />
+                <ScalarProperty Name="TelefoneCelularDoCliente" ColumnName="TelefoneCelularDoCliente" />
+                <ScalarProperty Name="TelefoneResidencialDoCliente" ColumnName="TelefoneResidencialDoCliente" />
+                <ScalarProperty Name="SenhaDoCliente" ColumnName="SenhaDoCliente" />
+                <ScalarProperty Name="EmailDoCliente" ColumnName="EmailDoCliente" />
+                <ScalarProperty Name="CEPDoCliente" ColumnName="CEPDoCliente" />
+                <ScalarProperty Name="CodigoDoEstado" ColumnName="CodigoDoEstado" />
+                <ScalarProperty Name="CodigoDaCidade" ColumnName="CodigoDaCidade" />
+                <ScalarProperty Name="BairroDoCliente" ColumnName="BairroDoCliente" />
+                <ScalarProperty Name="ComplementoDoCliente" ColumnName="ComplementoDoCliente" />
+                <ScalarProperty Name="NumeroDoCliente" ColumnName="NumeroDoCliente" />
+                <ScalarProperty Name="EnderecoDoCliente" ColumnName="EnderecoDoCliente" />
+                <ScalarProperty Name="CPFCNPJDoCliente" ColumnName="CPFCNPJDoCliente" />
+                <ScalarProperty Name="TipoDePessoaDoCliente" ColumnName="TipoDePessoaDoCliente" />
+                <ScalarProperty Name="NomeCompletoDoCliente" ColumnName="NomeCompletoDoCliente" />
+                <ScalarProperty Name="NomeCFC" ColumnName="NomeCFC" />
+                <ScalarProperty Name="CodigoDoCliente" ColumnName="CodigoDoCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

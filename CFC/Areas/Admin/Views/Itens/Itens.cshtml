@@ -1,0 +1,26 @@
+﻿@model CFC.Models.Itens
+@{
+    Layout = null;
+}
+<style>
+
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#CodigoDoCliente").change(function () {
+            $("#log").ajaxError(function (event, jqxhr, settings, exception) {
+                alert(exception);
+            });
+
+            var cliente = $('#CodigoDoCliente').val();
+            $.get('@Url.Action("Itens", "Itens")',
+                { CodigoDoCliente: cliente }, function (data) {
+                    $("#item").html(data);
+                });
+        });
+    });
+</script>
+
+@Html.LabelFor(model => model.CodigoDocliente, "Itens", htmlAttributes: new { @class = "control-label" })
+@Html.DropDownList("CodigoDoItem", null, "", htmlAttributes: new { @class = "form-control select2" })
+@Html.ValidationMessageFor(model => model.CodigoDoItem, "", new { @class = "text-danger" })

@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--=================================
+ inner-intro -->
+
+<section class="inner-intro bg-1 bg-overlay-black-70">
+    <div class="container">
+        <div class="row text-center intro-title">
+            <div class="col-lg-6 col-md-6 col-sm-6 text-left">
+                <h1 class="text-white">Login </h1>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 text-right">
+                <ul class="page-breadcrumb">
+                    <li><a href="#"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
+                    <li><a href="#">páginas</a> <i class="fa fa-angle-double-right"></i></li>
+                    <li><span>Login</span> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--=================================
+ inner-intro -->
+<!--=================================
+ login-form  -->
+<section class="login-form page-section-ptb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="section-title">
+                    <span>Área do cliente CFC Grupo</span>
+                    <h2>Faça o Login</h2>
+                    <div class="separator"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="gray-form clearfix">
+                    <form class="form-horizontal mt0" action="/Cliente/Home/Index" method="post" id="login-form" role="form">
+                    <div class="form-group">
+                        <label for="usuario">Usuário* </label>
+                        <input id="usuario" class="form-control" type="text" placeholder="Digite seu CNPJ" name="usuario">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha* </label>
+                        <input id="password" class="form-control" type="password" placeholder="senha" name="password">
+                    </div>
+                        <div class="form-group">
+                            @if (ViewBag.Erro == "1")
+                            {
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger">
+                                        <strong>Erro!</strong> CNPJ ou Senha incorreto! Se precisar de ajuda entre em contato.
+                                    </div>
+                                </div>
+                            }
+                            <div class="remember-checkbox mb-30">
+                                <input type="checkbox" name="one" id="one">
+                                <label for="one"> Lembrar</label>
+                                <a href="#" class="pull-right">Esqueceu a senha?</a>
+                            </div>
+                        </div>
+                    <button type="submit" class="button red"> Entrar </button>
+                </form>
+            </div>            
+                @*<div class="login-social text-center">
+                            <h5>Login with Social media</h5>
+                            <ul>
+                                <li><a class="fb button" href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
+                                <li><a class="twitter button" href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+                                <li><a class="pinterest button" href="#"><i class="fa fa-pinterest-p"></i> google+</a></li>
+                            </ul>
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+</section>
+<!--=================================
+ login-form  -->
+
+

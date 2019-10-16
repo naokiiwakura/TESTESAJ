@@ -1,0 +1,37 @@
+﻿@model CFC.Models.Itens
+@{
+    Layout = null;
+    string todos = ViewBag.Todos;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        @*$("#Cliente").change(function () {
+            var cliente = $('#Cliente').val();
+            $.get('@Url.Action("Itens", "Itens")',
+                { CodigoDoCliente: cliente }, function (data) {
+                    $("#lista").html(data);
+                });
+        });*@
+
+        $("#Gerar").on('click',function () {
+                var item = $("#Itens").val();
+                var cliente = $("#Cliente").val();
+                var data = $("#Vencimento").val();
+                var parcelas = $("#Parcelas").val();
+
+            $.post('@Url.Action("CaixaGerado", "Movimentacao")',
+            {
+                cliente: cliente,
+                item: item,
+                data: data,
+                parcelas: parcelas
+            }, function (data) {
+                $("#retorno").html(data);
+            });
+        });
+    });
+</script>
+
+    @Html.LabelFor(model => model.CodigoDoItem, "Itens", new { @class = "control-label" })
+    @Html.DropDownList("Itens", null, todos, new { @class = "form-control select2" })
+    @Html.ValidationMessageFor(model => model.CodigoDoItem)

@@ -1,0 +1,102 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var controller = "Movimentacao";    
+}
+<script>
+    var controller = '@Html.Raw(controller)';
+</script>
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>@Html.Raw("Processar Retorno")</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                    </a>
+                    <span class="divider">
+                    </span>
+                </li>
+                <li class="active"></li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            <div class="panel panel-default toggle">
+                <!-- Start .panel -->
+                <div class="panel-body">                    
+                    <form method="POST" enctype="multipart/form-data" id="enviarArquivo" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                @Html.Label("Retorno", htmlAttributes: new {@class = "control-label"})
+                                <input type="file" accept=".CRT" id="arquivo" name="arquivo" class="filestyle" data-buttonText="Selecione o Retorno" data-buttonName="btn-default" data-iconName="fa fa-plus">
+                            </div>                        
+                            <div class="col-md-4">
+                                <div style="margin-top: 23px; float: right;">
+                                    <button id="Gerar" class="btn btn-info"><span class="icon icomoon-icon-spinner-8"></span> Processar Retorno</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- col-lg-12 start here -->            
+            <div id="retorno"></div>                
+        </div>
+        <!-- End .row -->
+    </div>
+    <!-- End contentwrapper -->
+</div>
+<!-- End #content -->
+<script>
+    $(document).ready(function () {
+        $("#Gerar").click(function (event) {
+
+        //stop submit the form, we will post it manually.
+        event.preventDefault();
+
+        // Get form
+        var form = $('#enviarArquivo')[0];
+
+		// Create an FormData object
+        var data = new FormData(form);
+
+		// If you want to add an extra field for the FormData
+        //data.append("CustomField", "This is some extra data, testing");
+
+		// disabled the submit button
+        $("#Gerar").prop("disabled", true);
+
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/Admin/Movimentacao/LeituraDoRetorno",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+
+                $("#retorno").html(data);
+                //console.log("SUCCESS : ", data);
+                $("#Gerar").prop("disabled", false);
+
+            },
+            error: function (e) {
+
+                $("#retorno").html(e.responseText);
+                console.log("ERROR : ", e);
+                $("#Gerar").prop("disabled", false);
+
+            }
+        });
+
+    });
+});
+</script>

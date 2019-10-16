@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Gerar Rateio";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    //DateTime data = Convert.ToDateTime("01/" + DateTime.Today.AddMonths(1).Month + "/" + DateTime.Today.Year);
+    string todos = ViewBag.Todos;
+}
+<style>
+    .center {
+        text-align: center;
+    }
+</style>
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>Gerar Rateio</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                        <i class="s16 icomoon-icon-screen-2"></i>
+                    </a>
+                    <span class="divider">
+                        <i class="s16 icomoon-icon-arrow-right-3"></i>
+                    </span>
+                </li>
+                <li class="active">Blank Page</li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            <div class="panel panel-default toggle">
+                <!-- Start .panel -->
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @*<div class="col-md-12">
+                                <span><strong>Taxa Gestão </strong>R$ @ViewBag.Gestao</span><span><strong> | Terceiro </strong>R$ @ViewBag.Terceiro</span><span><strong> | Data de vencimento </strong>01/@DateTime.Now.AddMonths(1).Month.ToString().PadLeft(2, '0')/@DateTime.Today.Year</span>
+                            </div>*@
+                            <div class="col-md-12">
+                                @Html.Label("Sinistros", htmlAttributes: new {@class = "control-label"})
+                                @Html.DropDownList("Sinistros", null, todos, htmlAttributes: new {@class = "form-control duallistbox", multiple="multiple", size="10" })
+                            </div>
+                            <div id="item" class="col-md-2">
+                                @Html.Label("Vencimento", htmlAttributes: new { @class = "control-label" })
+                                <input type="text" name="Vencimento" id="Vencimento" value="@Html.Raw(DateTime.Today.ToShortDateString())" class="form-control" />
+                            </div>
+                            <div id="item" class="col-md-2">
+                                @Html.Label("Gerado", htmlAttributes: new { @class = "control-label" })
+                                <input type="text" name="Gerado" id="Gerado" value="@Html.Raw(DateTime.Today.ToShortDateString())" class="form-control" />
+                            </div>
+                            <div class="col-md-2">
+                                <div style="margin-top: 25px; float: right;">
+                                    <button id="Gerar" class="btn btn-info"><span class="icon icomoon-icon-spinner-8"></span> Gerar Rateio</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                <!-- col-lg-12 start here -->
+                <div class="panel panel-default">
+                    <!-- Start .panel -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Lista Rateio</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div id="retorno"></div>                        
+                    </div>
+                </div>
+            </div>
+            <!-- End .row -->
+        </div>
+    <!-- End contentwrapper -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#adicionarBtn").appendTo($(".panel-title"));
+        $("#Vencimento").mask("99/99/9999");
+        $("#Gerado").mask("99/99/9999");
+
+        //------------- Dual list box -------------//
+        $('#Sinistros').bootstrapDualListbox({
+            nonSelectedListLabel: 'Não Selecionado',
+            selectedListLabel: 'Selecionado',
+            moveSelectedLabel: 'Mover Selecionado',
+            moveAllLabel: 'Mover Todos',
+            infoTextEmpty: 'Lista Vazia',
+            //infoTextFiltered: 'Busca',
+            filterPlaceHolder: 'Buscar',
+            infoText: '{0}',
+            preserveSelectionOnMove: 'moved',
+            moveOnSelect: false,
+            dropRight: true,
+            preventInputChangeEvent: true
+        });
+
+        $("#Gerar").on('click', function () {            
+                var sinistros = $("#Sinistros").val();
+                var data = $("#Vencimento").val();
+                var gerado = $("#Gerado").val();
+
+            $.post('@Url.Action("GerarRateio", "Movimentacao")',
+            {
+                sinistros: sinistros,                
+                vencimento: data,
+                gerado: gerado
+            }, function (data) {
+                $("#retorno").html(data);
+            });
+    });
+
+    });
+</script>

@@ -1,0 +1,231 @@
+﻿@model CFC.Models.Site
+@{
+    ViewBag.Title = "Paginas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    bool sobre = false;
+    bool contato = false;
+    var texto = "";
+    string pagina = ViewBag.Pagina;
+
+    switch (pagina)
+    {
+        case "Sobre":
+            sobre = true;
+            texto = Model.SobreTexto;
+            break;
+        case "Cobertura":
+            texto = Model.CoberturaTexto;
+            break;
+        case "Preço":
+            texto = Model.PrecoTexto;
+            break;
+        case "Serviços":
+            texto = Model.PrecoTexto;
+            break;
+        case "Veiculos":
+            texto = Model.VeiculosTexto;
+            break;
+        case "Contato":
+            contato = true;
+            break;
+        default:
+            pagina = "CFC GRUPO";
+            texto = "BEM VINDO!";
+            break;
+    }
+    }
+
+<!--=================================
+ inner-intro -->
+<section class="inner-intro bg-1 bg-overlay-black-70">
+    <div class="container">
+        <div class="row text-center intro-title">
+            <div class="col-lg-6 col-md-6 col-sm-6 text-left">
+                <h1 class="text-white">@pagina </h1>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 text-right">
+                <ul class="page-breadcrumb">
+                    <li><a href="#"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
+                    <li><a href="#">páginas</a> <i class="fa fa-angle-double-right"></i></li>
+                    <li><span>@pagina</span> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--=================================
+ inner-intro -->
+@if (contato)
+{
+    <!--=================================
+    contact -->
+    <section class="contact page-section-ptb white-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="section-title">
+                        <span>Gostaríamos de ouvir de você</span>
+                        <h2>ENTRE EM CONTATO!</h2>
+                        <div class="separator"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="contact-box text-center">
+                        <i class="fa fa-map-marker"></i>
+                        <h5>Endereço</h5>
+                        <p>@Model.Endereco</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="contact-box text-center">
+                        <i class="fa fa-phone"></i>
+                        <h5>Telefone</h5>
+                        <p> @Model.Telefone</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="contact-box text-center">
+                        <i class="fa fa-envelope-o"></i>
+                        <h5>Email</h5>
+                        <p> @Model.Email</p>
+                    </div>
+                </div>                
+            </div>
+            <div class="page-section-ptb">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8">
+                        <div class="gray-form row">
+                            <div id="formmessage">Success/Error Message Goes Here</div>
+                            <form class="form-horizontal" id="contactform" role="form" method="post" action="">
+                                <div class="contact-form">
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group">
+                                            <input disabled id="name" type="text" placeholder="Nome*" class="form-control" name="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group">
+                                            <input disabled type="email" placeholder="Email*" class="form-control" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <div class="form-group">
+                                            <input disabled type="text" placeholder="Telefone*" class="form-control" name="phone">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group">
+                                            <textarea disabled class="form-control input-message" placeholder="Comentário*" rows="7" name="message"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                        <input type="hidden" name="action" value="sendEmail"/>
+                                        <button disabled id="submit" name="submit" type="submit" value="Send" class="button red"> Enviar mensagem </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div id="ajaxloader" style="display: none"><img class="center-block" src="/Supr/images/ajax-loader.gif" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="opening-hours gray-bg">
+                            <h6>horário de atendimento</h6>
+                            <ul class="list-style-none">
+                                <li><strong>Domingo</strong> <span class="text-red"> -</span></li>
+                                <li><strong>Segunda</strong> <span> 8:00 ás 18:00 </span></li>
+                                <li><strong>Terça</strong> <span> 8:00 ás 18:00 </span></li>
+                                <li><strong>Quarta</strong> <span> 8:00 ás 18:00 </span></li>
+                                <li><strong>Quinta</strong> <span> 8:00 ás 18:00 </span></li>
+                                <li><strong>Sexta</strong> <span> 8:00 ás 18:00 </span></li>
+                                <li><strong>Sábado</strong> <span> 8:00 ás 11:00 </span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="feature-box-3">
+                        <div class="icon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <div class="content">
+                            <h6>opening hours </h6>
+                            <p>Voluptatem accusanoremque sed ut perspiciatis unde omnis iste natus error sit laudantium, totam rem aperiam. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="feature-box-3">
+                        <div class="icon">
+                            <i class="fa fa-support"></i>
+                        </div>
+                        <div class="content">
+                            <h6>Our Support Center </h6>
+                            <p>Iste natus error sit sed ut perspiciatis unde omnis voluptatem laudantium, totam rem aperiam. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="feature-box-3">
+                        <div class="icon">
+                            <i class="fa fa-info"></i>
+                        </div>
+                        <div class="content">
+                            <h6>Some Information </h6>
+                            <p>Totam rem aperiam sed ut perspiciatis unde omnis iste natus error sit voluptatem laudantium.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </section>
+    <!--=================================
+    contact -->
+}
+else
+{
+    <!--=================================
+    paginas -->
+    <section class="welcome-4 page-section-ptb white-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                    <div class="section-title">
+                        <h2>@pagina</h2>
+                        <div class="separator"></div>
+                        @if (sobre)
+                        {
+                            <p>
+                                @Model.SobreResumo
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @if (sobre)
+                {
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div>
+                            <div class="item">
+                                <img class="img-responsive" src="~/Uploads/@Model.SobreImagemEquipe" alt="">
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div @Html.Raw(sobre ? "class='col-lg-6 col-md-6 col-sm-6'" : "class='col-lg-12 col-md-12 col-sm-12'") >
+                    <p>@Html.Raw(texto)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--=================================
+    paginas -->
+    <hr class="gray"/>
+}
+

@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="CFC Grupo" />
+    <meta name="author" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>CFC Grupo - A Segurança de seu CFC está aqui!</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/Site/images/favicon.ico" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/Site/css/bootstrap.min.css" />
+    <!-- flaticon -->
+    <link rel="stylesheet" type="text/css" href="/Site/css/flaticon.css" />
+    <!-- mega menu -->
+    <link rel="stylesheet" type="text/css" href="/Site/css/mega-menu/mega_menu.css" />
+    <!-- mega menu -->
+    <link rel="stylesheet" type="text/css" href="/Site/css/font-awesome.min.css" />
+    <!-- owl-carousel -->
+    <link rel="stylesheet" type="text/css" href="/Site/css/owl-carousel/owl.carousel.css" />
+    <!-- revolution -->
+    <link rel="stylesheet" type="text/css" href="/Site/revolution/css/settings.css">
+    <!-- main style -->
+    <link rel="stylesheet" type="text/css" href="/Site/css/style.css" />
+    <!-- responsive -->
+    <link rel="stylesheet" type="text/css" href="/Site/css/responsive.css" />
+    <!-- Style customizer -->
+    @*<link rel="stylesheet" href="#" data-style="styles" />*@
+    <link rel="stylesheet" type="text/css" href="/Site/css/style-customizer.css" />
+</head>
+<body>
+    <!--=================================
+      loading -->
+
+    <div id="loading">
+        <div id="loading-center">
+            <img src="/Site/images/loader.gif" alt="">
+        </div>
+    </div>
+    <!--=================================
+      loading -->
+    <!--=================================
+     header -->
+@{
+    Html.RenderAction("Cabecalho", "Home", new { area = ""});
+}
+
+    <!--=================================
+    header -->
+
+@RenderBody()
+
+    <!--=================================
+    footer -->
+    @{
+        Html.RenderAction("Rodape", "Home", new { area = "" });
+    }
+    <!--=================================
+    footer -->
+    <!--=================================
+    color customizer -->
+
+    @*<div class="style-customizer closed">
+        <div class="buy-button"> <a class="opener" href="#"><i class="fa fa-cog fa-spin"></i></a>  </div>
+        <div class="clearfix content-chooser">
+            <a target="_blank" class="button" href="https://themeforest.net/item/car-dealer-the-best-car-dealer-automotive-responsive-html5-template/19226545">purchase now</a>
+            <h3>Color Schemes</h3>
+            <p>Which theme color you want to use? Here are some predefined colors.</p>
+            <ul class="styleChange clearfix">
+                <li class="skin-default selected" title="Default" data-style="skin-default"></li>
+                <li class="skin-blue" title="Blue" data-style="skin-blue"></li>
+                <li class="skin-orange" title="Orange" data-style="skin-orange"></li>
+                <li class="skin-purple" title="purple" data-style="skin-purple"></li>
+                <li class="skin-gold" title="gold" data-style="skin-gold"></li>
+                <li class="skin-green" title="green" data-style="skin-green"></li>
+                <li class="skin-palatinate-blue" title="palatinate-blue" data-style="skin-palatinate-blue"></li>
+                <li class="skin-yellow" title="Yellow" data-style="skin-yellow"></li>
+            </ul>
+            <ul class="resetAll">
+                <li><a class="button button-reset" href="#">Reset All</a></li>
+            </ul>
+        </div>
+    </div>*@
+
+    <!--=================================
+    color customizer -->
+    <!--=================================
+    back to top -->
+    <div class="car-top">
+        <span><img src="/Site/images/car.png" alt=""></span>
+    </div>
+    <!--=================================
+    back to top -->
+    <!--=================================
+     jquery -->
+    <!-- jquery  -->
+    <script type="text/javascript" src="/Site/js/jquery.min.js"></script>
+
+    <!-- bootstrap -->
+    <script type="text/javascript" src="/Site/js/bootstrap.min.js"></script>
+    <!-- mega-menu -->
+    <script type="text/javascript" src="/Site/js/mega-menu/mega_menu.js"></script>
+    <!-- appear -->
+    <script type="text/javascript" src="/Site/js/jquery.appear.js"></script>
+    <!-- counter -->
+    <script type="text/javascript" src="/Site/js/counter/jquery.countTo.js"></script>
+    <!-- owl-carousel -->
+    <script type="text/javascript" src="/Site/js/owl-carousel/owl.carousel.min.js"></script>
+    <!-- select -->
+    <script type="text/javascript" src="/Site/js/select/jquery-select.js"></script>
+    <!-- revolution -->
+    <script type="text/javascript" src="/Site/revolution/js/jquery.themepunch.tools.min.js"></script>
+    <script type="text/javascript" src="/Site/revolution/js/jquery.themepunch.revolution.min.js"></script>
+    <!-- custom -->
+    <script type="text/javascript" src="/Site/js/custom.js"></script>
+    <!-- style customizer  -->
+    <script type="text/javascript" src="/Site/js/style-customizer.js"></script>
+    <script type="text/javascript">
+  (function($){
+  "use strict";
+
+     var tpj=jQuery;
+      var revapi10;
+      tpj(document).ready(function() {
+        if(tpj("#rev_slider_10_1").revolution == undefined){
+          revslider_showDoubleJqueryError("#rev_slider_10_1");
+        }else{
+          revapi10 = tpj("#rev_slider_10_1").show().revolution({
+            sliderType:"standard",
+            sliderLayout:"fullwidth",
+            dottedOverlay:"none",
+            delay:9000,
+            navigation: {
+              keyboardNavigation:"off",
+              keyboard_direction: "horizontal",
+              mouseScrollNavigation:"off",
+                             mouseScrollReverse:"default",
+              onHoverStop:"off",
+              arrows: {
+                style:"hesperiden",
+                enable:true,
+                hide_onmobile:false,
+                hide_onleave:false,
+                tmp:'',
+                left: {
+                  h_align:"left",
+                  v_align:"center",
+                  h_offset:20,
+                                    v_offset:0
+                },
+                right: {
+                  h_align:"right",
+                  v_align:"center",
+                  h_offset:20,
+                                    v_offset:0
+                }
+              }
+            },
+            visibilityLevels:[1240,1024,778,480],
+            gridwidth:1920,
+            gridheight:900,
+            lazyType:"none",
+            parallax: {
+              type:"mouse",
+              origo:"enterpoint",
+              speed:400,
+              levels:[3,5,8,10,12,30,35,40,45,46,47,48,49,50,51,55],
+              type:"mouse",
+            },
+            shadow:0,
+            spinner:"spinner3",
+            stopLoop:"off",
+            stopAfterLoops:-1,
+            stopAtSlide:-1,
+            shuffle:"off",
+            autoHeight:"off",
+            disableProgressBar:"on",
+            hideThumbsOnMobile:"off",
+            hideSliderAtLimit:0,
+            hideCaptionAtLimit:0,
+            hideAllCaptionAtLilmit:0,
+            debugMode:false,
+            fallbacks: {
+              simplifyAll:"off",
+              nextSlideOnWindowFocus:"off",
+              disableFocusListener:false,
+            }
+          });
+        }
+      });
+ })(jQuery);
+
+    </script>
+
+</body>
+</html>    

@@ -1,0 +1,797 @@
+/*
+	-- Theme Name: jtable flat theme
+	-- Author: dibacode
+	-- Author URI: http://themeforest.net/user/dibacode
+	-- Version: 0.1.0
+*/
+
+
+.jtable {
+    border-collapse: collapse;
+	width: 100%;
+    direction: ltr;
+	
+}
+
+.rtl .jtable {
+    direction: rtl;
+}
+
+/****** Parent & Child Table Header Colors *******/
+
+/** Default Parent Header Color ***/
+.jtable .jtable-title ,
+.child-slate-gray .jtable-child-row .jtable-title{
+	background-color: #7f8ba5;
+    border-bottom: 4px solid #4c5770;
+}
+
+/** Default Child Header Color ***/
+.jtable-child-row .jtable-title {
+	 background-color: #2cc4c6;
+    border-bottom: 4px solid #27acae;
+	
+}
+
+.parent-turquoise .jtable-title,
+.child-turquoise .jtable-child-row .jtable-title {
+    background-color: #2cc4c6;
+    border-bottom: 4px solid #27acae;
+}
+.parent-violet .jtable-title,
+.child-violet .jtable-child-row .jtable-title {
+    background-color: #9d82d1;
+    border-bottom: 4px solid #8a72b8;
+}
+
+.parent-green .jtable-title,
+.child-green .jtable-child-row .jtable-title {
+    background-color: #2cc683;
+    border-bottom: 4px solid #27ae73;
+}
+
+.parent-blue .jtable-title,
+.child-blue .jtable-child-row .jtable-title {
+    background-color: #32cdee;
+    border-bottom: 4px solid #2cb4d1;
+}
+
+.parent-orange .jtable-title,
+.child-orange .jtable-child-row .jtable-title {
+    background-color: #f16039;
+    border-bottom: 4px solid #d45432;
+}
+
+/************** End Colors **********/
+
+
+/********** JTable Styles ***********/
+
+.jtable-main-container {
+	position: relative;
+    padding: 35px 20px;
+    font: 13px/25px "verdana", sans-serif;
+}
+
+.jtable-title {
+    background-color: #7f8ba5;
+    border-bottom: 4px solid #566380;
+    height: 70px;
+    padding: 0 20px;
+}
+
+.jtable-title .jtable-title-text {
+   color: white;
+   font:  18px/70px "Verdana", sans-serif;
+   float: left;
+   margin-right: 20px;
+}
+
+.rtl .jtable-child-row .jtable-title { 
+    direction: rtl;
+}
+
+.rtl .jtable-title-text{
+    float: right;
+    margin-right: 0;
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.rtl .jtable-data-row td,
+.rtl .jtable-page-info,
+.rtl .jtable-page-size-change,
+.rtl .jtable-input input,
+.rtl .jtable-input textarea,
+.rtl .jtable-input select,
+.rtl .jtable-input options,
+.rtl .jtable-input-label,
+.rtl .ui-button-text,
+.rtl .jtable-column-header-text,
+.rtl .jtable-title-text,
+.rtl .jtable-delete-confirm-message,
+.rtl .jtable-toolbar-item,
+.rtl .ui-dialog .ui-dialog-titlebar {
+    font-family: "Tahoma", sans-serif !important;
+}
+
+.jtable-toolbar {
+    float: right;
+	margin: 15px 0;
+}
+
+.rtl .jtable-toolbar {
+    float: left;
+}
+
+.jtable th {
+    background-color: #FFF;
+    border: none;
+    color: #566380;
+    border-left: 1px solid #afb6c3;
+    border-bottom: 1px solid #afb6c3;
+    font: 15px/71px "verdana", sans-serif;
+}
+
+.rtl .jtable th {
+    border-left: none !important;
+    border-right: 1px solid #afb6c3;
+}
+
+.jtable-bottom-panel {
+    clear: both;
+    display: inline-block;
+    width: 100%;
+    direction: ltr;
+}
+.jtable-left-area{
+    float: left;
+    padding: 20px 2.5% 0 0;
+
+}
+
+.jtable-right-area{
+    float: right;
+    padding: 26px 2.5% 0;
+    text-align: right;
+}
+.rtl .jtable-right-area {
+    direction: rtl;
+}
+
+.jtable-page-list {
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.jtable-page-list [class*=jtable-page-number] {
+    background-color: white;
+    margin-right: 3px;
+    padding: 6px 12px;
+    cursor: pointer;
+    border: 1px solid #c5c9d1;
+    border-radius: 4px;
+    color: #afb6c3;
+    min-width: 10px;
+   font: normal 14px/14px "Verdana", sans-serif;
+}
+
+.jtable-page-list .jtable-page-number-first,
+.jtable-page-list .jtable-page-number-last {
+    letter-spacing: -4px;
+    padding: 6px 15px 6px 10px;
+}
+.jtable-page-list .jtable-page-number-disabled {
+    color: #ced3db;
+    background-color: #e7ebf3;
+    border-color: #ced3db;
+}
+.jtable-page-list span:empty {
+    display: none;
+}
+.jtable-page-list span:not(.jtable-page-number-disabled):hover {
+     border-color: #7f8ba5;
+    color: #566380;
+}
+.jtable-page-list span:not(.jtable-page-number-disabled):active {
+    border-color: #4c637b;
+}
+.jtable-page-size-change,
+.jtable-goto-page {
+    margin-left: 20px;
+    color: #6d7e91;
+    display: inline-block;
+    vertical-align: middle;
+}
+.jtable-page-size-change select,
+.jtable-goto-page select {
+    background-color: white;
+    text-align: center;
+    height: 29px;
+    top: -3px !important;
+    margin: 0 7px 0;
+    position: relative;
+    min-width: 50px;
+    color: #afb6c3;
+    font: 13px/20px "verdana", sans-serif;
+    border: 1px solid #c5c9d1;
+	vertical-align: bottom;
+    
+}
+
+
+.jtable-page-size-change select option {
+    color: inherit;
+    padding: 5px 0;
+    text-align: center;
+   
+}
+.jtable-page-size-change > span,
+.jtable-goto-page > span {
+    display: inline-block;
+    padding: 4px 0;
+}
+.jtable-page-size-change .selectize-control {
+   float: right;
+    margin: 0 10px;
+    width: 70px;
+}
+.jtable-page-size-change .selectize-control .item {
+   float: left !important;
+   padding: 6px !important;
+}
+
+.jtable-page-info {
+    color: #afb6c3;
+}
+.jtable-command-column-header,
+.jtable td:first-child,
+.jtable th:first-child {
+    border-left: none !important;
+   
+}
+
+.rtl .jtable-command-column-header,
+.rtl .jtable td:first-child,
+.rtl .jtable th:first-child {
+    border-right: none !important;
+
+}
+
+.jtable-column-header-container {
+	position: relative;
+}
+
+.jtable-child-row .jtable{
+    border: none !important;
+}
+
+
+.jtable-no-data-row td {
+    text-align: center;
+    padding: 20px 0;
+    background-color: white;
+    color: #b8c6d6;
+}
+.jtable-child-row .jtable-child-table-container{
+    position: relative;
+    background-color: #dce1eb;
+    
+}
+
+.jtable-column-header-sortable{
+	cursor: pointer;
+    
+    
+}
+
+.jtable-column-header-sortable:before {
+    float: left;
+    padding: 0 !important;
+    margin: 35px 0 0 10px;
+    content: "\f475";
+    color: #dce1eb;
+	-ms-transform: rotate(90deg) ; 
+    -webkit-transform: rotate(90deg) ; 
+	-o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rtl .jtable-column-header-sortable:before {
+    float: right;
+    margin: 30px 10px 0 0;
+}
+
+.jtable-column-header-sorted-asc:before,
+.jtable-column-header-sorted-desc:before {
+	
+	-ms-transform: rotate(0deg) !important; 
+    -webkit-transform: rotate(0deg) !important; 
+	-o-transform: rotate(0deg) !important;
+	transform: rotate(0deg) !important;
+	font-size: 17px !important;
+}
+
+.jtable-column-header-sorted-asc:before {
+    content: "\f347" !important;
+    margin-top: 38px !important;
+   
+}
+
+.jtable-column-header-sorted-desc:before {
+     content: "\f343" !important;
+    margin-top: 30px !important;
+}
+
+.jtable-toolbar-item, 
+.ui-button-text-only {
+    border: 1px solid white;
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: 10px;
+    font: 13px/20px "Verdana", sans-serif;
+    display: inline-block;
+}
+
+.jtable-toolbar-item {
+    margin-left: 5px;
+}
+
+.rtl .jtable-toolbar-item {
+    margin-left: inherit !important;
+    margin-right: 5px;
+    font-size: 14px ;
+}
+
+.jtable-toolbar-item:hover {
+    background-color: rgba(255,255,255, 0.2);
+}
+.jtable-data-row {
+    border-bottom: 1px solid #e7ebf3;
+}
+
+.jtable-selecting-column ~ td ,
+.jtable-selecting-column{
+    cursor: pointer;
+}
+
+.jtable-data-row > td {
+    background-color: #FFFFFF;
+    color: #afb6c3;
+    font: normal 14px/20px "verdana", sans-serif;
+    padding: 22px 10px;
+    text-align: center;
+    border-right: 1px solid transparent;
+	
+}
+
+.jtable-child-row td {
+    font-weight: normal;
+   
+}
+
+.jtable-data-row:hover td ,
+.jtable-row-selected td{
+    color: #566380 !important;
+    background-color: #f7f9fc !important;
+    
+}
+
+.jtable-command-button {
+    width: 30px;
+	height: 25px;
+}
+
+.jtable-edit-command-button,
+.jtable-delete-command-button {
+	vertical-align: top;
+	margin-top: -1px;
+}
+
+.jtable-command-button:before, .jtable-command-button:after {
+    line-height: 9px !important;
+	vertical-align: bottom !important;
+}
+
+.jtable-command-button span {
+    text-indent: -9999px;
+    overflow: hidden;
+    display: inline-block;
+}
+.jtable-command-button , 
+.jtable-toolbar-item-icon,
+.ui-button-icon-only{
+    border: medium none;
+    cursor: pointer;
+    line-height: 0;
+    background: none;
+    color: inherit;
+}
+
+.jtable-toolbar-item-icon {
+    margin: -2px 5px 0 0;
+    color: white;
+}
+
+.rtl .jtable-toolbar-item-icon {
+    float: right;
+    margin: 10px 0 0 5px;
+}
+
+
+.jtable-close-button{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    visibility: visible;
+    color: #afb6c3;
+}
+
+.rtl .jtable-close-button{
+    left: 15px;
+    right: inherit;
+}
+
+.jtable-busy-panel-background, 
+.ui-widget-overlay,
+.jtable-contextmenu-overlay{
+    background-color: #363b4a;
+    opacity: 0.5;
+	zoom: 1;
+	filter: alpha(opacity=50);
+    position: fixed;
+    top: 0 ;
+    right: 0 ;
+    left: 0 ;
+    bottom: 0 ;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 10000;
+}
+
+.jtable-contextmenu-overlay {
+	background-color: transparent !important;
+}
+
+.jtable-busy-message {
+    color: white;
+    font-size: 14px;
+    height: 60px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    position: fixed;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0;
+    z-index: 11000;
+    border-radius: 100px;
+	
+}
+.rtl .jtable-busy-message {
+    direction: rtl;
+}
+
+
+.jtable-column-resize-handler {
+    bottom: 0;
+    height: 100%;
+    right: -8px;
+    position: absolute;
+    top: 0;
+    width: 8px;
+    z-index: 100;
+    cursor: col-resize;
+}
+
+
+.jtable-column-resize-bar {
+	border-right: 1px solid #7f8ba5;
+    bottom: 0;
+    position: absolute;
+    width: 10px;
+
+}
+.jtable-dialog-form {
+    border-collapse: collapse;
+}
+
+.jtable-input-field-container {
+    display: block;
+    position: relative;
+    margin-top: 13px; 
+}
+
+.jtable-input-label {
+   float: left;
+    width: 30%;
+    max-width: 116px;
+    padding: 0 10px;
+    word-wrap: break;
+    color: #4c637b;
+  
+}
+
+.rtl .jtable-input-label {
+    float: right;
+    margin-right: inherit;
+}
+
+.jtable-input {
+    display: table-cell;
+    
+}
+
+.jtable-input input[type="text"], 
+.jtable-input textarea,
+.jtable-input input[type="password"],
+.jtable-input input[type="email"],
+.jtable-input input[type="number"]{
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    font: 14px/25px "Verdana",sans-serif;
+    height: 42px !important;
+    padding: 0 10px !important;
+    position: relative !important;
+    color: #afb6c3;
+    border: 1px solid #afb6c3;
+	max-width: 200px;
+	min-width: 20px;
+}
+
+.jtable-input textarea {
+    height: inherit !important;
+}
+
+.jtable-input select {
+     border: 1px solid #afb6c3;
+     height: 30px;
+    position: relative;
+    color: #afb6c3;
+}
+
+.jtable-input select:focus {
+    color: #7f8ba5;
+}
+
+.jtable-input select option {
+    padding: 5px 10px;
+  
+}
+
+.jtable-input input[type="text"]:disabled, 
+.jtable-input textarea:disabled,
+.jtable-input input[type="password"]:disabled {
+    cursor: not-allowed;
+    border: 1px solid #DCE1EB;
+    color: #CED3DB;
+    background-color: #f7f9fc;
+}
+
+.jtable-input input:focus,
+.jtable-input textarea:focus{
+    background-color: #F7F9FC;
+    border-color: #7f8ba5;
+    color: #7f8ba5;
+}
+
+tr.jtable-row-created , 
+tr.jtable-row-updated {
+    background-color: #2CC683 !important;
+}
+
+tr.jtable-row-deleting {
+	background-color: #D85B73 !important;
+}
+ 
+tr.jtable-row-updated td ,
+tr.jtable-row-created td{
+	animation: row-animation 3s linear forwards;
+	-webkit-animation: row-animation 3s linear forwards;
+}
+
+@keyframes row-animation {
+    from {
+        background-color: transparent;
+		color: white;
+	}
+ 
+    to {
+       background-color: white;
+	   color: #AFB6C3;
+    }
+}
+
+
+@-webkit-keyframes row-animation {
+    from {
+        background-color: transparent;
+		color: white;
+	}
+ 
+    to {
+       background-color: white;
+	   color: #AFB6C3;
+    }
+}
+
+.jtable-column-selection-container {
+    background-color: white;
+    padding: 5px 15px;
+    position: absolute;
+    display: none;
+    border: 1px solid #ced3db;
+	z-index: 25000;
+    box-shadow: 0 0 7px #ced3db;
+    color: #6e7992;
+}
+
+.jtable-column-select-list span {
+    margin: 0 10px;
+    
+}
+
+.jtable-column-selection-container ul{
+    list-style: none;
+    padding: 0;
+}
+
+.jtable-column-selection-container ul li {
+    padding: 3px 0;
+}
+
+/****** jQuery UI Styles ********/
+
+.ui-dialog {
+    background-color: white;
+    z-index: 20000;
+    max-width: 400px;
+	min-width: 380px;
+    margin: auto;
+    color: #566380;
+    font:13px/25px "Verdana", sans-serif;
+}
+
+.ui-dialog .ui-dialog-content {
+    display: block;
+    padding: 20px;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+	background-color: #7f8ba5;
+	color: white;
+	font: 20px/70px "Verdana", sans-serif;
+	padding: 0 20px;
+    border-bottom: 4px solid #566380;
+    cursor: all-scroll;
+}
+
+.rtl .ui-dialog .ui-dialog-titlebar,
+.rtl .ui-dialog .ui-dialog-content{
+    text-align: right;
+    direction: rtl;
+}
+
+.jtable-delete-confirm-message {
+    font-family: "Verdana", sans-serif;
+}
+
+.ui-dialog-titlebar-close:hover:after{
+    color: #9ba7c2;
+}
+
+.ui-dialog-titlebar-close:active:after {
+    color: #566380;
+}
+
+.ui-dialog-titlebar-close {
+    position: absolute;
+    top: 10px;
+	width: 30px;
+	height: 30px;
+	padding: 0 !important;
+    right: 10px;
+}
+
+.rtl .ui-dialog-titlebar-close {
+    right: inherit;
+    left: 10px;
+}
+.ui-dialog-buttonpane {
+    background-color: #e3eaf3;
+    padding: 15px;
+    border-top: 2px solid #dce1eb;
+}
+
+.ui-button-icon-only span.ui-button-text {
+    display: none;
+}
+
+.ui-dialog-buttonpane .ui-button-text-only,
+.ui-dialog-buttonpane .ui-button-text-only:active{
+    border-radius: 0;
+    border: none;
+    width: 50%;
+    font-size: 16px;
+    padding: 15px 0;
+    background-color: #566380;
+}
+
+
+.ui-dialog-buttonpane #DeleteDialogButton,
+.ui-dialog-buttonpane .delete-dialog-button{
+    background-color: #d85b73;
+   border: none !important;
+}
+
+.ui-dialog-buttonpane .ui-button-text-only:hover,
+.ui-dialog-buttonpane .ui-button-text-only:focus
+{
+    opacity: 0.9;
+}
+
+.ui-dialog-buttonpane #AddRecordDialogSaveButton, 
+.ui-dialog-buttonpane #EditDialogSaveButton {
+    background-color: #2cc683;
+}
+
+
+
+/****** Dashicons *********/
+
+.jtable-command-button:after,  
+.jtable-toolbar-item-icon:after,
+.ui-button-icon-only:after,
+.jtable-page-list span:before,
+.jtable-page-list span:after,
+.jtable-column-header:before,
+.ui-dialog-titlebar-close:after{
+    display: inline-block;
+    font: 20px/0 dashicons;
+    vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+}
+
+.ui-dialog-titlebar-close:after {
+	content: "\f335";
+	font-size: 30px;
+	color: #566380;
+	opacity: 0.7;
+}
+
+.ui-dialog-titlebar-close span {
+	display: none;
+}
+
+.jtable-toolbar-item-icon:after {
+	visibility: visible;
+	content: "\f132";
+}
+
+
+.jtable-delete-command-button:after {
+	content: "\f182";
+}
+
+.jtable-delete-command-button:hover,
+.jtable-close-button:hover {
+    color: #d85b73;
+}
+
+.jtable-edit-command-button:after {
+	content: "\f464";
+}
+
+.jtable-edit-command-button:hover {
+	color: #2cc683;
+}
+
+.jtable-close-button:after {
+	content: "\f335";
+	font-size: 30px;
+
+}
+
+
+

@@ -1,0 +1,35 @@
+﻿@model CFC.Models.Cidades
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cidades</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeDaCidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeDaCidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estados.NomeDoEstado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estados.NomeDoEstado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CodigoDaCidade }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

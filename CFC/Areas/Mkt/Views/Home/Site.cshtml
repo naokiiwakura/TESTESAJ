@@ -1,0 +1,734 @@
+﻿@model CFC.Models.Site
+
+@{
+    Layout = "~/Areas/Mkt/Views/Shared/_Layout.cshtml";
+    var controller = "Site";
+    var tipo = "Edit";
+    //var opt = "Adicionar <span class='glyphicon glyphicon-plus'></span>";
+    var opt = "Editar Site <span class='glyphicon glyphicon-edit'></span>";
+    var erro = TempData["erro"];
+    var ok = TempData["ok"];
+}
+
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>@Html.Raw(controller)</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                        <i class="s16 icomoon-icon-screen-2"></i>
+                    </a>
+                    <span class="divider">
+                        <i class="s16 icomoon-icon-arrow-right-3"></i>
+                    </span>
+                </li>
+                <li class="active"></li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            @if (erro != null)
+            {
+                <div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><i class="glyphicon glyphicon-ban-circle alert-icon "></i><strong>Ops! </strong>@Html.Raw(erro)</div>
+            }
+            @if (ok != null)
+            {
+                <div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="success" aria-hidden="true">&times;</button><i class="glyphicon glyphicon-ok-circle "></i><strong>OK! </strong>@Html.Raw(ok)</div>
+            }
+        </div>
+@using ((Html.BeginForm("Site", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" })))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CodigoDoSite)
+    @Html.HiddenFor(model => model.Banner1Imagem)
+    @Html.HiddenFor(model => model.Banner2Imagem)
+    @Html.HiddenFor(model => model.SobreImagem)
+    @Html.HiddenFor(model => model.SobreImagemEquipe)
+    <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">                                            
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.AtivaSite, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.AtivaSite)
+                            @Html.ValidationMessageFor(model => model.AtivaSite, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.AtivaLogin, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.AtivaLogin)
+                            @Html.ValidationMessageFor(model => model.AtivaLogin, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.AtivaParceiros, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.AtivaParceiros)
+                            @Html.ValidationMessageFor(model => model.AtivaParceiros, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.AtivaContato, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.AtivaContato)
+                            @Html.ValidationMessageFor(model => model.AtivaContato, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            @Html.LabelFor(model => model.Telefone, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Endereco, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Facebook, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Facebook, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Facebook, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Instagram, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Instagram, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Instagram, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Twitter, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Twitter, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Twitter, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Youtube, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Youtube, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Youtube, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- End .site -->
+    <div class="row">
+        <div class="panel panel-default">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h4 class="panel-title">Banner</h4>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.AtivaBanner, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.AtivaBanner, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AtivaBanner, "", new { @class = "text-danger" })
+                    </div>                                      
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.AtivaBanner1Padrao, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.AtivaBanner1Padrao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AtivaBanner1Padrao, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Banner1Texto1, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Banner1Texto1, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Banner1Texto1, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Banner1Texto2, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Banner1Texto2, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Banner1Texto2, "", new { @class = "text-danger" })
+                    </div>                                        
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.AtivaBanner2Padrao, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.AtivaBanner2Padrao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AtivaBanner2Padrao, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Banner2Texto1, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Banner2Texto1, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Banner2Texto1, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.Banner2Texto3, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Banner2Texto3, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Banner2Texto3, "", new { @class = "text-danger" })
+                    </div>                    
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.Banner2Texto2, htmlAttributes: new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Banner2Texto2, new { @class = "form-control limitTextarea", @maxlength = "8000", @rows = "4" })
+                            @Html.ValidationMessageFor(model => model.Banner2Texto2, "", new { @class = "text-danger" })
+                        </div>                                      
+                </div>
+                <div class="email-read-attachment">                    
+                    <div class="row">
+                        <input type="file" name="f1" id="f1" style="display: none;" />
+                        <input type="file" name="f2" id="f2" style="display: none;" />                                            
+                        <div class="col-xs-3 col-md-3">
+                            <p class="mb15">
+                                Banner 1 <a href="#"><i class="fa fa-cloud-download s16"></i></a>
+                            </p>
+                            <a id="ufoto1" href="@Html.Raw(Model.Banner1Imagem == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Banner1Imagem)" data-toggle="lightbox" class="thumbnail">
+                                <img id="ifoto1" class="img-responsive" src="@Html.Raw(Model.Banner1Imagem == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Banner1Imagem)" alt="attachment image">
+                            </a>
+                            <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                <button type="button" class="btn btn-primary" onclick="$('#f1').click()"> <span class="glyphicon glyphicon-edit"></span></button>                                
+                            </div>
+                        </div>
+                        <div class="col-xs-3 col-md-3">
+                            <p class="mb15">
+                                Banner 2 <a href="#"><i class="fa fa-cloud-download s16"></i></a>
+                            </p>
+                            <a id="ufoto2" href="@Html.Raw(Model.Banner2Imagem == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Banner2Imagem)" data-toggle="lightbox" class="thumbnail">
+                                <img id="ifoto2" class="img-responsive" src="@Html.Raw(Model.Banner2Imagem == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Banner2Imagem)" alt="attachment image">
+                            </a>
+                            <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                <button type="button" class="btn btn-primary" onclick="$('#f2').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                            </div>
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End .panel -->
+    </div>
+    <!-- End .banner -->
+    <div class="row">
+        <div class="panel panel-default">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h4 class="panel-title">Sobre</h4>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.AtivaSobre, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.AtivaSobre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AtivaSobre, "", new { @class = "text-danger" })
+                    </div>                   
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.SobreTitulo, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.SobreTitulo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SobreTitulo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(model => model.SobreResumo, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.SobreResumo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SobreResumo, "", new { @class = "text-danger" })
+                    </div>                    
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.SobreTexto, htmlAttributes: new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.SobreTexto, new { @class = "form-control limitTextarea", @maxlength = "8000", @rows = "9" })
+                        @Html.ValidationMessageFor(model => model.SobreTexto, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        <div class="email-read-attachment">
+                            <div class="row">
+                                <input type="file" name="f3" id="f3" style="display: none;" />
+                                <input type="file" name="f4" id="f4" style="display: none;" />
+                                <div class="col-xs-6 col-md-6">
+                                    <p class="mb15">
+                                        Imagem Capa <a href="#"><i class="fa fa-cloud-download s16"></i></a>
+                                    </p>
+                                    <a id="ufoto3" href="@Html.Raw(Model.SobreImagem == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.SobreImagem)" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto3" class="img-responsive" src="@Html.Raw(Model.SobreImagem == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.SobreImagem)" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f3').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-6">
+                                    <p class="mb15">
+                                        Imagem Equipe <a href="#"><i class="fa fa-cloud-download s16"></i></a>
+                                    </p>
+                                    <a id="ufoto4" href="@Html.Raw(Model.SobreImagemEquipe == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.SobreImagemEquipe)" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto4" class="img-responsive" src="@Html.Raw(Model.SobreImagemEquipe == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.SobreImagemEquipe)" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f4').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- End .panel -->
+    </div>
+    <!-- End .sobre -->
+    <div class="row">
+        <div class="panel panel-default">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h4 class="panel-title">Links</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.AtivaLinks, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.AtivaLinks)
+                            @Html.ValidationMessageFor(model => model.AtivaLinks, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <!-- Start .panel -->
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Serviços</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.AtivaServicos, htmlAttributes: new {@class = "control-label"})
+                                    @Html.EditorFor(model => model.AtivaServicos, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.AtivaServicos, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.ServicosTexto, htmlAttributes: new {@class = "control-label"})
+                                    @Html.TextAreaFor(model => model.ServicosTexto, new {@class = "form-control limitTextarea", @maxlength = "8000", @rows = "4"})
+                                    @Html.ValidationMessageFor(model => model.ServicosTexto, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <!-- Start .panel -->
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Veiculos</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.AtivaVeiculos, htmlAttributes: new {@class = "control-label"})
+                                    @Html.EditorFor(model => model.AtivaVeiculos, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.AtivaVeiculos, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.VeiculosTexto, htmlAttributes: new {@class = "control-label"})
+                                    @Html.TextAreaFor(model => model.VeiculosTexto, new {@class = "form-control limitTextarea", @maxlength = "8000", @rows = "4"})
+                                    @Html.ValidationMessageFor(model => model.VeiculosTexto, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <!-- Start .panel -->
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Cobertura</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.AtivaCobertura, htmlAttributes: new {@class = "control-label"})
+                                    @Html.EditorFor(model => model.AtivaCobertura, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.AtivaCobertura, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.CoberturaTexto, htmlAttributes: new {@class = "control-label"})
+                                    @Html.TextAreaFor(model => model.CoberturaTexto, new {@class = "form-control limitTextarea", @maxlength = "8000", @rows = "4"})
+                                    @Html.ValidationMessageFor(model => model.CoberturaTexto, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <!-- Start .panel -->
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Preço</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.AtivaPreco, htmlAttributes: new {@class = "control-label"})
+                                    @Html.EditorFor(model => model.AtivaPreco, new {htmlAttributes = new {@class = "form-control"}})
+                                    @Html.ValidationMessageFor(model => model.AtivaPreco, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(model => model.PrecoTexto, htmlAttributes: new {@class = "control-label"})
+                                    @Html.TextAreaFor(model => model.PrecoTexto, new {@class = "form-control limitTextarea", @maxlength = "8000", @rows = "4"})
+                                    @Html.ValidationMessageFor(model => model.PrecoTexto, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End .panel -->
+            </div>
+        </div>
+    </div>
+    <!-- End .links -->
+    <div class="row">
+            <div class="panel panel-default">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">Área</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="col-md-1">
+                                @Html.LabelFor(model => model.AtivaArea, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.AtivaArea)
+                                @Html.ValidationMessageFor(model => model.AtivaArea, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <!-- Start .panel -->
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Area 1</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Area1Titulo, htmlAttributes: new { @class = "control-label" })
+                                        @Html.EditorFor(model => model.Area1Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Area1Titulo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Area1Texto, htmlAttributes: new { @class = "control-label" })
+                                        @Html.TextAreaFor(model => model.Area1Texto, new { @class = "form-control limitTextarea", @maxlength = "8000", @rows = "4" })
+                                        @Html.ValidationMessageFor(model => model.Area1Texto, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <!-- Start .panel -->
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Area 2</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Area2Titulo, htmlAttributes: new {@class = "control-label"})
+                                        @Html.EditorFor(model => model.Area2Titulo, new {htmlAttributes = new {@class = "form-control"}})
+                                        @Html.ValidationMessageFor(model => model.Area2Titulo, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Area2Texto, htmlAttributes: new {@class = "control-label"})
+                                        @Html.TextAreaFor(model => model.Area2Texto, new {@class = "form-control limitTextarea", @maxlength = "8000", @rows = "4"})
+                                        @Html.ValidationMessageFor(model => model.Area2Texto, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End .panel -->
+                </div>
+            </div>
+    </div>
+    <!-- End .area -->
+    <div class="row">
+            <div class="panel panel-default">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">Depoimentos</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="alert alert-info fade in"><button type="button" class="close" data-dismiss="success" aria-hidden="true">&times;</button><i class="glyphicon glyphicon-ok-circle "></i><strong>Info! </strong>Deixe o nome em branco para desativar o depoimento.</div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.LabelFor(model => model.AtivaDepoimento, htmlAttributes: new {@class = "control-label"})
+                            @Html.EditorFor(model => model.AtivaDepoimento, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.AtivaDepoimento, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <!-- Start .panel -->
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Depoimento 1</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Depoimento1Cliente, htmlAttributes: new {@class = "control-label"})
+                                        @Html.EditorFor(model => model.Depoimento1Cliente, new {htmlAttributes = new {@class = "form-control"}})
+                                        @Html.ValidationMessageFor(model => model.Depoimento1Cliente, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Depoimento1Texto, htmlAttributes: new {@class = "control-label"})
+                                        @Html.TextAreaFor(model => model.Depoimento1Texto, new {@class = "form-control limitTextarea", @maxlength = "8000", @rows = "4"})
+                                        @Html.ValidationMessageFor(model => model.Depoimento1Texto, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <!-- Start .panel -->
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Depoimento 2</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Depoimento2Cliente, htmlAttributes: new {@class = "control-label"})
+                                        @Html.EditorFor(model => model.Depoimento2Cliente, new {htmlAttributes = new {@class = "form-control"}})
+                                        @Html.ValidationMessageFor(model => model.Depoimento2Cliente, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Depoimento2Texto, htmlAttributes: new {@class = "control-label"})
+                                        @Html.TextAreaFor(model => model.Depoimento2Texto, new {@class = "form-control limitTextarea", @maxlength = "8000", @rows = "4"})
+                                        @Html.ValidationMessageFor(model => model.Depoimento2Texto, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <!-- Start .panel -->
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Depoimento 3</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Depoimento3Cliente, htmlAttributes: new {@class = "control-label"})
+                                        @Html.EditorFor(model => model.Depoimento3Cliente, new {htmlAttributes = new {@class = "form-control"}})
+                                        @Html.ValidationMessageFor(model => model.Depoimento3Cliente, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Depoimento3Texto, htmlAttributes: new {@class = "control-label"})
+                                        @Html.TextAreaFor(model => model.Depoimento3Texto, new {@class = "form-control limitTextarea", @maxlength = "8000", @rows = "4"})
+                                        @Html.ValidationMessageFor(model => model.Depoimento3Texto, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <!-- Start .panel -->
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Depoimento 4</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Depoimento4Cliente, htmlAttributes: new {@class = "control-label"})
+                                        @Html.EditorFor(model => model.Depoimento4Cliente, new {htmlAttributes = new {@class = "form-control"}})
+                                        @Html.ValidationMessageFor(model => model.Depoimento4Cliente, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.Depoimento4Texto, htmlAttributes: new {@class = "control-label"})
+                                        @Html.TextAreaFor(model => model.Depoimento4Texto, new {@class = "form-control limitTextarea", @maxlength = "8000", @rows = "4"})
+                                        @Html.ValidationMessageFor(model => model.Depoimento4Texto, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- End .panel -->
+    </div>
+    <!-- End .depoimentos -->
+    <div class="row">
+        <div class="panel panel-default">
+            <!-- Start .panel -->
+            <div class="panel-heading">
+                <h4 class="panel-title">Contador</h4>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-info fade in"><button type="button" class="close" data-dismiss="success" aria-hidden="true">&times;</button><i class="glyphicon glyphicon-ok-circle "></i><strong>Info! </strong>Deixe o valor como 0 para desativar o contador.</div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.AtivaContador, htmlAttributes: new {@class = "control-label"})
+                        @Html.EditorFor(model => model.AtivaContador, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.AtivaContador, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.Contador1Numero, htmlAttributes: new {@class = "control-label"})
+                        @Html.EditorFor(model => model.Contador1Numero, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Contador1Numero, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Contador1Titulo, htmlAttributes: new {@class = "control-label"})
+                        @Html.EditorFor(model => model.Contador1Titulo, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Contador1Titulo, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.Contador2Numero, htmlAttributes: new {@class = "control-label"})
+                        @Html.EditorFor(model => model.Contador2Numero, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Contador2Numero, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Contador2Titulo, htmlAttributes: new {@class = "control-label"})
+                        @Html.EditorFor(model => model.Contador2Titulo, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Contador2Titulo, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.Contador3Numero, htmlAttributes: new {@class = "control-label"})
+                        @Html.EditorFor(model => model.Contador3Numero, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Contador3Numero, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Contador3Titulo, htmlAttributes: new {@class = "control-label"})
+                        @Html.EditorFor(model => model.Contador3Titulo, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Contador3Titulo, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.Contador4Numero, htmlAttributes: new {@class = "control-label"})
+                        @Html.EditorFor(model => model.Contador4Numero, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Contador4Numero, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Contador4Titulo, htmlAttributes: new {@class = "control-label"})
+                        @Html.EditorFor(model => model.Contador4Titulo, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.Contador4Titulo, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End .panel -->
+    </div>
+    <!-- End .contador -->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button onclick="javascript: history.back();" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</button>
+                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End .botoes -->
+            }
+        </div>
+        <!-- End contentwrapper -->
+    </div>
+<script>
+    $(document).ready(function () {
+        $("#Telefone").mask("(99)9999-9999");
+        $('#SobreTexto').summernote({
+            height: 200
+        });
+        $('#ServicosTexto').summernote({
+            height: 200
+        });
+        $('#VeiculosTexto').summernote({
+            height: 200
+        });
+        $('#CoberturaTexto').summernote({
+            height: 200
+        });        
+        $('#PrecoTexto').summernote({
+            height: 200
+        });
+        $('#Banner2Texto2').summernote({
+            height: 200
+        });
+    });
+
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+
+    $("#f1").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto1').attr('src', e.target.result);
+                $('#ufoto1').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f2").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto2').attr('src', e.target.result);
+                $('#ufoto2').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f3").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto3').attr('src', e.target.result);
+                $('#ufoto3').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f4").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto4').attr('src', e.target.result);
+                $('#ufoto4').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+</script>

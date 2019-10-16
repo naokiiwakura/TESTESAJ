@@ -1,0 +1,22 @@
+﻿<script>
+    jQuery(function($) {
+        $('#save-link').click(function() {
+            console.log(this.dataset.retorno);
+            var retContent = [];
+            var retString = '';
+            $('tbody tr').each(function(idx, elem) {
+                var elemText = [];
+                $(elem).children('td').each(function(childIdx, childElem) {
+                    elemText.push($(childElem).text());
+                });
+                retContent.push(`(${elemText.join(',')})`);
+            });
+            retString = retContent.join(',\r\n');
+            var file = new Blob([retString], { type: 'text/plain' });
+            var btn = $('#save-link');
+            btn.attr("href", URL.createObjectURL(file));
+            btn.prop("download", this.dataset.retorno+"-processado.txt");
+        });
+    });
+</script>
+@Html.Raw(ViewBag.Retorno)

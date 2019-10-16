@@ -1,0 +1,214 @@
+﻿@model CFC.Models.Clientes
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var controller = "Clientes";
+    var tipo = "Edit";
+    //var opt = "Adicionar <span class='glyphicon glyphicon-plus'></span>";
+    var opt = "Editar <span class='glyphicon glyphicon-edit'></span>";
+    var erro = TempData["erro"];
+}
+
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>@Html.Raw(controller)</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                        <i class="s16 icomoon-icon-screen-2"></i>
+                    </a>
+                    <span class="divider">
+                        <i class="s16 icomoon-icon-arrow-right-3"></i>
+                    </span>
+                </li>
+                <li class="active"></li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            @if (erro != null)
+            {
+                <div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><i class="glyphicon glyphicon-ban-circle alert-icon "></i><strong>Ops! </strong>@Html.Raw(erro)</div>
+            }
+            <div class="panel panel-default">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">@Html.Raw(opt)</h4>
+                </div>
+                <div class="panel-body">
+                    @using ((Html.BeginForm(tipo, controller, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" })))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.CodigoDoCliente)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                         <div class="form-group">
+                            <div class="col-md-1">
+                                @Html.LabelFor(model => model.ClienteAtivo, htmlAttributes: new {@class = "control-label"})
+                                @Html.EditorFor(model => model.ClienteAtivo)
+                                @Html.ValidationMessageFor(model => model.ClienteAtivo, "", new {@class = "text-danger"})
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.DataDoCadastro, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DataDoCadastro, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DataDoCadastro, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.TipoDePessoaDoCliente, htmlAttributes: new {@class = "control-label"})
+                                <select class="fancy-select form-control" id="TipoDePessoaDoCliente" name="TipoDePessoaDoCliente">
+                                    <option value="@Model.TipoDePessoaDoCliente">@Model.TipoDePessoaDoCliente</option>
+                                    <option value="CNPJ">CNPJ</option>
+                                    <option value="CPF">CPF</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.CPFCNPJDoCliente, htmlAttributes: new {@class = "control-label"})
+                                @Html.EditorFor(model => model.CPFCNPJDoCliente, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.CPFCNPJDoCliente, "", new {@class = "text-danger"})
+                            </div>
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.NomeCFC, htmlAttributes: new {@class = "control-label"})
+                                @Html.EditorFor(model => model.NomeCFC, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.NomeCFC, "", new {@class = "text-danger"})
+                            </div>                            
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.NomeCompletoDoCliente, htmlAttributes: new {@class = "control-label"})
+                                @Html.EditorFor(model => model.NomeCompletoDoCliente, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.NomeCompletoDoCliente, "", new {@class = "text-danger"})
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.TelefoneResidencialDoCliente, htmlAttributes: new {@class = "control-label"})
+                                @Html.EditorFor(model => model.TelefoneResidencialDoCliente, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.TelefoneResidencialDoCliente, "", new {@class = "text-danger"})
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.TelefoneCelularDoCliente, htmlAttributes: new {@class = "control-label"})
+                                @Html.EditorFor(model => model.TelefoneCelularDoCliente, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.TelefoneCelularDoCliente, "", new {@class = "text-danger"})
+                            </div>
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.EmailDoCliente, htmlAttributes: new {@class = "control-label"})
+                                @Html.EditorFor(model => model.EmailDoCliente, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.EmailDoCliente, "", new {@class = "text-danger"})
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.SenhaDoCliente, htmlAttributes: new {@class = "control-label"})
+                                @Html.EditorFor(model => model.SenhaDoCliente, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.SenhaDoCliente, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.CEPDoCliente, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.CEPDoCliente, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CEPDoCliente, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-5">
+                                @Html.LabelFor(model => model.EnderecoDoCliente, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.EnderecoDoCliente, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EnderecoDoCliente, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.NumeroDoCliente, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.NumeroDoCliente, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NumeroDoCliente, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.BairroDoCliente, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.BairroDoCliente, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.BairroDoCliente, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                @Html.LabelFor(model => model.ComplementoDoCliente, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.ComplementoDoCliente, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ComplementoDoCliente, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.CodigoDaCidade, "Cidade", htmlAttributes: new { @class = "control-label" })
+                                @*<input readonly="readonly" type="text" id="cidade" data-val-length-max="100" data-val-length="O campo CFC deve ser uma cadeia de caracteres com um comprimento máximo de 100." data-val-required="O campo Cidade é obrigatório." name="cidade" data-val="true" class="form-control input-validation-error" />*@
+                                @Html.DropDownList("CodigoDaCidade", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessage("cidade", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.CodigoDoEstado, "Estado", htmlAttributes: new { @class = "control-label" })
+                                @*<input readonly="readonly" type="text" id="estado" data-val-length-max="2" data-val-length="O campo CFC deve ser uma cadeia de caracteres com um comprimento máximo de 2." data-val-required="O campo Estado é obrigatório." name="estado" data-val="true" class="form-control input-validation-error" />*@
+                                @Html.DropDownList("CodigoDoEstado", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessage("estado", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    @Html.LabelFor(model => model.ObservacoesDoCliente, htmlAttributes: new { @class = "control-label" })
+                                    @Html.TextAreaFor(model => model.ObservacoesDoCliente, new { @class = "form-control limitTextarea", @maxlength = "8000", @rows = "3" })
+                                    @Html.ValidationMessageFor(model => model.ObservacoesDoCliente, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.LabelFor(model => model.SepararVeiculos, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.SepararVeiculos)
+                                    @Html.ValidationMessageFor(model => model.SepararVeiculos, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <button onclick="javascript: history.back();" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</button>
+                                    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- End .row -->
+    </div>
+    <!-- End contentwrapper -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#DataDoCadastro").mask("99/99/9999");
+        $("#CEPDoCliente").mask("99999-999");        
+        $("#CPFCNPJDoCliente").mask("99.999.999/9999-99");
+        $("#CPFCNPJDoCliente").mask("99.999.999/9999-99");
+        $("#TelefoneResidencialDoCliente").mask("(99)9999-9999");
+        $("#TelefoneCelularDoCliente").mask("(99)99999-9999");
+        //$("#ClienteAtivo").prop("checked", true);
+        $('#TipoDePessoaDoCliente').on('change', function () {
+            //alert(this.value);
+            if (this.value == "CPF") {
+                $("#CPFCNPJDoCliente").mask("999.999.999-99");
+            } else {
+                $("#CPFCNPJDoCliente").mask("99.999.999/9999-99");
+            }
+        });
+
+        $("#CPFCNPJDoCliente").blur(function () {
+            var dados = this.value;
+            $("#SenhaDoCliente").val(dados.replace(".", "").substring(0, 5));
+        });
+
+        /* Executa a requisição quando o campo CEP perder o foco */
+        $("#CEPDoCliente").blur(function () {
+            $.post("http://cep.republicavirtual.com.br/web_cep.php", { cep: $("#CEPDoCliente").val(), formato: 'json' },
+                function (data) {
+                    if (data.resultado == 1 || data.resultado == 2) {
+                        $("#EnderecoDoCliente").val(data.tipo_logradouro + " " + data.logradouro);
+                        $("#BairroDoCliente").val(data.bairro);
+                        $("#cidade").val(data.cidade);
+                        $("#estado").val(data.uf);
+                    }
+
+                }, "json");
+
+            $("#veiculoCEP").val(this.value);
+        });
+
+    });
+</script>

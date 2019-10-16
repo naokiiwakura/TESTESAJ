@@ -1,0 +1,209 @@
+﻿@model CFC.Models.Itens
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Itens</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DescricaoDoModelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescricaoDoModelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Placa1DoVeiculo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Placa1DoVeiculo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Placa2DoVeiculo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Placa2DoVeiculo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Renavam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Renavam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroDoChassi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroDoChassi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnoDeFabricacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnoDeFabricacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnoDoModelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnoDoModelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorPredominante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorPredominante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemAtivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemAtivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Particular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Particular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObservacaoDoItem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObservacaoDoItem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDoCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDoCadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDaDesativacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDaDesativacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoFipe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoFipe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Foto4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDaAtivacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDaAtivacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Clientes.NomeCFC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Clientes.NomeCFC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marcas.NomeDaMarca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marcas.NomeDaMarca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipos.NomeDoTipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipos.NomeDoTipo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

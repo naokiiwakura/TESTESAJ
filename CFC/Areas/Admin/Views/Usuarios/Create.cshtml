@@ -1,0 +1,150 @@
+﻿@model CFC.Models.Usuarios
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var controller = "Usuarios";
+    var tipo = "Create";
+    var opt = "Adicionar <span class='glyphicon glyphicon-plus'></span>";
+    //var opt = "Editar <span class='glyphicon glyphicon-edit'></span>";
+    var erro = TempData["erro"];
+
+    Random rnd = new Random();
+    int senha = rnd.Next(1, 10000000);
+}
+
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>@Html.Raw(controller)</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                        <i class="s16 icomoon-icon-screen-2"></i>
+                    </a>
+                    <span class="divider">
+                        <i class="s16 icomoon-icon-arrow-right-3"></i>
+                    </span>
+                </li>
+                <li class="active"></li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            @if (erro != null)
+            {
+                <div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><i class="glyphicon glyphicon-ban-circle alert-icon "></i><strong>Ops! </strong>@Html.Raw(erro)</div>
+            }
+            <div class="panel panel-default">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">@Html.Raw(opt)</h4>
+                </div>
+                <div class="panel-body">
+                    @using ((Html.BeginForm(tipo, controller, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" })))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })                        
+                        <div class="form-group">
+                            <div class="col-md-1">
+                                @Html.LabelFor(model => model.UsuarioAtivo, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.UsuarioAtivo)
+                                @Html.ValidationMessageFor(model => model.UsuarioAtivo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                @Html.LabelFor(model => model.Admin, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Admin)
+                                @Html.ValidationMessageFor(model => model.Admin, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                @Html.LabelFor(model => model.Operador, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Operador)
+                                @Html.ValidationMessageFor(model => model.Operador, "", new { @class = "text-danger" })
+                            </div>   
+                            <div class="col-md-1">
+                                @Html.LabelFor(model => model.Site, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Site)
+                                @Html.ValidationMessageFor(model => model.Site, "", new { @class = "text-danger" })
+                            </div>                                                                                 
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.DataDoCadastro, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DataDoCadastro, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Today.ToShortDateString() } })
+                                @Html.ValidationMessageFor(model => model.DataDoCadastro, "", new { @class = "text-danger" })
+                            </div>                            
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                @Html.LabelFor(model => model.NomeDoUsuario, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.NomeDoUsuario, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NomeDoUsuario, "", new { @class = "text-danger" })
+                            </div>                            
+                            <div class="col-md-4">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.LabelFor(model => model.Senha, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control", @Value = senha } })
+                                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="email-read-attachment">
+                            <p class="mb15">
+                                1 Foto <a href="#"><i class="fa fa-cloud-download s16"></i></a>
+                            </p>
+                                <div class="col-md-12">
+                                    @*@Html.EditorFor(model => model.Foto1, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f1" id="f1" style="display: none;" />
+                                </div>                                
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto1" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto1" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f1').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(1)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>                                
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button onclick="javascript: history.back();" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</button>
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- End .row -->
+    </div>
+    <!-- End contentwrapper -->
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#DataDoCadastro").mask("99/99/9999");        
+        $("#UsuarioAtivo").prop("checked", true);
+    });
+
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+
+    $("#f1").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto1').attr('src', e.target.result);
+                $('#ufoto1').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+</script>

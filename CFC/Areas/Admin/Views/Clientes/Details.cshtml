@@ -1,0 +1,162 @@
+﻿@model CFC.Models.Clientes
+@using CFC.Models;
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    cfcadminEntities db = new cfcadminEntities();
+    var itens = db.Itens.Where(x => x.CodigoDocliente.Equals(Model.CodigoDoCliente));
+}
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>Cliente</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                    </a>
+                    <span class="divider">
+                    </span>
+                </li>
+                <li class="active"></li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <!-- col-lg-4 start here -->
+                <div class="panel panel-default">
+                    <!-- Start .panel -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Informações do Cliente</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row profile">
+                            <!-- Start .row -->
+                            <div class="col-md-4">
+                                <div class="profile-avatar">
+                                    <img src="/Supr/img/avatars/128.jpg" alt="Avatar">
+                                    <p class="mt10">
+                                        @Html.Raw(Model.ClienteAtivo ? "Ativo" : "Inativo")
+                                        <span class="device">
+                                            <i class="fa fa-circle s16 @Html.Raw(Model.ClienteAtivo ? "color-green-light" : "color-red-dark")"></i>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="profile-name">
+                                    <h3>@Html.Raw(Model.NomeCompletoDoCliente)</h3>
+                                    <p class="job-title mb0"><i class="fa fa-building"></i> @Html.Raw(Model.NomeCFC)</p>
+                                    <p class="balance">
+                                        Cotas: <span>@Html.Raw(itens.Any() ? (itens.Sum(x => x.Valor)/10000) : 0)</span>
+                                    </p>
+                                    <a href="#" class="btn btn-primary btn-large mr10"> <i class="fa fa-envelope"></i> Enviar Email</a>
+                                    <a href="#" class="btn btn-default btn-alt btn-large"> Enviar PM</a>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="contact-info bt">
+                                    <div class="row">
+                                        <!-- Start .row -->
+                                        <div class="col-md-4">
+                                            <dl class="mt20">
+                                                <dt class="text-muted">Telefone</dt>
+                                                <dd>@Html.Raw(Model.TelefoneResidencialDoCliente)</dd>
+                                                <dt class="text-muted">Celular</dt>
+                                                <dd>@Html.Raw(Model.TelefoneCelularDoCliente)</dd>                                                
+                                                <dt class="text-muted">Tipo</dt>
+                                                <dd>@Html.Raw(Model.TipoDePessoaDoCliente)</dd>        
+                                                <dt class="text-muted">CPF/CNPJ</dt>
+                                                <dd>@Html.Raw(Model.CPFCNPJDoCliente)</dd>        
+                                            </dl>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <dl class="mt20">
+                                                <dt class="text-muted">Email</dt>
+                                                <dd>@Html.Raw(Model.EmailDoCliente)</dd>
+                                                <dt class="text-muted">Endereço Completo</dt>
+                                                <dd>@Html.Raw(Model.EnderecoDoCliente + " " + Model.NumeroDoCliente + (Model.ComplementoDoCliente == null ? "" : Model.ComplementoDoCliente) + ", " + Model.BairroDoCliente)</dd>
+                                                <dt class="text-muted">Cidade/Estado</dt>
+                                                <dd>@Html.Raw(Model.Cidades.NomeDaCidade + "/" + Model.Estados.NomeDoEstado)</dd>
+                                                <dt class="text-muted">CEP</dt>
+                                                <dd>@Html.Raw(Model.CEPDoCliente)</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                    <!-- End .row -->
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="profile-info bt">
+                                    <h5 class="text-muted">Observações</h5>
+                                    <p>
+                                        @Html.Raw(Model.ObservacoesDoCliente)
+                                    </p>
+                                </div>
+                                <div class="social bt">
+                                    <h5 class="text-muted">Cadastro</h5>
+                                    <dl class="dl-horizontal mb0">
+                                        <dt>
+                                            <span class="text-muted">
+                                                <i class="icomoon-icon-calendar"></i>
+                                                Cadastrado:
+                                            </span>
+                                        </dt>
+                                        <dd>
+                                            <strong> @Html.Raw(Model.DataDoCadastro.Value.ToShortDateString())</strong>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="profile-info bt">
+                                    <br />
+                                    <button onclick="javascript: history.back();" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</button>
+                                    <a href="/Admin/Clientes/Edit/@Model.CodigoDoCliente" class="btn btn-primary btn-alt btn-large pull-right"><span class="glyphicon glyphicon-edit"></span> Editar</a>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End .row -->
+                    </div>
+                </div>
+                <!-- End .panel -->
+            </div>
+            <!-- col-lg-4 end here -->
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <!-- col-lg-4 start here -->
+                <div class="tabs mb20">
+                    <ul id="profileTab" class="nav nav-tabs">
+                        <li>
+                            <a href="#overview" data-toggle="tab">Veiculos</a>
+                        </li>                        
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="overview">
+                            <ul class="timeline timeline-icons">
+                                @foreach (var item in itens)
+                                {
+                                <li>
+                                    <p>
+                                        <a href="/Admin/Itens/Details/@Html.Raw(item.CodigoDoItem)">@Html.Raw(item.Placa1DoVeiculo)</a> @Html.Raw(item.DescricaoDoModelo.ToLower())
+                                        <span class="timeline-icon"><i class="fa fa-car @Html.Raw(item.DataDaDesativacao == null ? "color-green-light" : "color-red-dark")"></i></span>
+                                        <span class="timeline-date">@Html.Raw("A " + item.DataDaAtivacao.Value.ToShortDateString() + (item.DataDaDesativacao == null ? "" : "| D " + item.DataDaDesativacao.Value.ToShortDateString()))</span>
+                                    </p>
+                                </li>
+                                }
+                              </ul>                           
+                        </div>
+                    </div>
+                </div>
+                <!-- End .tabs -->
+            </div>
+            <!-- col-lg-4 end here -->
+        </div>
+        <!--End .row-->
+    </div>
+    <!--End.contentwrapper -->
+    </div>
+    <!-- End #content -->

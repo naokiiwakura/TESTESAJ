@@ -1,0 +1,382 @@
+﻿@model CFC.Models.Movimentacao
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var controller = "Movimentacao";
+    var tipo = "Create";
+    var opt = "Adicionar <span class='glyphicon glyphicon-plus'></span>";
+    //var opt = "Editar <span class='glyphicon glyphicon-edit'></span>";
+    var erro = TempData["erro"];
+}
+
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>@Html.Raw("Movimentação")</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                        <i class="s16 icomoon-icon-screen-2"></i>
+                    </a>
+                    <span class="divider">
+                        <i class="s16 icomoon-icon-arrow-right-3"></i>
+                    </span>
+                </li>
+                <li class="active"></li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            @if (erro != null)
+            {
+                <div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><i class="glyphicon glyphicon-ban-circle alert-icon "></i><strong>Ops! </strong>@Html.Raw(erro)</div>
+            }
+            <div class="panel panel-default">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">@Html.Raw(opt)</h4>
+                </div>
+                <div class="panel-body">
+                    @using ((Html.BeginForm(tipo, controller, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" })))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">                                                        
+                            <div class="col-md-1">                                
+                                <div class="radio-custom">
+                                    <input type="radio" name="tipodemovimentacao" checked="checked" value="1" id="credito">
+                                    <label for="credito">Crédito</label>
+                                </div>
+                                <div class="radio-custom">
+                                    <input type="radio" name="tipodemovimentacao" value="2" id="debito">
+                                    <label for="debito">Debito</label>
+                                </div>                                
+                            </div>
+                            <p class="col-md-2">
+                                @Html.LabelFor(model => model.DataDoTitulo, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DataDoTitulo, new { htmlAttributes = new { @class = "form-control", Value=DateTime.Today.ToShortDateString()} })
+                                @Html.ValidationMessageFor(model => model.DataDoTitulo)
+                            </p>
+                            <p class="col-md-2">
+                                @Html.LabelFor(model => model.DataDoVencimento, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DataDoVencimento, new { htmlAttributes = new { @class = "form-control", Value = DateTime.Today.AddDays(7).ToShortDateString() } })
+                                @Html.ValidationMessageFor(model => model.DataDoVencimento)
+                            </p>                                                      
+                            @*<p class="col-md-2">
+                                @Html.LabelFor(model => model.DataDoRecebimento, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DataDoRecebimento, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DataDoRecebimento)
+                            </p>*@ 
+                            <p class="col-md-3">
+                                @Html.LabelFor(model => model.TipoDoTitulo, htmlAttributes: new { @class = "control-label" })
+                                <select id="TipoDoTitulo" name="TipoDoTitulo" class="form-control">
+                                    <option value="Não Especificado">Não Especificado</option>
+                                    <option value="Boleto">Boleto</option>
+                                    <option value="Cheque">Cheque</option>
+                                    <option value="Nota Promissória">Nota Promissória</option>
+                                    <option value="Duplicata">Duplicata</option>
+                                    <option value="Outros">Outros</option>
+                                </select>                                
+                            </p>
+                            <p class="col-md-1">
+                                @Html.LabelFor(model => model.Cancelado, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Cancelado, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Cancelado)
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <p class="col-md-7">
+                                @Html.LabelFor(model => model.DescricaoDoTitulo, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DescricaoDoTitulo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DescricaoDoTitulo)
+                            </p>
+                            <p class="col-md-2">
+                                @Html.LabelFor(model => model.ValorDoTitulo, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.ValorDoTitulo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ValorDoTitulo)
+                            </p>
+                            <p class="col-md-3">
+                                @Html.LabelFor(model => model.CodigoDoHistorico, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("CodigoDoHistorico", null, new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.CodigoDoHistorico)
+                            </p>   
+                        </div>
+                        <div class="form-group">
+                            <p class="col-md-12">
+                                @Html.LabelFor(model => model.Detalhes, htmlAttributes: new { @class = "control-label" })
+                                @Html.TextAreaFor(model => model.Detalhes, new { @class = "form-control limitTextarea", @maxlength = "8000", @rows = "3" })
+                                @Html.ValidationMessageFor(model => model.Detalhes)
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <p class="col-md-4">
+                                @Html.LabelFor(model => model.CodigoDoCliente, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("CodigoDoCliente", null, "-- Selecione o Cliente --", htmlAttributes: new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.CodigoDoCliente)
+                            </p>                            
+                            <p class="col-md-4">
+                                @Html.LabelFor(model => model.CodigoDoFornecedor, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("CodigoDoFornecedor", null, "-- Selecione o Fornecedor --", htmlAttributes: new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.CodigoDoFornecedor)
+                            </p>    
+                            <p class="col-md-4">
+                                @Html.LabelFor(model => model.CodigoDoSinistro, htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("CodigoDoSinistro", null, "-- Selecione o Sinsitro --", htmlAttributes: new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.CodigoDoSinistro)
+                            </p>    
+                        </div>
+                        <div class="col-md-12 sortable-layout">
+                            <div class="panel panel-default plain">
+                                <!-- Start .panel -->
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Boleto</h4>
+                                </div>
+                                <div class="panel-body">                                    
+                                    <div class="form-group">
+                                        <p class="col-md-1">
+                                            @Html.LabelFor(model => model.Boleto, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Boleto, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Boleto)
+                                        </p>
+                                        <p class="col-md-2">
+                                            @Html.LabelFor(model => model.GeradoBoleto, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.GeradoBoleto, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.GeradoBoleto)
+                                        </p>
+                                        <p class="col-md-2">
+                                            @Html.LabelFor(model => model.GeradoRemessa, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.GeradoRemessa, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.GeradoRemessa)
+                                        </p>
+                                        <p class="col-md-2">
+                                            @Html.LabelFor(model => model.BoletoAdmin, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.BoletoAdmin, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.BoletoAdmin)
+                                        </p>
+                                        <p class="col-md-2">
+                                            @Html.LabelFor(model => model.Caixa, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Caixa, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Caixa)
+                                        </p>
+                                        <p class="col-md-2">
+                                            @Html.LabelFor(model => model.Rateio, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Rateio, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Rateio)
+                                        </p>
+                                    </div>
+                                    <div class="form-group">                            
+                                        <p class="col-md-4">
+                                            @Html.LabelFor(model => model.NossoNumero, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.NossoNumero, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            @Html.ValidationMessageFor(model => model.NossoNumero)
+                                        </p>
+                                        <p class="col-md-4">
+                                            @Html.LabelFor(model => model.TipoDaBaixa, htmlAttributes: new { @class = "control-label" })
+                                            <select id="TipoDaBaixa" name="TipoDaBaixa" class="form-control">
+                                                <option value="Não Baixado">Não Baixado</option>
+                                                <option value="Manual">Manual</option>
+                                                <option value="Automatica">Automatica</option>
+                                                <option value="Outros">Outros</option>
+                                            </select>                                
+                                            @Html.ValidationMessageFor(model => model.TipoDaBaixa)
+                                        </p>
+                                        <p class="col-md-2">
+                                            @Html.LabelFor(model => model.NumeroParcela, htmlAttributes: new { @class = "control-label" })
+                                            <select id="NumeroParcela" name="NumeroParcela" class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.NumeroParcela)
+                                        </p>
+                                        <p class="col-md-2">
+                                            @Html.LabelFor(model => model.TotalParcelas, htmlAttributes: new { @class = "control-label" })
+                                            <select id="TotalParcelas" name="TotalParcelas" class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.TotalParcelas)
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="col-md-12">
+                                            @Html.LabelFor(model => model.Observacao1, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Observacao1, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Observacao1)
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="col-md-12">
+                                            @Html.LabelFor(model => model.Observacao2, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Observacao2, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Observacao2)
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="col-md-12">
+                                            @Html.LabelFor(model => model.Observacao3, htmlAttributes: new { @class = "control-label" })
+                                            @Html.EditorFor(model => model.Observacao3, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Observacao3)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="email-read-attachment">
+                            <p class="mb15">
+                                Anexos 4 Fotos <a href="#"><i class="fa fa-cloud-download s16"></i></a>
+                            </p>
+                            <div class="row">
+                                <div class="col-md-3">                                    
+                                    @*@Html.EditorFor(model => model.Foto1, new { htmlAttributes = new { @class = "form-control" } })*@   
+                                    <input type="file" name="f1" id="f1" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto2, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f2" id="f2" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto3, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f3" id="f3" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto4, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f4" id="f4" style="display: none;" />
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto1" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto1" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>                                   
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f1').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(1)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto2" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto2" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f2').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(2)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto3" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto3" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f3').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(3)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto4" href="/Supr/img/semimagem.png" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto4" class="img-responsive" src="/Supr/img/semimagem.png" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f4').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(4)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>       
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button onclick="javascript: history.back();" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</button>
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- End .row -->
+    </div>
+    <!-- End contentwrapper -->
+</div>
+
+<script>
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+
+    $("#f1").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto1').attr('src', e.target.result);
+                $('#ufoto1').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f2").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto2').attr('src', e.target.result);
+                $('#ufoto2').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f3").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto3').attr('src', e.target.result);
+                $('#ufoto3').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f4").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto4').attr('src', e.target.result);
+                $('#ufoto4').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $(document).ready(function () {
+        $("#DataDoTitulo").mask("99/99/9999");
+        $("#DataDoVencimento").mask("99/99/9999");
+        $("#DataDoRecebimento").mask("99/99/9999");
+        CampoDecimal("#ValorDoTitulo");  
+    });
+</script>

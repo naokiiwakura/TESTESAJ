@@ -1,0 +1,445 @@
+﻿@model CFC.Models.Itens
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var controller = "Itens";
+    var tipo = "Edit";
+    //var opt = "Adicionar <span class='glyphicon glyphicon-plus'></span>";
+    var opt = "Editar <span class='glyphicon glyphicon-edit'></span>";
+    var erro = TempData["erro"];
+}
+
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>@Html.Raw(controller)</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                        <i class="s16 icomoon-icon-screen-2"></i>
+                    </a>
+                    <span class="divider">
+                        <i class="s16 icomoon-icon-arrow-right-3"></i>
+                    </span>
+                </li>
+                <li class="active"></li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            @if (erro != null)
+            {
+                <div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><i class="glyphicon glyphicon-ban-circle alert-icon "></i><strong>Ops! </strong>@Html.Raw(erro)</div>
+            }
+            <div class="panel panel-default">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">@Html.Raw(opt)</h4>
+                </div>
+                <div class="panel-body">
+                    @using ((Html.BeginForm(tipo, controller, new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" })))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.DescricaoDoModelo)
+                        @Html.HiddenFor(model => model.DescricaoDaMarca)
+                        @Html.HiddenFor(model => model.CodigoDoItem)
+                        @Html.HiddenFor(model => model.Foto1)
+                        @Html.HiddenFor(model => model.Foto2)
+                        @Html.HiddenFor(model => model.Foto3)
+                        @Html.HiddenFor(model => model.Foto4)
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.CodigoDocliente, "Cliente", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("CodigoDocliente", null, "", htmlAttributes: new { @class = "form-control select2" })
+                                @Html.ValidationMessageFor(model => model.CodigoDocliente, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.DataDoCadastro, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DataDoCadastro, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DataDoCadastro, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.DataDaAtivacao, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.DataDaAtivacao, new { htmlAttributes = new { @class = "form-control", @Value = Model.DataDaAtivacao?.ToShortDateString() ?? DateTime.Today.ToShortDateString() } })
+                                @Html.ValidationMessageFor(model => model.DataDaAtivacao, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                    @Html.LabelFor(model => model.DataDaDesativacao, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.DataDaDesativacao, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DataDaDesativacao, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.CodigoDoTipo, "Tipo", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("CodigoDoTipo", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CodigoDoTipo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.DescricaoDaMarca, "Marca", htmlAttributes: new { @class = "control-label" })
+                                <select name="marca" id="marca" data-val-required="O campo Marca é obrigatório." data-val="true" class="form-control input-validation-error select2">
+                                    <option>@Model.DescricaoDaMarca</option>
+                                </select>
+                                @Html.ValidationMessage("marca", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-7">
+                                @Html.LabelFor(model => model.DescricaoDoModelo, htmlAttributes: new { @class = "control-label" })
+                                <select name="modelo" id="modelo" data-val-required="O campo Modelo é obrigatório." data-val="true" class="form-control input-validation-error select2">
+                                    <option>@Model.DescricaoDoModelo</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.DescricaoDoModelo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.AnoDeFabricacao, htmlAttributes: new { @class = "control-label" })
+                                <select name="AnoDeFabricacao" id="AnoDeFabricacao" data-val-required="O campo Fabricação é obrigatório." data-val="true" class="form-control input-validation-error select2">
+                                    <option>@Model.AnoDeFabricacao</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.AnoDeFabricacao, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.AnoDoModelo, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.AnoDoModelo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AnoDoModelo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.CodigoFipe, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.CodigoFipe, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CodigoFipe, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.Placa1DoVeiculo, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Placa1DoVeiculo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Placa1DoVeiculo, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.Placa2DoVeiculo, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Placa2DoVeiculo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Placa2DoVeiculo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.Renavam, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Renavam, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Renavam, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.NumeroDoChassi, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.NumeroDoChassi, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NumeroDoChassi, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.LabelFor(model => model.CorPredominante, htmlAttributes: new { @class = "control-label" })
+                                <select id="CorPredominante" name="CorPredominante" data-val-required="O campo Cor é obrigatório." data-val="true" class="form-control input-validation-error">
+                                    <option>@Model.CorPredominante</option>
+                                    <option value="BRANCA">BRANCA</option>
+                                    <option value="PRATA">PRATA</option>
+                                    <option value="PRETA">PRETA</option>
+                                    <option value="BEGE">BEGE</option>
+                                    <option value="CINZA">CINZA</option>
+                                    <option value="AZUL">AZUL</option>
+                                    <option value="VERMELHA">VERMELHA</option>
+                                    <option value="VERDE">VERDE</option>
+                                    <option value="AMARELA">AMARELA</option>
+                                    <option value="MARROM">MARRO</option>
+                                    <option value="ROSA">ROSA</option>
+                                    <option value="LARANJA">LARANJA</option>
+                                    <option value="FANTASIA">FANTASIA</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.CorPredominante, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-1">
+                                @Html.LabelFor(model => model.Particular, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Particular)
+                                @Html.ValidationMessageFor(model => model.Particular, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="email-read-attachment">
+                            <p class="mb15">
+                                4 Fotos <a href="#"><i class="fa fa-cloud-download s16"></i></a>
+                            </p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto1, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f1" id="f1" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto2, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f2" id="f2" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto3, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f3" id="f3" style="display: none;" />
+                                </div>
+                                <div class="col-md-3">
+                                    @*@Html.EditorFor(model => model.Foto4, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    <input type="file" name="f4" id="f4" style="display: none;" />
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto1" href="@Html.Raw(Model.Foto1 == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Foto1)" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto1" class="img-responsive" src="@Html.Raw(Model.Foto1 == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Foto1)" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f1').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(1)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto2" href="@Html.Raw(Model.Foto2 == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Foto2)" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto2" class="img-responsive" src="@Html.Raw(Model.Foto2 == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Foto2)" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f2').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(2)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto3" href="@Html.Raw(Model.Foto3 == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Foto3)" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto3" class="img-responsive" src="@Html.Raw(Model.Foto3 == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Foto3)" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f3').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(3)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a id="ufoto4" href="@Html.Raw(Model.Foto4 == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Foto4)" data-toggle="lightbox" class="thumbnail">
+                                        <img id="ifoto4" class="img-responsive" src="@Html.Raw(Model.Foto4 == null ? "/Supr/img/semimagem.png" : "/Uploads/" + Model.Foto4)" alt="attachment image">
+                                    </a>
+                                    <div class='btn-group btn-group-xs' style="margin-top: -80px;">
+                                        <button type="button" class="btn btn-primary" onclick="$('#f4').click()"> <span class="glyphicon glyphicon-edit"></span></button>
+                                        @*<button class="btn btn-danger" type="button" onclick="remover(4)"> <span class="glyphicon glyphicon-trash"></span></button>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.LabelFor(model => model.ObservacaoDoItem, htmlAttributes: new { @class = "control-label" })
+                                @Html.TextAreaFor(model => model.ObservacaoDoItem, new { @class = "form-control limitTextarea", @maxlength = "8000", @rows = "3" })
+                                @Html.ValidationMessageFor(model => model.ObservacaoDoItem, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button onclick="javascript: history.back();" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</button>
+                                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span> Salvar</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- End .row -->
+    </div>
+    <!-- End contentwrapper -->
+</div>
+
+<script>
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+
+    $("#f1").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto1').attr('src', e.target.result);
+                $('#ufoto1').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f2").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto2').attr('src', e.target.result);
+                $('#ufoto2').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f3").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto3').attr('src', e.target.result);
+                $('#ufoto3').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    $("#f4").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ifoto4').attr('src', e.target.result);
+                $('#ufoto4').attr('href', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+        //note();
+    });
+
+    function note() {
+        $.extend($.gritter.options, {
+            position: 'bottom-left',
+        });
+        $.gritter.add({
+            // (string | mandatory) the heading of the notification
+            title: 'Atenção !!!',
+            // (string | mandatory) the text inside the notification
+            text: 'Não esqueça de salvar o Item após selecionar as fotos',
+            // (int | optional) the time you want it to be alive for before fading out
+            time: '',
+            // (string) specify font-face icon  class for close message
+            close_icon: 'entypo-icon-cancel s12',
+            // (string) specify font-face icon class for big icon in left. if are specify image this will not show up.
+            icon: 'icomoon-icon-user',
+            // (string | optional) the class name you want to apply to that specific message
+            class_name: 'warning-notice'
+        });
+    }
+
+    function remover(e) {
+        $.ajax({
+            url: '/Admin/Itens/DeletarFoto/' + e,
+            type: 'POST',
+            success: function (result) {
+                $('#ifoto' + e + '').attr('src', '/Supr/img/semimagem.png');
+                $('#ufoto' + e + '').attr('href', '/Supr/img/semimagem.png');
+
+                $.extend($.gritter.options, {
+                    position: 'bottom-left',
+                });
+                $.gritter.add({
+                    // (string | mandatory) the heading of the notification
+                    title: 'Feito !!!',
+                    // (string | mandatory) the text inside the notification
+                    text: 'A foto foi Removida com Sucesso',
+                    // (int | optional) the time you want it to be alive for before fading out
+                    time: '',
+                    // (string) specify font-face icon  class for close message
+                    close_icon: 'entypo-icon-cancel s12',
+                    // (string) specify font-face icon class for big icon in left. if are specify image this will not show up.
+                    icon: 'eco-trashcan',
+                    // (string | optional) the class name you want to apply to that specific message
+                    class_name: 'success-notice'
+                });
+            }
+        });
+    };
+
+    $(document).ready(function () {
+        $("#DataDoCadastro").mask("99/99/9999");       
+        $("#DataDaAtivacao").mask("99/99/9999");
+        $("#DataDaDesativacao").mask("99/99/9999");
+        $("#CPFCNPJDoCliente").mask("99.999.999/9999-99");
+        $("#ItemAtivo").prop("checked", true);
+        $("#Placa1DoVeiculo").mask("aaa-9999");
+        $("#Placa2DoVeiculo").mask("aaa-9999");
+        $("#AnoDoModelo").mask("9999");
+        CampoDecimal("#Valor");        
+        //FIPE COMEÇA AQUI        
+
+        var tipo = $("#CodigoDoTipo").val();
+        $.post("https://fipe.inuva.com.br/api/ConsultarTabelaDeReferencia",
+            function (data) {
+                referencia = data[0].Codigo;
+                $("#fipeServer").html("Inuva Fipe Mirror" + " | Tabela - " + data[0].Mes);
+                postMarca();
+            }, "json");
+        
+        $("#CodigoDoTipo").change(function () {
+            tipo = this.value;
+            postMarca(this.value);
+        });        
+
+        function postMarca(tipoSelect) {
+
+            if (tipoSelect != null) {
+                tipo = tipoSelect;
+            }
+
+            $.post("https://fipe.inuva.com.br/api/ConsultarMarcas", { codigoTabelaReferencia: referencia, codigoTipoVeiculo: tipo },
+                function (data) {
+                    var sel = $("#marca");
+                    sel.empty();
+                    sel.append("<option selected>@Model.DescricaoDaMarca</option>");
+                    for (var i = 0; i < data.length; i++) {
+                        sel.append("<option value='" + data[i].Value + "'>" + data[i].Label.toUpperCase() + "</option>");
+                    }
+                    $("#marca").on("change", marca);
+                }, "json");
+        }
+
+        function marca() {
+            var marcaValue = $("#marca").val();
+            $.post("https://fipe.inuva.com.br/api/ConsultarModelos", { codigoTabelaReferencia: referencia, codigoTipoVeiculo: tipo, codigoMarca: marcaValue },
+                function (data) {
+                    var sel = $("#modelo");
+                    sel.empty();
+                    sel.append("<option> Selecione o Modelo  </option>");
+                    for (var i = 0; i < data.Modelos.length; i++) {
+                        sel.append("<option value='" + data.Modelos[i].Value + "'>" + data.Modelos[i].Label.toUpperCase() + "</option>");
+                    }
+                    $("#modelo").on("change", modelo);
+                }, "json");
+        };
+
+        function modelo() {
+            var marca = $("#marca").val();
+            var modeloValue = $("#modelo").val();
+            $.post("https://fipe.inuva.com.br/api/ConsultarAnoModelo", { codigoTabelaReferencia: referencia, codigoTipoVeiculo: tipo, codigoMarca: marca, codigoModelo: modeloValue },
+                function (data) {
+                    var sel = $("#AnoDeFabricacao");
+                    sel.empty();
+                    sel.append("<option> Selecione o Ano </option>");
+                    for (var i = 0; i < data.length; i++) {
+                        sel.append("<option value='" + data[i].Value + "'>" + data[i].Label.toUpperCase() + "</option>");
+                    }
+                    $("#AnoDeFabricacao").on("change", anoModelo);
+                }, "json");
+        };
+
+        function anoModelo() {
+            var marca = $("#marca").val();
+            var modelo = $("#modelo").val();
+            var ano = this.value.substring(0, 4);
+            var combustivel = this.value.substring(5, 6);
+
+            $.post("https://fipe.inuva.com.br/api/ConsultarValorComTodosParametros", { codigoTabelaReferencia: referencia, codigoTipoVeiculo: tipo, codigoMarca: marca, codigoModelo: modelo, anoModelo: ano, codigoTipoCombustivel: combustivel, tipoVeiculo: 2, tipoConsulta: "tradicional" },
+                function (data) {
+                    var removeSifra = data.Valor.replace("R$ ", "").replace(".", "");
+                    $("#Valor").val(removeSifra);
+                    $("#AnoDoModelo").val(ano);
+                    $("#CodigoFipe").val(data.CodigoFipe);
+                    $("#DescricaoDoModelo").val($('#modelo option:selected').text());
+                    $("#DescricaoDaMarca").val($('#marca option:selected').text());
+                }, "json");
+        };
+
+    });
+</script>
+
+

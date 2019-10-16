@@ -1,0 +1,177 @@
+﻿@model CFC.Models.Titulos
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Titulos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DescricaoDoTitulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescricaoDoTitulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDoTitulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoDoTitulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorDoTitulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorDoTitulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDoTitulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDoTitulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDoVencimento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDoVencimento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDoRecebimento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDoRecebimento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NossoNumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NossoNumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDaBaixa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoDaBaixa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GeradoBoleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GeradoBoleto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GeradoRemessa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GeradoRemessa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacao1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observacao1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacao2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observacao2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacao3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observacao3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cancelado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cancelado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoDaConta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoDaConta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailEnviado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailEnviado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroParcela)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroParcela)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalParcelas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalParcelas)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

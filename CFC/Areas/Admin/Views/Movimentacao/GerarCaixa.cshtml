@@ -1,0 +1,105 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var controller = "Movimentacao";
+    DateTime data = Convert.ToDateTime("15/" + DateTime.Today.Month + "/" + DateTime.Today.Year);
+}
+<script>
+    var controller = '@Html.Raw(controller)';
+</script>
+<div id="content" class="page-content clearfix">
+    <div class="contentwrapper">
+        <!--Content wrapper-->
+        <div class="heading">
+            <!--  .heading-->
+            <h3>@Html.Raw("Gerar Caixa")</h3>
+            <ul class="breadcrumb">
+                <li></li>
+                <li>
+                    <a href="#" class="tip" title="voltar para home">
+                    </a>
+                    <span class="divider">
+                    </span>
+                </li>
+                <li class="active"></li>
+            </ul>
+        </div>
+        <!-- End  / heading-->
+        <!-- Start .row -->
+        <div class="row">
+            <div class="panel panel-default toggle">
+                <!-- Start .panel -->
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                @Html.Label("Cliente", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("Cliente", null, "Todos", htmlAttributes: new { @class = "form-control select2" })
+                            </div>                           
+                            <div id="lista" class="col-md-5">
+                                @Html.Label("Itens", htmlAttributes: new { @class = "control-label" })
+                                @Html.DropDownList("Itens", null, "-- Selecione o Cliente --", new { @class = "form-control select2" })
+                            </div>
+                            <div class="col-md-1">
+                                @Html.Label("Parcelas", htmlAttributes: new { @class = "control-label" })
+                                <select id="Parcelas" name="Parcelas" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                            </div>
+                            <div id="item" class="col-md-2">
+                                @Html.Label("Vencimento", htmlAttributes: new { @class = "control-label" })
+                                <input type="text" name="Vencimento" id="Vencimento" value="@Html.Raw(data)" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="margin-top: 14px;float: right;">
+                                    <button id="Gerar" class="btn btn-info"><span class="icon icomoon-icon-spinner-8"></span> Gerar Caixa</button>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">                        
+            <!-- col-lg-12 start here -->
+            <div class="panel panel-default">
+                <!-- Start .panel -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">Caixa Gerado</h4>
+                </div>
+                <div class="panel-body">
+                  <div id="retorno"></div>
+                </div>
+            </div>
+        </div>
+        <!-- End .row -->
+    </div>
+    <!-- End contentwrapper -->  
+</div>
+<!-- End #content -->
+<script>
+    $(document).ready(function () {
+        $("#Vencimento").mask("99/99/9999");
+
+        $("#Cliente").change(function () {
+            event.preventDefault();
+            var item = $(this).val();
+            $.get('@Url.Action("ListaItens", "Movimentacao")',
+            { CodigoDoCliente: item }, function (data) {
+                $("#lista").html(data);
+            });
+        });
+    });
+</script>

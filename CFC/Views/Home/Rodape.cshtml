@@ -1,0 +1,90 @@
+﻿@model CFC.Models.Site
+<footer class="footer-2 page-section-pt">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="about-content">
+                    <img class="img-responsive" id="logo-footer" src="/Site/images/logo-dark.png" alt="">
+                    <p class="text-gray">@Model.SobreResumo</p>
+                </div>
+                <div class="social">
+                    <ul>
+                        <li><a href="@Model.Facebook"> <i class="fa fa-facebook"></i> </a></li>
+                        <li><a href="@Model.Twitter"> <i class="fa fa-twitter"></i> </a></li>
+                        <li><a href="@Model.Instagram"> <i class="fa fa-instagram"></i> </a></li>
+                        <li><a href="@Model.Youtube"> <i class="fa fa-youtube"></i> </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="usefull-link">
+                    <h6 class="text-white">Links</h6>
+                    <ul>
+                        <li> <a href="http://sajclub.com.br"> <i class="fa fa-angle-right"></i> SAJ Club </a></li>
+                        <li> <a href="http://grandems.com.br"> <i class="fa fa-angle-right"></i> GrandeMS</a></li>
+                        <li> <a href="http://veiculos.fipe.org.br/"> <i class="fa fa-angle-right"></i> FIPE</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="usefull-link">
+                    <h6 class="text-white">CFC Grupo</h6>
+                    <ul>
+                        <li> <a href="#"> <i class="fa fa-angle-right"></i> Home </a></li>
+                        @if (Model.AtivaSobre)
+                        {
+                            <li> <a href="/Home/Pagina/?=id=Sobre"> <i class="fa fa-angle-right"></i> Sobre </a></li>
+                        }
+                        @if (Model.AtivaContato)
+                        {
+                            <li> <a href="/Home/Pagina/?id=Contato"> <i class="fa fa-angle-right"></i> Contato</a></li>
+                        }
+                        @if (Model.AtivaLogin)
+                        {
+                            <li> <a href="/Cliente"> <i class="fa fa-angle-right"></i> Login</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <div class="keep-touch">
+                    <h6 class="text-white">Contato</h6>
+                    <div class="address">
+                        <ul>
+                            <li> <i class="fa fa-map-marker"></i><span>@Model.Endereco</span> </li>
+                            <li> <i class="fa fa-phone"></i><span>@Model.Telefone</span> </li>
+                            <li> <i class="fa fa-envelope-o"></i><span>@Model.Email</span> </li>
+                        </ul>
+                    </div>
+                    <div class="news-letter">
+                        <form>
+                            <div class="input-group divcenter">
+                                <input type="email" placeholder="Seu Email" class="form-control placeholder">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-icon"><i class="fa fa-paper-plane"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="text-left">
+                        <p>©Copyright 2017 CFC Grupo por<a href="http://inuva.com.br" target="_blank"> Inuva Lab´s</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <ul class="list-inline text-right">
+                        <li><a href="/Home/Pagina/?id=Sobre">sobre </a> | </li>
+                        <li><a href="/Home/Contato">contato </a> |</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

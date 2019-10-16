@@ -1,0 +1,177 @@
+﻿@model CFC.Models.Clientes
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Clientes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeCFC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeCFC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeCompletoDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeCompletoDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoDePessoaDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoDePessoaDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPFCNPJDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPFCNPJDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnderecoDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnderecoDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComplementoDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComplementoDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BairroDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BairroDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CEPDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CEPDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SenhaDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SenhaDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefoneResidencialDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TelefoneResidencialDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TelefoneCelularDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TelefoneCelularDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteAtivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClienteAtivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ObservacoesDoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ObservacoesDoCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDoCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDoCadastro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDaDesativacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDaDesativacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cidades.NomeDaCidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cidades.NomeDaCidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estados.NomeDoEstado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estados.NomeDoEstado)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
