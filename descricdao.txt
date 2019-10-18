@@ -1,0 +1,18 @@
+Sistema CFC 
+
+-Utiliza as linguaguens C# ,HTML Css ,jQuery ,
+Java Script , Bootstrap
+.NET Framework 4.5 
+
+ O sistema de seguro para Carros , a pagina principal
+é para que o cliente visite e possa ver como funciona 
+preço o que a empresa faz entre outros. A parte do 
+administrador ele pode cadastrar e visualizar  
+todos os clientes fazer cadastrados de veiculos 
+e serviços também.
+
+No sistema o que pode melhor, a Arquitetura do Sitema para
+DDD , utilizar o Bootstrap 4 , fazer Teste de Unidade "TDD" 
+para garantir a eficiência do sistema, fazer abstrações das interfaces.
+ 
+
