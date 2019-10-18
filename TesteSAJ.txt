@@ -1,0 +1,14 @@
+Aluno: Gustavo Henrique
+
+°Linguagem:(Html,Css, C#, JavaScrity, banco de dados SQL Server)
+
+°Framework mvc, versão:(Usa o .NET FRAMEWORK 4.5)
+
+°O que o sistema faz:(É um sistema de seguro de carros para CFC=autoescola ou particular, onde ele pode cadastrar os clientes e veiculos,
+ pode sinclonizar os clientes com os veículos)
+
+°O que pode ser melhorado:(
+Pode ser implementado o SOLID,
+O sistema atual usa o boostrap3, e pode ser melhorado para o boostrap4.
+O sistema não contem nenhum tipo de arquitetura, pode ser melhorado para Três Camadas ou DDD.
+O sitema não tem TDD(teste unitario develop), pode ser inplementado.)
